@@ -2448,7 +2448,7 @@ form textarea {
 
 @media screen and (max-width: 1195px) {
   .product-list {
-    --columns: 3;
+    --columns: 2;
   }
   .card-image
   {
