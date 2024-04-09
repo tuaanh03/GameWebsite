@@ -28,7 +28,7 @@
 		<div id="site-content">
 			<div class="site-header">
 				<div class="container">
-					<a href="index.html" id="branding">
+					<a href="index.php" id="branding">
 						<img src="images/logo.png" alt="" class="logo">
 						<div class="logo-text">
 							<h1 class="site-title">Company name</h1>
@@ -37,7 +37,7 @@
 					</a> <!-- #branding -->
 
 					<div class="right-section pull-right">
-						<a href="cart.html" class="cart"><i class="icon-cart"></i> 0 items in cart</a>
+						<a href="cart.php" class="cart"><i class="icon-cart"></i> 0 items in cart</a>
 						<a href="#">My Account</a>
 						<a href="#">Logout <small>(John Smith)</small></a>
 					</div> <!-- .right-section -->
@@ -45,13 +45,13 @@
 					<div class="main-navigation">
 						<button class="toggle-menu"><i class="fa fa-bars"></i></button>
 						<ul class="menu">
-							<li class="menu-item home current-menu-item"><a href="index.html"><i class="icon-home"></i></a></li>
-							<li class="menu-item"><a href="products.html">Accessories</a></li>
-							<li class="menu-item"><a href="products.html">Promotions</a></li>
-							<li class="menu-item"><a href="products.html">PC</a></li>
-							<li class="menu-item"><a href="products.html">Playstation</a></li>
-							<li class="menu-item"><a href="products.html">Xbox</a></li>
-							<li class="menu-item"><a href="products.html">Wii</a></li>
+							<li class="menu-item home current-menu-item"><a href="index.php"><i class="icon-home"></i></a></li>
+							<li class="menu-item"><a href="products.php">Accessories</a></li>
+							<li class="menu-item"><a href="products.php">Promotions</a></li>
+							<li class="menu-item"><a href="products.php">PC</a></li>
+							<li class="menu-item"><a href="products.php">Playstation</a></li>
+							<li class="menu-item"><a href="products.php">Xbox</a></li>
+							<li class="menu-item"><a href="products.php">Wii</a></li>
 						</ul> <!-- .menu -->
 						<div class="search-form">
 							<label><img src="images/icon-search.png"></label>
@@ -63,7 +63,7 @@
 
 					<div class="breadcrumbs">
 						<div class="container">
-							<a href="index.html">Home</a>
+							<a href="index.php">Home</a>
 							<span>Cart</span>
 						</div>
 					</div>

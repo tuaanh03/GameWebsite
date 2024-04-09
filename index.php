@@ -5,10 +5,10 @@
 		<meta http-equiv="X-UA-Compatible" content="IE=edge">
 		<meta name="viewport" content="width=device-width, initial-scale=1.0,maximum-scale=1">
 		
-		<title>Ecommerce Video Game | Products</title>
+		<title>Ecommerce Video Game | Cart</title>
 
 		<!-- Loading third party fonts -->
-		<link href="http://fonts.googleapis.com/css?family=Roboto:100,400,700|" rel="stylesheet" type="text/css">
+		<link href="http://fonts.googleapis.com/css?family=Roboto:100,300,400,700|" rel="stylesheet" type="text/css">
 		<link href="fonts/font-awesome.min.css" rel="stylesheet" type="text/css">
 		<link href="fonts/lineo-icon/style.css" rel="stylesheet" type="text/css">
 		<link rel="stylesheet" href="boostrap.min.css">
@@ -23,12 +23,12 @@
 	</head>
 
 
-	<body>
+	<body class="slider-collapse">
 		
 		<div id="site-content">
 			<div class="site-header">
 				<div class="container">
-					<a href="index.html" id="branding">
+					<a href="index.php" id="branding">
 						<img src="images/logo.png" alt="" class="logo">
 						<div class="logo-text">
 							<h1 class="site-title">Company name</h1>
@@ -37,21 +37,20 @@
 					</a> <!-- #branding -->
 
 					<div class="right-section pull-right">
-						<a href="cart.html" class="cart"><i class="icon-cart"></i> 0 items in cart</a>
-						<a href="#">My Account</a>
-						<a href="#">Logout <small>(John Smith)</small></a>
+						<a href="cart.php" class="cart"><i class="icon-cart"></i> 0 items in cart</a>
+						<a href="#" class="login-button">Login/Register</a>
 					</div> <!-- .right-section -->
 
 					<div class="main-navigation">
 						<button class="toggle-menu"><i class="fa fa-bars"></i></button>
 						<ul class="menu">
-							<li class="menu-item home "><a href="index.html"><i class="icon-home"></i></a></li>
+							<li class="menu-item home "><a href="index.php"><i class="icon-home"></i></a></li>
 							<li class="menu-item drop-down">
 								<a class="nav-link" href="#" id="navbarDropdown" role="button" aria-expanded="false">
 									Games
 								</a>
 								  <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-									<li><a class="dropdown-item" href="products.html"><label for="" class="psicon"><img src="images/free-playstation-40-739542.webp" alt=""></label>Playstation 5</a></li>
+									<li><a class="dropdown-item" href="products.php"><label for="" class="psicon"><img src="images/free-playstation-40-739542.webp" alt=""></label>Playstation 5</a></li>
 									<li><a class="dropdown-item" href="#"><label for="" class="psicon"><img src="images/free-playstation-40-739542.webp" alt=""></label>Playstation 4</a></li>
 									<li><a class="dropdown-item" href="#"><label for="" class="psicon"><img src="images/microsoft_xbox_icon_136396.png" alt=""></label>Xbox Series X|S</a></li>
 									<li><a class="dropdown-item" href="#"><label for="" class="psicon"><img src="images/nintendo_switch_icon_136357.png" alt=""></label>Nintendo Switch</a></li>
@@ -106,160 +105,152 @@
 
 						<div class="mobile-navigation"></div> <!-- .mobile-navigation -->
 					</div> <!-- .main-navigation -->
-
-					<div class="breadcrumbs">
-						<div class="container">
-							<a href="index.html">Home</a>
-							<span>Play Station Games</span>
-						</div>
-					</div>
-
 				</div> <!-- .container -->
 			</div> <!-- .site-header -->
+
+			<div class="home-slider">
+				<div id="carouselExampleIndicators" class="carousel slide" data-bs-ride="carousel">
+					<div class="carousel-indicators">
+					  <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
+					  <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="1" aria-label="Slide 2"></button>
+					  <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="2" aria-label="Slide 3"></button>
+					</div>
+					<div class="carousel-inner">
+					  <div class="carousel-item active" id="c-item" >
+						<img src="images/ark-survival-ascended.jpg" class="d-block w-75 p-5 mx-auto" id="c-image" alt="...">
+					  </div>
+					  <div class="carousel-item " id="c-item">
+						<img src="images/elden-ring.jpg" class="d-block w-75 p-5 mx-auto" id="c-image" alt="...">
+					  </div>
+					  <div class="carousel-item " id="c-item">
+						<img src="images/codmwIII.jpg" class="d-block w-75 p-5 mx-auto" id="c-image" alt="...">
+					  </div>
+					</div>
+					<button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="prev">
+					  <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+					  <span class="visually-hidden">Previous</span>
+					</button>
+					<button class="carousel-control-next" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="next">
+					  <span class="carousel-control-next-icon" aria-hidden="true"></span>
+					  <span class="visually-hidden">Next</span>
+					</button>
+				  </div>
+			</div> <!-- .home-slider -->
+
 			<main class="main-content">
 				<div class="container">
 					<div class="page">
-						<div class="filter-bar">
-							<div class="filter">
-								<span>
-									<label>Sort by:</label>
-									<select name="#">
-										<option value="#" selected>Default</option>
-										<option value="#">Name (A-Z)</option>
-										<option value="#">Name (Z-A)</option>
-										<option value="#">Price (Low > High)</option>							
-										<option value="#">Price (High > Low)</option>																
-									</select>
-								</span>
-								<span>
-									<label>Genre</label>
-									<select name="#">
-										<option value="#">Show All</option>
-										<option value="#">Action</option>
-										<option value="#">Racing</option>
-										<option value="#">Strategy</option>
-									</select>
-								</span>
-								<span>
-									<label>Show:</label>
-									<select name="#">
-										<option value="#">8</option>
-										<option value="#">16</option>
-										<option value="#">24</option>
-									</select>
-								</span>
-							</div> <!-- .filter -->
+						<section>
+							<header>
+								<h2 class="section-title">New Products</h2>
+								<a href="single.php" class="all">Show All</a>
+							</header>
 
-							<div class="pagination">
-								<a href="#" class="page-number"><i class="fa fa-angle-left"></i></a>
-								<span class="page-number current">1</span>
-								<a href="#" class="page-number">2</a>
-								
-								<a href="#" class="page-number"><i class="fa fa-angle-right"></i></a>
-							</div> <!-- .pagination -->
-						</div> <!-- .filter-bar -->
-						
-						<div class="product-list">
-							<div class="product">
-								<img src="images/nintendo-pokemonMysteryDungeonRescueTeam.jpg" alt="" class="card-image">
-								<div class="card-content">
-									<div class="card-top">
-										<h3 class="card-title">Elden Ring</h3>
-									</div>
-									<div class="card-bottom">
-										<span class="gia">420000đ</span>
+							<div class="product-list">
+								<div class="product">
+									<img src="images/nintendo-pokemonMysteryDungeonRescueTeam.jpg" alt="" class="card-image">
+									<div class="card-content">
+										<div class="card-top">
+											<h3 class="card-title">Elden Ring</h3>
+										</div>
+										<div class="card-bottom">
+											<span class="gia">420000đ</span>
+										</div>
 									</div>
 								</div>
-							</div>
-							<div class="product">
-								<img src="images/ps4-daysgone.webp" alt="" class="card-image">
-								<div class="card-content">
-									<div class="card-top">
-										<h3 class="card-title">Elden Ring Elden Ring Elden Ring Elden Ring</h3>
-									</div>
-									<div class="card-bottom">
-										<span class="gia">420000đ</span>
-									</div>
-								</div>
-							</div>
-							<div class="product">
-								<img src="images/ps4-avatar.jpg" alt="" class="card-image">
-								<div class="card-content">
-									<div class="card-top">
-										<h3 class="card-title">Elden RingRingRingRingRingRingRingRingRingRingRingRing</h3>
-									</div>
-									<div class="card-bottom">
-										<span class="gia">420000đ</span>
+								<div class="product">
+									<img src="images/ps4-daysgone.webp" alt="" class="card-image">
+									<div class="card-content">
+										<div class="card-top">
+											<h3 class="card-title">Elden Ring Elden Ring Elden Ring Elden Ring</h3>
+										</div>
+										<div class="card-bottom">
+											<span class="gia">420000đ</span>
+										</div>
 									</div>
 								</div>
-							</div>
-							<div class="product">
-								<img src="images/ps4-gtaV.webp" alt="" class="card-image">
-								<div class="card-content">
-									<div class="card-top">
-										<h3 class="card-title">Elden Ring</h3>
-									</div>
-									<div class="card-bottom">
-										<span class="gia">420000đ</span>
-									</div>
-								</div>
-							</div>
-							<div class="product">
-								<img src="images/ps4-gtaV.webp" alt="" class="card-image">
-								<div class="card-content">
-									<div class="card-top">
-										<h3 class="card-title">Elden Ring</h3>
-									</div>
-									<div class="card-bottom">
-										<span class="gia">420000đ</span>
+								<div class="product">
+									<img src="images/ps4-avatar.jpg" alt="" class="card-image">
+									<div class="card-content">
+										<div class="card-top">
+											<h3 class="card-title">Elden RingRingRingRingRingRingRingRingRingRingRingRing</h3>
+										</div>
+										<div class="card-bottom">
+											<span class="gia">420000đ</span>
+										</div>
 									</div>
 								</div>
-							</div>
-							<div class="product">
-								<img src="images/ps4-gtaV.webp" alt="" class="card-image">
-								<div class="card-content">
-									<div class="card-top">
-										<h3 class="card-title">Elden Ring</h3>
-									</div>
-									<div class="card-bottom">
-										<span class="gia">420000đ</span>
-									</div>
-								</div>
-							</div>
-							<div class="product">
-								<img src="images/ps4-gtaV.webp" alt="" class="card-image">
-								<div class="card-content">
-									<div class="card-top">
-										<h3 class="card-title">Elden Ring</h3>
-									</div>
-									<div class="card-bottom">
-										<span class="gia">420000đ</span>
+								<div class="product">
+									<img src="images/ps4-gtaV.webp" alt="" class="card-image">
+									<div class="card-content">
+										<div class="card-top">
+											<h3 class="card-title">Elden Ring</h3>
+										</div>
+										<div class="card-bottom">
+											<span class="gia">420000đ</span>
+										</div>
 									</div>
 								</div>
-							</div>
-							<div class="product">
-								<img src="images/ps4-gtaV.webp" alt="" class="card-image">
-								<div class="card-content">
-									<div class="card-top">
-										<h3 class="card-title">Elden Ring</h3>
-									</div>
-									<div class="card-bottom">
-										<span class="gia">420000đ</span>
-									</div>
-								</div>
-							</div>
 
-						</div> <!-- .product-list -->
+							</div> <!-- .product-list -->
 
-						<div class="pagination-bar">
-							<div class="pagination ">
-								<a href="#" class="page-number"><i class="fa fa-angle-left"></i></a>
-								<span class="page-number current">1</span>
-								<a href="#" class="page-number">2</a>								
-								
-								<a href="#" class="page-number"><i class="fa fa-angle-right"></i></a>
-							</div> <!-- .pagination -->
-						</div>
+						</section>
+
+						<section>
+							<header>
+								<h2 class="section-title">New Products</h2>
+								<a href="#" class="all">Show All</a>
+							</header>
+
+							<div class="product-list">
+								<div class="product">
+									<img src="images/ps5-codmwII.jpg" alt="" class="card-image">
+									<div class="card-content">
+										<div class="card-top">
+											<h3 class="card-title">Elden Ring</h3>
+										</div>
+										<div class="card-bottom">
+											<span class="gia">420000đ</span>
+										</div>
+									</div>
+								</div>
+								<div class="product">
+									<img src="images/ps5-eldenring.jpg" alt="" class="card-image">
+									<div class="card-content">
+										<div class="card-top">
+											<h3 class="card-title">Elden Ring Elden Ring Elden Ring Elden Ring </h3>
+										</div>
+										<div class="card-bottom">
+											<span class="gia">420000đ</span>
+										</div>
+									</div>
+								</div>
+								<div class="product">
+									<img src="images/ps5-residentevil4.jpg" alt="" class="card-image">
+									<div class="card-content">
+										<div class="card-top">
+											<h3 class="card-title">Elden RingRingRingRingRingRingRingRingRingRingRingRing</h3>
+										</div>
+										<div class="card-bottom">
+											<span class="gia">420000đ </span>
+										</div>
+									</div>
+								</div>
+								<div class="product">
+									<img src="images/ps5-minecraftlegend.jpg" alt="" class="card-image">
+									<div class="card-content">
+										<div class="card-top">
+											<h3 class="card-title">Elden Ring</h3>
+										</div>
+										<div class="card-bottom">
+											<span class="gia">420000đ</span>
+										</div>
+									</div>
+								</div>
+
+							</div> <!-- .product-list -->
+
+						</section>
 					</div>
 				</div> <!-- .container -->
 			</main> <!-- .main-content -->
@@ -330,7 +321,7 @@
 		<div class="overlay"></div>
 
 		<div class="auth-popup popup">
-			<a href="#" class="close"><i class="fa fa-close"></i></a>
+			<a href="#" class="close"><i class="fa fa-times"></i></a>
 			<div class="row">
 				<div class="col-md-6">
 					<h2 class="section-title">Login</h2>
@@ -356,7 +347,6 @@
 		<script src="js/app.js"></script>
 		<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
 		<script src='https://kit.fontawesome.com/a076d05399.js' crossorigin='anonymous'></script>
-		
 	</body>
-
+	
 </html>
