@@ -1,7 +1,7 @@
 <ul class="menu">
     <li class="menu-item home "><a href="index.php"><i class="icon-home"></i></a></li>
     <li class="menu-item drop-down">
-        <a class="nav-link" href="products.php?manage=product&id=1" id="navbarDropdown" role="button" aria-expanded="false">
+        <a class="nav-link" href="index.php?manage=product&id=1" id="navbarDropdown" role="button" aria-expanded="false">
             Games
         </a>
         <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
@@ -48,8 +48,8 @@
 
         </ul>
     </li>
-    <li class="menu-item"><a class="nav-link" href="#" id="navbarDropdown" role="button" aria-expanded="false">
-            New
+    <li class="menu-item"><a class="nav-link" href="index.php?manage=news" id="navbarDropdown" role="button" aria-expanded="false">
+            News
         </a></li>
 
 </ul> <!-- .menu -->

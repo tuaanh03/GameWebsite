@@ -9,7 +9,7 @@
         </a> <!-- #branding -->
 
         <div class="right-section pull-right">
-            <a href="cart.php" class="cart"><i class="icon-cart"></i> 0 items in cart</a>
+            <a href="index.php?manage=cart" class="cart"><i class="icon-cart"></i> 0 items in cart</a>
             <a href="#" class="login-button">Login/Register</a>
         </div> <!-- .right-section -->
 
