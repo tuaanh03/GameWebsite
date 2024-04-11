@@ -1,3 +1,16 @@
+<?php
+if(isset($_GET['manage']))
+{
+	$tam = $_GET['manage'];
+}
+else{
+	$tam = '';
+}
+if($tam == '')
+{
+	include("pages/slider.php");
+}
+?>
 <main class="main-content">
 	<div class="container">
 		<div class="page">

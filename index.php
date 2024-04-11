@@ -28,7 +28,6 @@
 		<div id="site-content">
 			<?php
 				include("pages/header.php");
-				include("pages/slider.php");
 				include("pages/main.php");
 				include("pages/footer.php");
 			?>

@@ -5,11 +5,11 @@
             Games
         </a>
         <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-            <li><a class="dropdown-item" href="products.php"><label for="" class="psicon"><img src="images/free-playstation-40-739542.webp" alt=""></label>Playstation 5</a></li>
-            <li><a class="dropdown-item" href="#"><label for="" class="psicon"><img src="images/free-playstation-40-739542.webp" alt=""></label>Playstation 4</a></li>
-            <li><a class="dropdown-item" href="#"><label for="" class="psicon"><img src="images/microsoft_xbox_icon_136396.png" alt=""></label>Xbox Series X|S</a></li>
-            <li><a class="dropdown-item" href="#"><label for="" class="psicon"><img src="images/nintendo_switch_icon_136357.png" alt=""></label>Nintendo Switch</a></li>
-            <li><a class="dropdown-item" href="#"><label for="" class="psicon"><img src="images/pc-screen-icon-2048x1793-ic9fcuzs.png" alt=""></label>PC</a></li>
+            <li><a class="dropdown-item" href="index.php?manage=product&id=2"><label for="" class="psicon"><img src="images/free-playstation-40-739542.webp" alt=""></label>Playstation 5</a></li>
+            <li><a class="dropdown-item" href="index.php?manage=product&id=3"><label for="" class="psicon"><img src="images/free-playstation-40-739542.webp" alt=""></label>Playstation 4</a></li>
+            <li><a class="dropdown-item" href="index.php?manage=product&id=4"><label for="" class="psicon"><img src="images/microsoft_xbox_icon_136396.png" alt=""></label>Xbox Series X|S</a></li>
+            <li><a class="dropdown-item" href="index.php?manage=product&id=5"><label for="" class="psicon"><img src="images/nintendo_switch_icon_136357.png" alt=""></label>Nintendo Switch</a></li>
+            <li><a class="dropdown-item" href="index.php?manage=product&id=6"><label for="" class="psicon"><img src="images/pc-screen-icon-2048x1793-ic9fcuzs.png" alt=""></label>PC</a></li>
         </ul>
     </li>
     <li class="menu-item drop-down">
