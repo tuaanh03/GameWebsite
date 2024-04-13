@@ -26,6 +26,7 @@
 			if($tam == 'managecategory')
 			{
 				include("managecategory/add.php");
+                include("managecategory/list.php");
 			}		
 			else
 			{
