@@ -5,20 +5,20 @@
 
 
             <li class="active-link">
-                <a href="index.php?action=managecategory"><i class="fa fa-desktop "></i>Manage category </a>
+                <a href="index.php?action=managecategory&query=add"><i class="fa fa-desktop "></i>Manage category </a>
             </li>
 
 
             <li>
-                <a href="index.php?action=manageproducts"><i class="fa fa-table "></i>Manage products </a>
+                <a href="index.php?action=manageproducts&query=add"><i class="fa fa-table "></i>Manage products </a>
             </li>
             <li>
-                <a href="index.php?action=managelistposts"><i class="fa fa-edit "></i>Manage list of posts </a>
+                <a href="index.php?action=managelistposts&query=add"><i class="fa fa-edit "></i>Manage list of posts </a>
             </li>
 
 
             <li>
-                <a href="index.php?action=manageposts"><i class="fa fa-qrcode "></i>Manage posts</a>
+                <a href="index.php?action=manageposts&query=add"><i class="fa fa-qrcode "></i>Manage posts</a>
             </li>
 
         </ul>

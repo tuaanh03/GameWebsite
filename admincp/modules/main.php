@@ -16,18 +16,24 @@
         </div>
         <!-- /. ROW  -->
         <?php
-			if(isset($_GET['action']))
+			if(isset($_GET['action']) && $_GET['query'])
 			{
 				$tam = $_GET['action'];
+                $query = $_GET['query'];
 			}
 			else{
 				$tam = '';
+                $query = '';
 			}
-			if($tam == 'managecategory')
+			if($tam == 'managecategory' && $query == 'add')
 			{
 				include("managecategory/add.php");
                 include("managecategory/list.php");
-			}		
+			}
+            elseif($tam == 'managecategory' && $query == 'modified')
+            {
+                include("managecategory/modified.php");
+            }		
 			else
 			{
 				include("dashboard.php");

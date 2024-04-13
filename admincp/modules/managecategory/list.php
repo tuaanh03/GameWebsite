@@ -22,7 +22,7 @@ $query_lietke_danhmucsp = mysqli_query($mysqli, $sql_lietke_danhmucsp);
                 <td><?php echo $i ?></td>
                 <td><?php echo $row['genre_name'] ?></td>
                 <td>
-                    <a href="modules/managecategory/xuly.php?iddanhmuc=<?php echo $row['genre_id'] ?>">Delete</a> | <a href="?action=managecategory&query=modified">Modified</a>
+                    <a href="modules/managecategory/xuly.php?iddanhmuc=<?php echo $row['genre_id'] ?>">Delete</a> | <a href="?action=managecategory&query=modified&iddanhmuc=<?php echo $row['genre_id'] ?>">Modified</a>
                 </td>
             </tr>
         <?php
