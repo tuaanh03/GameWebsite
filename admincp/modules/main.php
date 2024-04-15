@@ -33,6 +33,15 @@
             elseif($tam == 'managecategory' && $query == 'modified')
             {
                 include("managecategory/modified.php");
+            }	
+            elseif($tam == 'manageproducts' && $query == 'add')
+            {
+                include("manageproduct/add.php");
+                include("manageproduct/list.php");
+            }
+            elseif($tam == 'manageproducts' && $query == 'modified')
+            {
+                include("manageproduct/modified.php");
             }		
 			else
 			{

@@ -7,7 +7,7 @@ $query_lietke_danhmucsp = mysqli_query($mysqli, $sql_lietke_danhmucsp);
 <table class="table">
     <tbody>
         <tr>
-            <th scope="row">ID</th>
+            <th scope="row">Name product</th>
             <th scope="row">Name of category</th>
             <th scope="row">Manage</th>
         </tr>
