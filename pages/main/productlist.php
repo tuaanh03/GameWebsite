@@ -1,3 +1,14 @@
+<?php 
+$sql_pro = "SELECT * FROM product WHERE product.category_id = '$_GET[id]' ORDER BY product.product_id DESC";
+$query_pro = mysqli_query($mysqli, $sql_pro);
+// danhmuc
+$sql_cate = "SELECT * FROM category WHERE category_id = '$_GET[id]' LIMIT 1";
+$query_cate = mysqli_query($mysqli,$sql_cate);
+$row_title = mysqli_fetch_array($query_cate);
+?>
+
+<h3 style="color: black; font-size:50px"><?php echo $row_title['category_name'] ?></h3>
+
 <div class="filter-bar">
     <div class="filter">
         <span>
@@ -39,95 +50,21 @@
 </div> <!-- .filter-bar -->
 
 <div class="product-list">
+    <?php 
+    while($row_pro = mysqli_fetch_array($query_pro)) {
+    ?>
     <div class="product">
-        <img src="images/nintendo-pokemonMysteryDungeonRescueTeam.jpg" alt="" class="card-image">
+        <img src="admincp/modules/manageproduct/uploads/<?php echo $row_pro['thumbnail'] ?>" alt="" class="card-image">
         <div class="card-content">
             <div class="card-top">
-                <h3 class="card-title">Elden Ring</h3>
+                <h3 class="card-title"><?php echo $row_pro['name_product'] ?></h3>
             </div>
             <div class="card-bottom">
-                <span class="gia">420000đ</span>
+                <span class="gia"><?php echo number_format($row_pro['price']).'₫' ?></span>
             </div>
         </div>
     </div>
-    <div class="product">
-        <img src="images/ps4-daysgone.webp" alt="" class="card-image">
-        <div class="card-content">
-            <div class="card-top">
-                <h3 class="card-title">Elden Ring Elden Ring Elden Ring Elden Ring</h3>
-            </div>
-            <div class="card-bottom">
-                <span class="gia">420000đ</span>
-            </div>
-        </div>
-    </div>
-    <div class="product">
-        <img src="images/ps4-avatar.jpg" alt="" class="card-image">
-        <div class="card-content">
-            <div class="card-top">
-                <h3 class="card-title">Elden RingRingRingRingRingRingRingRingRingRingRingRing</h3>
-            </div>
-            <div class="card-bottom">
-                <span class="gia">420000đ</span>
-            </div>
-        </div>
-    </div>
-    <div class="product">
-        <img src="images/ps4-gtaV.webp" alt="" class="card-image">
-        <div class="card-content">
-            <div class="card-top">
-                <h3 class="card-title">Elden Ring</h3>
-            </div>
-            <div class="card-bottom">
-                <span class="gia">420000đ</span>
-            </div>
-        </div>
-    </div>
-    <div class="product">
-        <img src="images/ps4-gtaV.webp" alt="" class="card-image">
-        <div class="card-content">
-            <div class="card-top">
-                <h3 class="card-title">Elden Ring</h3>
-            </div>
-            <div class="card-bottom">
-                <span class="gia">420000đ</span>
-            </div>
-        </div>
-    </div>
-    <div class="product">
-        <img src="images/ps4-gtaV.webp" alt="" class="card-image">
-        <div class="card-content">
-            <div class="card-top">
-                <h3 class="card-title">Elden Ring</h3>
-            </div>
-            <div class="card-bottom">
-                <span class="gia">420000đ</span>
-            </div>
-        </div>
-    </div>
-    <div class="product">
-        <img src="images/ps4-gtaV.webp" alt="" class="card-image">
-        <div class="card-content">
-            <div class="card-top">
-                <h3 class="card-title">Elden Ring</h3>
-            </div>
-            <div class="card-bottom">
-                <span class="gia">420000đ</span>
-            </div>
-        </div>
-    </div>
-    <div class="product">
-        <img src="images/ps4-gtaV.webp" alt="" class="card-image">
-        <div class="card-content">
-            <div class="card-top">
-                <h3 class="card-title">Elden Ring</h3>
-            </div>
-            <div class="card-bottom">
-                <span class="gia">420000đ</span>
-            </div>
-        </div>
-    </div>
-
+    <?php } ?>
 </div> <!-- .product-list -->
 
 <div class="pagination-bar">
