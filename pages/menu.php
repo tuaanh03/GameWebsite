@@ -1,9 +1,17 @@
+<?php
+$sql_danhmuc = "SELECT * FROM category ORDER BY category_id DESC";
+$query_danhmuc = mysqli_query($mysqli, $sql_danhmuc);
+?>
+
+
 <ul class="menu">
     <li class="menu-item home "><a href="index.php"><i class="icon-home"></i></a></li>
+
     <li class="menu-item drop-down">
         <a class="nav-link" href="index.php?manage=product&id=1" id="navbarDropdown" role="button" aria-expanded="false">
             Games
         </a>
+
         <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
             <li><a class="dropdown-item" href="index.php?manage=product&id=2"><label for="" class="psicon"><img src="images/free-playstation-40-739542.webp" alt=""></label>Playstation 5</a></li>
             <li><a class="dropdown-item" href="index.php?manage=product&id=3"><label for="" class="psicon"><img src="images/free-playstation-40-739542.webp" alt=""></label>Playstation 4</a></li>
@@ -11,7 +19,9 @@
             <li><a class="dropdown-item" href="index.php?manage=product&id=5"><label for="" class="psicon"><img src="images/nintendo_switch_icon_136357.png" alt=""></label>Nintendo Switch</a></li>
             <li><a class="dropdown-item" href="index.php?manage=product&id=6"><label for="" class="psicon"><img src="images/pc-screen-icon-2048x1793-ic9fcuzs.png" alt=""></label>PC</a></li>
         </ul>
+
     </li>
+
     <li class="menu-item drop-down">
         <a class="nav-link" href="#" id="navbarDropdown" role="button" aria-expanded="false">
             PS5

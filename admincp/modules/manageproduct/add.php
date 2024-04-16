@@ -17,7 +17,23 @@
             <tr>
                 <th scope="row">Quantity</th>
                 <td><input type="text" name="soluong"></td>
-            </tr>         
+            </tr>  
+            
+            <tr>
+                <th scope="row">Category</th>
+                <td>
+                    <select name="danhmuc" >
+                        <?php
+                        $sql_danhmuc = "SELECT * FROM category ORDER BY category_id DESC";
+                        $query_danhmuc = mysqli_query($mysqli,$sql_danhmuc); 
+                        while($row_danhmuc = mysqli_fetch_array($query_danhmuc)){
+                        ?>
+                        <option value="<?php echo $row_danhmuc['category_id']?>"><?php echo $row_danhmuc['category_name']?></option>
+                        <?php }?>
+                    </select>
+                </td>
+            </tr>
+            
             <tr>
                 <th scope="row">Description</th>
                 <td><textarea name="noidung" rows="5" cols="40" style="resize: none;"></textarea></td>

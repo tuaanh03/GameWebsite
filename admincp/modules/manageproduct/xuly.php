@@ -8,6 +8,7 @@ $noidung = $_POST['noidung'];
 $hemaysp = $_POST['hemaysp'];
 $ngonngusp = $_POST['ngonngusp'];
 $songuoichoi = $_POST['songuoichoi'];
+$danhmuc = $_POST['danhmuc'];
 $nhaxuatban = $_POST['nhaxuatban'];
 $tinhtrang = $_POST['tinhtrang'];
 $dotuoi = $_POST['dotuoi'];
@@ -18,7 +19,7 @@ $hinhanh = time() . '_' . $hinhanh;
 
 if (isset($_POST['themsanpham'])) {
     //them
-    $spl_them = "INSERT INTO product(name_product,idproduct,thumbnail,descriptions,console_type,languages,player,price,quantity,publisher_name,statuspr,esrb) VALUE('" . $tensanpham . "','" . $masp . "','" . $hinhanh . "','" . $noidung . "','" . $hemaysp . "','" . $ngonngusp . "','" . $songuoichoi . "','" . $giasp . "','" . $soluong . "','" . $nhaxuatban . "','" . $tinhtrang . "','" . $dotuoi . "')";
+    $spl_them = "INSERT INTO product(name_product,idproduct,thumbnail,descriptions,console_type,languages,player,category_id,price,quantity,publisher_name,statuspr,esrb) VALUE('" . $tensanpham . "','" . $masp . "','" . $hinhanh . "','" . $noidung . "','" . $hemaysp . "','" . $ngonngusp . "','" . $songuoichoi . "','" . $danhmuc . "','" . $giasp . "','" . $soluong . "','" . $nhaxuatban . "','" . $tinhtrang . "','" . $dotuoi . "')";
     mysqli_query($mysqli, $spl_them);
     move_uploaded_file($hinhanh_tmp, 'uploads/' . $hinhanh);
     header('Location:../../index.php?action=manageproducts&query=add');
