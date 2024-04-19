@@ -46,6 +46,25 @@ $query_sua_sp = mysqli_query($mysqli, $sql_sua_sp);
                 </tr>
 
                 <tr>
+                    <th scope="row">Genre</th>
+                    <td>
+                        <select name="theloai">
+                            <?php
+                            $sql_theloai = "SELECT * FROM genres ORDER BY genre_id DESC";
+                            $query_theloai = mysqli_query($mysqli, $sql_theloai);
+                            while ($row_theloai = mysqli_fetch_array($query_theloai)) {
+                                if($row_theloai['genre_id'] == $row['genre_id']) {
+                            ?>
+                                <option selected value="<?php echo $row_theloai['genre_id'] ?>"><?php echo $row_theloai['genre_name'] ?></option>
+                            <?php } else{?>
+                                <option value="<?php echo $row_theloai['genre_id'] ?>"><?php echo $row_theloai['genre_name'] ?></option>
+                            <?php }?>
+                            <?php } ?>
+                        </select>
+                    </td>
+                </tr>
+
+                <tr>
                     <th scope="row">Description</th>
                     <td><textarea name="noidung" rows="5" cols="40" style="resize: none;"><?php echo $row['descriptions'] ?></textarea></td>
                 </tr>

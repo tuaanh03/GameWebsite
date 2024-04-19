@@ -33,6 +33,21 @@
                     </select>
                 </td>
             </tr>
+
+            <tr>
+                <th scope="row">Genre</th>
+                <td>
+                    <select name="theloai" >
+                        <?php
+                        $sql_theloai = "SELECT * FROM genres ORDER BY genre_id DESC";
+                        $query_theloai = mysqli_query($mysqli,$sql_theloai); 
+                        while($row_theloai = mysqli_fetch_array($query_theloai)){
+                        ?>
+                        <option value="<?php echo $row_theloai['genre_id']?>"><?php echo $row_theloai['genre_name']?></option>
+                        <?php }?>
+                    </select>
+                </td>
+            </tr>
             
             <tr>
                 <th scope="row">Description</th>

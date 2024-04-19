@@ -1,110 +1,33 @@
-<section>
-    <header>
-        <h2 class="section-title">New Products</h2>
-        <a href="single.php" class="all">Show All</a>
-    </header>
+<?php
+$sql_pro = "SELECT * FROM product,category WHERE product.category_id = category.category_id ORDER BY product.product_id DESC LIMIT 25";
+$query_pro = mysqli_query($mysqli, $sql_pro);
+?>
 
-    <div class="product-list">
-        <div class="product">
-            <img src="images/nintendo-pokemonMysteryDungeonRescueTeam.jpg" alt="" class="card-image">
-            <div class="card-content">
-                <div class="card-top">
-                    <h3 class="card-title">Elden Ring</h3>
-                </div>
-                <div class="card-bottom">
-                    <span class="gia">420000đ</span>
-                </div>
-            </div>
-        </div>
-        <div class="product">
-            <img src="images/ps4-daysgone.webp" alt="" class="card-image">
-            <div class="card-content">
-                <div class="card-top">
-                    <h3 class="card-title">Elden Ring Elden Ring Elden Ring Elden Ring</h3>
-                </div>
-                <div class="card-bottom">
-                    <span class="gia">420000đ</span>
-                </div>
-            </div>
-        </div>
-        <div class="product">
-            <img src="images/ps4-avatar.jpg" alt="" class="card-image">
-            <div class="card-content">
-                <div class="card-top">
-                    <h3 class="card-title">Elden RingRingRingRingRingRingRingRingRingRingRingRing</h3>
-                </div>
-                <div class="card-bottom">
-                    <span class="gia">420000đ</span>
-                </div>
-            </div>
-        </div>
-        <div class="product">
-            <img src="images/ps4-gtaV.webp" alt="" class="card-image">
-            <div class="card-content">
-                <div class="card-top">
-                    <h3 class="card-title">Elden Ring</h3>
-                </div>
-                <div class="card-bottom">
-                    <span class="gia">420000đ</span>
-                </div>
-            </div>
-        </div>
-
-    </div> <!-- .product-list -->
-
-</section>
 
 <section>
     <header>
         <h2 class="section-title">New Products</h2>
-        <a href="#" class="all">Show All</a>
+        <!-- <a href="single.php" class="all">Show All</a> -->
     </header>
 
     <div class="product-list">
-        <div class="product">
-            <img src="images/ps5-codmwII.jpg" alt="" class="card-image">
-            <div class="card-content">
-                <div class="card-top">
-                    <h3 class="card-title">Elden Ring</h3>
-                </div>
-                <div class="card-bottom">
-                    <span class="gia">420000đ</span>
-                </div>
+        <?php
+        while ($row = mysqli_fetch_array($query_pro)) {
+        ?>
+            <div class="product">
+                <a href="index.php?manage=singleproduct&id=<?php echo $row['product_id'] ?>">
+                    <img src="admincp/modules/manageproduct/uploads/<?php echo $row['thumbnail'] ?>" alt="" class="card-image">
+                    <div class="card-content">
+                        <div class="card-top">
+                            <h3 class="card-title"><?php echo $row['name_product'] ?></h3>
+                        </div>
+                        <div class="card-bottom">
+                            <span class="gia"><?php echo number_format($row['price']) . '₫' ?></span>
+                        </div>
+                    </div>
+                </a>
             </div>
-        </div>
-        <div class="product">
-            <img src="images/ps5-eldenring.jpg" alt="" class="card-image">
-            <div class="card-content">
-                <div class="card-top">
-                    <h3 class="card-title">Elden Ring Elden Ring Elden Ring Elden Ring </h3>
-                </div>
-                <div class="card-bottom">
-                    <span class="gia">420000đ</span>
-                </div>
-            </div>
-        </div>
-        <div class="product">
-            <img src="images/ps5-residentevil4.jpg" alt="" class="card-image">
-            <div class="card-content">
-                <div class="card-top">
-                    <h3 class="card-title">Elden RingRingRingRingRingRingRingRingRingRingRingRing</h3>
-                </div>
-                <div class="card-bottom">
-                    <span class="gia">420000đ </span>
-                </div>
-            </div>
-        </div>
-        <div class="product">
-            <img src="images/ps5-minecraftlegend.jpg" alt="" class="card-image">
-            <div class="card-content">
-                <div class="card-top">
-                    <h3 class="card-title">Elden Ring</h3>
-                </div>
-                <div class="card-bottom">
-                    <span class="gia">420000đ</span>
-                </div>
-            </div>
-        </div>
+        <?php } ?>
 
     </div> <!-- .product-list -->
 

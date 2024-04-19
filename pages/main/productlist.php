@@ -1,9 +1,9 @@
-<?php 
+<?php
 $sql_pro = "SELECT * FROM product WHERE product.category_id = '$_GET[id]' ORDER BY product.product_id DESC";
 $query_pro = mysqli_query($mysqli, $sql_pro);
 // danhmuc
 $sql_cate = "SELECT * FROM category WHERE category_id = '$_GET[id]' LIMIT 1";
-$query_cate = mysqli_query($mysqli,$sql_cate);
+$query_cate = mysqli_query($mysqli, $sql_cate);
 $row_title = mysqli_fetch_array($query_cate);
 ?>
 
@@ -50,20 +50,22 @@ $row_title = mysqli_fetch_array($query_cate);
 </div> <!-- .filter-bar -->
 
 <div class="product-list">
-    <?php 
-    while($row_pro = mysqli_fetch_array($query_pro)) {
+    <?php
+    while ($row_pro = mysqli_fetch_array($query_pro)) {
     ?>
-    <div class="product">
-        <img src="admincp/modules/manageproduct/uploads/<?php echo $row_pro['thumbnail'] ?>" alt="" class="card-image">
-        <div class="card-content">
-            <div class="card-top">
-                <h3 class="card-title"><?php echo $row_pro['name_product'] ?></h3>
-            </div>
-            <div class="card-bottom">
-                <span class="gia"><?php echo number_format($row_pro['price']).'₫' ?></span>
-            </div>
+        <div class="product">
+            <a href="index.php?manage=singleproduct&id=<?php echo $row_pro['product_id'] ?>">
+                <img src="admincp/modules/manageproduct/uploads/<?php echo $row_pro['thumbnail'] ?>" alt="" class="card-image">
+                <div class="card-content">
+                    <div class="card-top">
+                        <h3 class="card-title"><?php echo $row_pro['name_product'] ?></h3>
+                    </div>
+                    <div class="card-bottom">
+                        <span class="gia"><?php echo number_format($row_pro['price']) . '₫' ?></span>
+                    </div>
+                </div>
+            </a>
         </div>
-    </div>
     <?php } ?>
 </div> <!-- .product-list -->
 

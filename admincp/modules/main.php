@@ -42,7 +42,16 @@
             elseif($tam == 'manageproducts' && $query == 'modified')
             {
                 include("manageproduct/modified.php");
+            }
+            elseif($tam == 'managegenres' && $query == 'add')
+            {
+                include("managegenre/add.php");
+                include("managegenre/list.php");
             }		
+            elseif($tam == 'managegenres'  && $query == 'modified')
+            {
+                include("managegenre/modified.php");
+            }
 			else
 			{
 				include("dashboard.php");

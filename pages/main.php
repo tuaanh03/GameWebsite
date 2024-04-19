@@ -26,9 +26,13 @@ if($tam == '')
 			{
 				include("main/productlist.php");
 			}
-			elseif($tam == 'cart')
+			elseif($tam == 'carts')
 			{
 				include("main/cart.php");
+			}
+			elseif($tam == 'singleproduct')
+			{
+				include("main/singleproduct.php");
 			}
 			elseif($tam == 'news')
 			{

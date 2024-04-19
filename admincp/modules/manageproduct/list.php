@@ -1,6 +1,7 @@
 <?php
-$sql_lietke_sp = "SELECT * FROM product,category WHERE product.category_id = category.category_id ORDER BY product_id DESC";
+$sql_lietke_sp = "SELECT * FROM product,category,genres WHERE product.category_id = category.category_id AND product.genre_id = genres.genre_id ORDER BY product_id DESC";
 $query_lietke_sp = mysqli_query($mysqli, $sql_lietke_sp);
+// liet ke the loai
 ?>
 
 <p>List the product</p>
@@ -11,8 +12,9 @@ $query_lietke_sp = mysqli_query($mysqli, $sql_lietke_sp);
             <th scope="row">Product Name</th>
             <th scope="row">Product ID</th>
             <th scope="row">Price</th>
-            <th scope="row">Quantity</th>
+            <th scope="row">Quantity</th>           
             <th scope="row">Category</th>
+            <th scope="row">Genre</th>
             <th scope="row">Thumnail</th>
             <th scope="row">Console type</th>
             <th scope="row">Language</th>
@@ -35,7 +37,8 @@ $query_lietke_sp = mysqli_query($mysqli, $sql_lietke_sp);
                 <td><?php echo $row['idproduct'] ?></td>
                 <td><?php echo $row['price'] ?></td>
                 <td><?php echo $row['quantity'] ?></td>
-                <td><?php echo $row['category_name'] ?></td>
+                <td><?php echo $row['category_name'] ?></td>               
+                <td><?php echo $row['genre_name'] ?></td>                 
                 <td><img src="modules/manageproduct/uploads/<?php echo $row['thumbnail'] ?>" alt="" style="width: 150px; "></td>
                 <td><?php echo $row['console_type'] ?></td>
                 <td><?php echo $row['languages'] ?></td>

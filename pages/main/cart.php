@@ -1,3 +1,4 @@
+<?php $total_money = 0; ?>
 <table class="cart">
     <thead>
         <tr>
@@ -8,79 +9,74 @@
             <th class="action"></th>
         </tr>
     </thead>
-    <tbody>
+    <?php
+    if (isset($_SESSION['cart'])) {
+        $thanhtien = 0;
+
+        foreach ($_SESSION['cart'] as $cart_item) {
+            $thanhtien = $cart_item['quantity'] * $cart_item['price'];
+            $total_money += $thanhtien;
+    ?>
+            <tbody>
+                <tr>
+                    <td class="product-name">
+                        <div class="product-thumbnail">
+                            <img style="width: 150px;" src="admincp/modules/manageproduct/uploads/<?php echo $cart_item['thumbnail'] ?>" alt="">
+                        </div>
+                        <div class="product-detail" style="margin-top: 70px;">
+                            <h3 class="product-title"><?php echo $cart_item['name_product'] ?></h3>
+                        </div>
+                    </td>
+                    <td class="product-price"><?php echo number_format($cart_item['price']) . '₫' ?></td>
+                    <td class="product-qty">
+
+                        <a href="pages/main/addtocart.php?plus=<?php echo $cart_item['id'] ?>"><i class="fa fa-plus"></i></a>
+                        <?php echo $cart_item['quantity'] ?>
+                        <a href="pages/main/addtocart.php?minus=<?php echo $cart_item['id'] ?>"><i class="fa fa-minus"></i></a>
+
+                    </td>
+                    <td class="product-total"><?php echo number_format($thanhtien) . 'đ'; ?></td>
+                    <td class="action"><a href="pages/main/addtocart.php?delete=<?php echo $cart_item['id'] ?>"><i class="fa fa-times"></i></a></td>
+                </tr>
+            </tbody>
+        <?php }
+    } else { ?>
         <tr>
-            <td class="product-name">
-                <div class="product-thumbnail">
-                    <img src="dummy/cart-thumb-1.jpg" alt="">
-                </div>
-                <div class="product-detail">
-                    <h3 class="product-title">GTA V</h3>
-                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Iure nobis architecto dolorum, alias laborum sit odit, saepe expedita similique eius enim quasi obcaecati voluptates, autem eveniet ratione veniam omnis modi.</p>
-                </div>
+            <td colspan="6">
+                <p>Empty</p>
             </td>
-            <td class="product-price">$150.00</td>
-            <td class="product-qty">
-                <select name="#">
-                    <option value="1">1</option>
-                    <option value="2">2</option>
-                    <option value="3">3</option>
-                </select>
-            </td>
-            <td class="product-total">$150.00</td>
-            <td class="action"><a href="#"><i class="fa fa-times"></i></a></td>
         </tr>
-        <tr>
-            <td class="product-name">
-                <div class="product-thumbnail">
-                    <img src="dummy/cart-thumb-2.jpg" alt="">
-                </div>
-                <div class="product-detail">
-                    <h3 class="product-title">Big Game Hunter</h3>
-                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Iure nobis architecto dolorum, alias laborum sit odit, saepe expedita similique eius enim quasi obcaecati voluptates, autem eveniet ratione veniam omnis modi.</p>
-                </div>
-            </td>
-            <td class="product-price">$150.00</td>
-            <td class="product-qty">
-                <select name="#">
-                    <option value="1">1</option>
-                    <option value="2">2</option>
-                    <option value="3">3</option>
-                </select>
-            </td>
-            <td class="product-total">$150.00</td>
-            <td class="action"><a href="#"><i class="fa fa-times"></i></a></td>
-        </tr>
-        <tr>
-            <td class="product-name">
-                <div class="product-thumbnail">
-                    <img src="dummy/cart-thumb-3.jpg" alt="">
-                </div>
-                <div class="product-detail">
-                    <h3 class="product-title">Meal Gear Solid</h3>
-                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Iure nobis architecto dolorum, alias laborum sit odit, saepe expedita similique eius enim quasi obcaecati voluptates, autem eveniet ratione veniam omnis modi.</p>
-                </div>
-            </td>
-            <td class="product-price">$150.00</td>
-            <td class="product-qty">
-                <select name="#">
-                    <option value="1">1</option>
-                    <option value="2">2</option>
-                    <option value="3">3</option>
-                </select>
-            </td>
-            <td class="product-total">$150.00</td>
-            <td class="action"><a href="#"><i class="fa fa-times"></i></a></td>
-        </tr>
-    </tbody>
+    <?php } ?>
 </table> <!-- .cart -->
 
-<div class="cart-total">
-    <p><strong>Subtotal:</strong> $650.00</p>
-    <p><strong>Shipment:</strong> $15.00</p>
-    <p class="total"><strong>Total</strong><span class="num">$665.00</span></p>
-    <p>
-        <a href="#" class="button muted">Continue Shopping</a>
-        <a href="#" class="button">Finalize and pay</a>
-    </p>
-</div> <!-- .cart-total -->
+
+<?php
+if ($total_money == 0) {
+
+?>
+
+<?php } else {
+?>
+
+    <div class="cart-total" style="float: left; width: 160px;">
+        <tr>
+            <p><a href="pages/main/addtocart.php?deleteall=1">Delete all products</a></p>
+        </tr>
+    </div>
+
+    <div class="cart-total">
+        <!-- <p><strong>Subtotal:</strong> $650.00</p>
+        <p><strong>Shipment:</strong> $15.00</p> -->
+        <p class="total"><strong>Total</strong><span class="num"><?php echo number_format($total_money) . 'đ'; ?></span></p>
+        <p>
+            <a href="#" class="button">Continue Shopping</a>
+            <a href="#" class="button">Finalize and pay</a>
+        </p>
+
+
+    </div> <!-- .cart-total -->
+<?php
+}
+?>
+
+<!-- Use class="button muted" to muted button -->
