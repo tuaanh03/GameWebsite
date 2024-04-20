@@ -1,3 +1,4 @@
+
 <nav class="navbar-default navbar-side" role="navigation">
     <div class="sidebar-collapse">
         <ul class="nav" id="main-menu">
@@ -24,7 +25,8 @@
                 <a href="index.php?action=manageposts&query=add"><i class="fa fa-qrcode "></i>Manage posts</a>
             </li>
 
-            
+          
+
 
         </ul>
     </div>

@@ -10,7 +10,7 @@
         <div class="row">
             <div class="col-lg-12 ">
                 <div class="alert alert-info">
-                    <strong>Welcome Jhon Doe ! </strong>
+                    <strong>Welcome <?php if(isset($_SESSION['dangnhap'])) {echo $_SESSION['dangnhap'];} ?> ! </strong>
                 </div>
             </div>
         </div>

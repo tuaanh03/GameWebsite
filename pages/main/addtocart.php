@@ -3,18 +3,72 @@ session_start();
 include('../../admincp/config/config.php');
 
 //themsoluongsanpham
+if (isset($_GET['plus'])) {
+    $id = $_GET['plus'];
+    foreach ($_SESSION['cart'] as $cart_item) {
+        if ($cart_item['id'] != $id) {
+            $product[] = array(
+                'name_product' => $cart_item['name_product'], 'id' => $cart_item['id'], 'quantity' => $cart_item['quantity'], 'price' => $cart_item['price'], 'thumbnail' => $cart_item['thumbnail'], 'idproduct' => $cart_item['idproduct']
+            );
+            $_SESSION['cart'] = $product;
+        }
+        else{
+            $tangsoluong = $cart_item['quantity'] + 1;
+            if($cart_item['quantity']<10)
+            {
+                $product[] = array(
+                    'name_product' => $cart_item['name_product'], 'id' => $cart_item['id'], 'quantity' =>$tangsoluong, 'price' => $cart_item['price'], 'thumbnail' => $cart_item['thumbnail'], 'idproduct' => $cart_item['idproduct']
+                );
+            }
+            else
+            {
+                $product[] = array(
+                    'name_product' => $cart_item['name_product'], 'id' => $cart_item['id'], 'quantity' =>$cart_item['quantity'], 'price' => $cart_item['price'], 'thumbnail' => $cart_item['thumbnail'], 'idproduct' => $cart_item['idproduct']
+                );
+            }
+            $_SESSION['cart'] = $product;
+        }
+    }
+    header('Location:../../index.php?manage=carts');
+}
 
+//trusoluongsanpham
+if (isset($_GET['minus'])) {
+    $id = $_GET['minus'];
+    foreach ($_SESSION['cart'] as $cart_item) {
+        if ($cart_item['id'] != $id) {
+            $product[] = array(
+                'name_product' => $cart_item['name_product'], 'id' => $cart_item['id'], 'quantity' => $cart_item['quantity'], 'price' => $cart_item['price'], 'thumbnail' => $cart_item['thumbnail'], 'idproduct' => $cart_item['idproduct']
+            );
+            $_SESSION['cart'] = $product;
+        }
+        else{
+            $tangsoluong = $cart_item['quantity'] - 1;
+            if($cart_item['quantity']>1)
+            {
+                $product[] = array(
+                    'name_product' => $cart_item['name_product'], 'id' => $cart_item['id'], 'quantity' =>$tangsoluong, 'price' => $cart_item['price'], 'thumbnail' => $cart_item['thumbnail'], 'idproduct' => $cart_item['idproduct']
+                );
+            }
+            else
+            {
+                $product[] = array(
+                    'name_product' => $cart_item['name_product'], 'id' => $cart_item['id'], 'quantity' =>$cart_item['quantity'], 'price' => $cart_item['price'], 'thumbnail' => $cart_item['thumbnail'], 'idproduct' => $cart_item['idproduct']
+                );
+            }
+            $_SESSION['cart'] = $product;
+        }
+    }
+    header('Location:../../index.php?manage=carts');
+}
 
 //xóa từng sản phẩm
-if(isset($_SESSION['cart']) && isset($_GET['delete']) )
-{
+if (isset($_SESSION['cart']) && isset($_GET['delete'])) {
     $id =  $_GET['delete'];
-    foreach ($_SESSION['cart'] as $cart_item)
-    {
-        if($cart_item['id'] != $id)
-        {
+    foreach ($_SESSION['cart'] as $cart_item) {
+        if ($cart_item['id'] != $id) {
             $product[] = array(
-                'name_product' => $cart_item['name_product'], 'id' => $cart_item['id'], 'quantity' =>$cart_item['quantity'], 'price' => $cart_item['price'], 'thumbnail' => $cart_item['thumbnail'], 'idproduct' => $cart_item['idproduct']
+                'name_product' => $cart_item['name_product'], 'id' => $cart_item['id'], 'quantity' => $cart_item['quantity'], 'price' => $cart_item['price'], 'thumbnail' => $cart_item['thumbnail'], 'idproduct' => $cart_item['idproduct']
             );
         }
     }
@@ -23,8 +77,7 @@ if(isset($_SESSION['cart']) && isset($_GET['delete']) )
 }
 
 // xóa tất cả
-if(isset($_GET['deleteall']) && $_GET['deleteall'] == 1)
-{
+if (isset($_GET['deleteall']) && $_GET['deleteall'] == 1) {
     unset($_SESSION['cart']);
     header('Location:../../index.php?manage=carts');
 }
@@ -46,20 +99,18 @@ if (isset($_POST['themgiohang'])) {
             foreach ($_SESSION['cart'] as $cart_item) {
                 if ($cart_item['id'] == $id) {
                     $product[] = array(
-                        'name_product' => $cart_item['name_product'], 'id' => $cart_item['id'], 'quantity' =>$cart_item['quantity'] + 1, 'price' => $cart_item['price'], 'thumbnail' => $cart_item['thumbnail'], 'idproduct' => $cart_item['idproduct']
+                        'name_product' => $cart_item['name_product'], 'id' => $cart_item['id'], 'quantity' => $cart_item['quantity'] + 1, 'price' => $cart_item['price'], 'thumbnail' => $cart_item['thumbnail'], 'idproduct' => $cart_item['idproduct']
                     );
                     $found = true;
                 } else {
                     $product[] = array(
-                        'name_product' => $cart_item['name_product'], 'id' => $cart_item['id'], 'quantity' =>$cart_item['quantity'], 'price' => $cart_item['price'], 'thumbnail' => $cart_item['thumbnail'], 'idproduct' => $cart_item['idproduct']
+                        'name_product' => $cart_item['name_product'], 'id' => $cart_item['id'], 'quantity' => $cart_item['quantity'], 'price' => $cart_item['price'], 'thumbnail' => $cart_item['thumbnail'], 'idproduct' => $cart_item['idproduct']
                     );
                 }
             }
-            if($found == false)
-            {
-                $_SESSION['cart'] = array_merge($product,$new_product);
-            }
-            else{
+            if ($found == false) {
+                $_SESSION['cart'] = array_merge($product, $new_product);
+            } else {
                 $_SESSION['cart'] = $product;
             }
         } else {
@@ -67,6 +118,4 @@ if (isset($_POST['themgiohang'])) {
         }
     }
     header('Location:../../index.php?manage=carts');
-    
-    
 }

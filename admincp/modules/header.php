@@ -1,3 +1,11 @@
+<?php
+    if(isset($_GET['logout']) && $_GET['logout'] == 1)
+    {
+        unset($_SESSION['dangnhap']);
+        header('Location:login.php');
+    }
+?>
+
 <div class="navbar navbar-inverse navbar-fixed-top">
     <div class="adjust-nav">
         <div class="navbar-header">
@@ -13,8 +21,7 @@
         </div>
 
         <span class="logout-spn">
-            <a href="#" style="color:#fff;">LOGOUT</a>
-
+            <a href="index.php?logout=1" style="color:#fff;">LOGOUT</a>
         </span>
     </div>
 </div>

@@ -1,3 +1,11 @@
+<?php 
+    session_start();
+    if(!isset($_SESSION['dangnhap']))
+    {
+        header('Location:login.php');
+    }
+?>
+
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml">
 
