@@ -9,6 +9,7 @@ if (isset($_POST['dangnhap'])) {
     if ($count > 0) {
         $row_data = mysqli_fetch_array($row);
         $_SESSION['dangky'] = $row_data['username'];
+        $_SESSION['id_khachhang'] = $row_data['customer_id'];
 ?>
         <script>
             window.location.href = 'index.php?manage=carts'; // không cần dùng đến header:'Location:../../index.php?manage=carts' vì có thể bị lỗi

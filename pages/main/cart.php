@@ -6,6 +6,7 @@ $total_money = 0; ?>
 if(isset($_SESSION['dangky']))
 {
     echo $_SESSION['dangky'];
+    echo $_SESSION['id_khachhang'];
 }
 ?>
 <table class="cart">
@@ -83,7 +84,7 @@ if ($total_money == 0) {
             <?php 
                 if(isset($_SESSION['dangky'])){
             ?>
-            <a href="index.php?manage=payment" class="button">Finalize and pay</a>
+            <a href="pages/main/payment.php" class="button">Finalize and pay</a>
             <?php } else {?>
                 <a href="index.php?manage=login" class="button">Login to order</a>
             <?php } ?>

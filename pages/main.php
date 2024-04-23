@@ -50,11 +50,16 @@ if($tam == '')
 			{
 				include("main/news.php");
 			}
-			elseif($tam == 'payment')
-			{
-				include("main/payment.php");
-			}
+			// elseif($tam == 'payment')
+			// {
+			// 	include("main/payment.php");
+			// }
 			
+			elseif($tam == 'thankyou')
+			{
+				include("main/thankyou.php");
+			}
+
 			else
 			{
 				include("main/mainproductlist.php");

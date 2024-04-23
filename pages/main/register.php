@@ -9,8 +9,9 @@ if (isset($_POST['dangky'])) {
     $query_dangky = mysqli_query($mysqli,$sql_dangky);
     if($query_dangky)
     {
-        echo '<p style="color:green">Register Successfully !</p>';
+        echo '<p style="color:green">Register Successfully !</p>';    
         $_SESSION['dangky'] = $tenkhachhang;
+        $_SESSION['id_khachhang'] = mysqli_insert_id($mysqli);
 ?>
         <script>
             window.location.href='index.php?manage=carts';    // không cần dùng đến header:'Location:../../index.php?manage=carts' vì có thể bị lỗi
