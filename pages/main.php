@@ -34,10 +34,27 @@ if($tam == '')
 			{
 				include("main/singleproduct.php");
 			}
+			elseif($tam == 'register')
+			{
+				include("main/register.php");
+			}
+			elseif($tam == 'login')
+			{
+				include("main/login.php");
+			}
+			elseif($tam == 'search')
+			{
+				include("main/search.php");
+			}
 			elseif($tam == 'news')
 			{
 				include("main/news.php");
 			}
+			elseif($tam == 'payment')
+			{
+				include("main/payment.php");
+			}
+			
 			else
 			{
 				include("main/mainproductlist.php");

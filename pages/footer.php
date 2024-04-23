@@ -29,7 +29,7 @@
 							<div class="widget">
 								<h3 class="widget-title">My Account</h3>
 								<ul class="no-bullet">
-									<li><a href="#">Login/Register</a></li>
+									<li><a href="#">Login</a>/<a href="#">Register</a></li>
 									<li><a href="#">Settings</a></li>
 									<li><a href="#">Cart</a></li>
 									<li><a href="#">Order Tracking</a></li>

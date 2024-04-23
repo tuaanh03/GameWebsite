@@ -1,5 +1,13 @@
 <?php
 $total_money = 0; ?>
+
+<p>Giỏ hàng :</p>
+<?php  
+if(isset($_SESSION['dangky']))
+{
+    echo $_SESSION['dangky'];
+}
+?>
 <table class="cart">
     <thead>
         <tr>
@@ -71,7 +79,14 @@ if ($total_money == 0) {
         <p class="total"><strong>Total</strong><span class="num"><?php echo number_format($total_money) . 'đ'; ?></span></p>
         <p>
             <a href="#" class="button">Continue Shopping</a>
-            <a href="#" class="button">Finalize and pay</a>
+           
+            <?php 
+                if(isset($_SESSION['dangky'])){
+            ?>
+            <a href="index.php?manage=payment" class="button">Finalize and pay</a>
+            <?php } else {?>
+                <a href="index.php?manage=login" class="button">Login to order</a>
+            <?php } ?>
         </p>
 
 
