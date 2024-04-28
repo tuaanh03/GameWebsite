@@ -52,6 +52,14 @@
             {
                 include("managegenre/modified.php");
             }
+            elseif($tam == 'manageorders'  && $query == 'list')
+            {
+                include("manageorder/list.php");
+            }
+            elseif($tam == 'manageorders'  && $query == 'vieworder')
+            {
+                include("manageorder/vieworder.php");
+            }
 			else
 			{
 				include("dashboard.php");

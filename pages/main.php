@@ -50,14 +50,40 @@ if($tam == '')
 			{
 				include("main/news.php");
 			}
+
 			// elseif($tam == 'payment')
 			// {
 			// 	include("main/payment.php");
 			// }
-			
+
 			elseif($tam == 'thankyou')
 			{
 				include("main/thankyou.php");
+			}
+
+			elseif($tam == 'shipping')
+			{
+				include("main/shipping.php");
+			}
+
+			elseif($tam == 'payment')
+			{
+				include("main/inforpayment.php");
+			}
+			
+			elseif($tam == 'alreadyorder')
+			{
+				include("main/detailbill.php");
+			}
+
+			elseif($tam == 'historypurchase')
+			{
+				include("main/historypurchase.php");
+			}
+
+			elseif($tam == 'viewbill')
+			{
+				include("main/viewbill.php");
 			}
 
 			else

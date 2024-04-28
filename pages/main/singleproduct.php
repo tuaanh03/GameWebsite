@@ -27,26 +27,30 @@ while ($row_chitiet = mysqli_fetch_array($query_chitiet)) {
                     </ul>
                     <small class="price" style="margin-top: 25px;"><?php echo number_format($row_chitiet['price']) . '₫' ?></small>
                     <a style="background-color: rgb(100,196,147);" href="#demo" class="btn btn-primary" data-toggle="collapse">Details</a>
-                    <div id="demo" class="collapse">
-                        <h2>Genre: <?php echo $row_chitiet['genre_name'] ?></h2>
-                        <h2>Console type: <?php echo $row_chitiet['console_type'] ?></h2>
-                        <h2>ESRB: <?php if ($row_chitiet['esrb'] == 1) {
-                                        echo 'EARLYCHILDHOOD';
-                                    } elseif ($row_chitiet['esrb'] == 2) {
-                                        echo 'EVERYONE';
-                                    } elseif ($row_chitiet['esrb'] == 3) {
-                                        echo 'EVERYONE 10+';
-                                    } elseif ($row_chitiet['esrb'] == 4) {
-                                        echo 'TEEN';
-                                    } elseif ($row_chitiet['esrb'] == 5) {
-                                        echo 'MATURE 17+';
-                                    } else {
-                                        echo 'ADULTS ONLY 18+';
-                                    } ?>
+                    <div id="demo" class="collapse" style="margin-top: 25px; color:black;">
+                        <h2>Genre: <span><?php echo $row_chitiet['genre_name'] ?></span></h2>
+                        <h2>Console type: <span><?php echo $row_chitiet['console_type'] ?></span></h2>
+                        <h2>ESRB:
+                            <span>
+                                <?php if ($row_chitiet['esrb'] == 1) {
+                                    echo 'EARLYCHILDHOOD';
+                                } elseif ($row_chitiet['esrb'] == 2) {
+                                    echo 'EVERYONE';
+                                } elseif ($row_chitiet['esrb'] == 3) {
+                                    echo 'EVERYONE 10+';
+                                } elseif ($row_chitiet['esrb'] == 4) {
+                                    echo 'TEEN';
+                                } elseif ($row_chitiet['esrb'] == 5) {
+                                    echo 'MATURE 17+';
+                                } else {
+                                    echo 'ADULTS ONLY 18+';
+                                } ?>
+                            </span>
                         </h2>
-                        <h2>Language(s): <?php echo $row_chitiet['languages'] ?></h2>
-                        <h2>Player: <?php echo $row_chitiet['player'] ?></h2>
-                        <h2>Publisher: <?php echo $row_chitiet['publisher_name'] ?></h2>
+                        <h2>Language(s): <span><?php echo $row_chitiet['languages'] ?></span></h2>
+                        <h2>Player: <span><?php echo $row_chitiet['player'] ?></span></h2>
+                        <h2>Publisher: <span><?php echo $row_chitiet['publisher_name'] ?></span></h2>
+
                     </div>
 
                     <p style="margin-top: 25px;"><?php echo $row_chitiet['descriptions'] ?></p>
@@ -54,12 +58,6 @@ while ($row_chitiet = mysqli_fetch_array($query_chitiet)) {
 
                     <div class="addtocart-bar">
                         <form action="#">
-                            <label for="#">Quantity</label>
-                            <select name="#">
-                                <option value="1">1</option>
-                                <option value="2">2</option>
-                                <option value="3">100</option>
-                            </select>
                             <input name="themgiohang" type="submit" value="Add to cart">
                         </form>
 

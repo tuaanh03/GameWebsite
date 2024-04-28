@@ -1,5 +1,5 @@
-<?php 
-    session_start();
+<?php
+session_start();
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -22,7 +22,7 @@
 	<script src="https://cdn.jsdelivr.net/npm/jquery@3.7.1/dist/jquery.slim.min.js"></script>
 	<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
 	<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.bundle.min.js"></script>
-	
+
 
 	<!--[if lt IE 9]>
 		<script src="js/ie-support/html5.js"></script>
@@ -36,7 +36,7 @@
 
 	<div id="site-content">
 		<?php
-		
+
 		include("admincp/config/config.php");
 		include("pages/header.php");
 		include("pages/main.php");
@@ -47,13 +47,41 @@
 
 	<div class="overlay"></div>
 
-	
+
 
 	<script src="js/jquery-1.11.1.min.js"></script>
 	<script src="js/plugins.js"></script>
 	<script src="js/app.js"></script>
 	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
 	<script src='https://kit.fontawesome.com/a076d05399.js' crossorigin='anonymous'></script>
+	<script>
+		$(document).ready(function() {
+
+			var back = $(".prev");
+			var next = $(".next");
+			var steps = $(".step");
+
+			next.bind("click", function() {
+				$.each(steps, function(i) {
+					if (!$(steps[i]).hasClass('current') && !$(steps[i]).hasClass('done')) {
+						$(steps[i]).addClass('current');
+						$(steps[i - 1]).removeClass('current').addClass('done');
+						return false;
+					}
+				})
+			});
+			back.bind("click", function() {
+				$.each(steps, function(i) {
+					if ($(steps[i]).hasClass('done') && $(steps[i + 1]).hasClass('current')) {
+						$(steps[i + 1]).removeClass('current');
+						$(steps[i]).removeClass('done').addClass('current');
+						return false;
+					}
+				})
+			});
+
+		})
+	</script>
 </body>
 
 </html>

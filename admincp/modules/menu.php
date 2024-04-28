@@ -1,8 +1,11 @@
-
 <nav class="navbar-default navbar-side" role="navigation">
     <div class="sidebar-collapse">
         <ul class="nav" id="main-menu">
 
+
+            <li>
+                <a href="index.php"><i class="fa fa-qrcode "></i>Statiscal</a>
+            </li>
 
 
             <li class="active-link">
@@ -18,6 +21,10 @@
             </li>
 
             <li>
+                <a href="index.php?action=manageorders&query=list"><i class="fa fa-qrcode "></i>Manage order</a>
+            </li>
+
+            <li>
                 <a href="index.php?action=managelistposts&query=add"><i class="fa fa-edit "></i>Manage list of posts </a>
             </li>
 
@@ -25,7 +32,7 @@
                 <a href="index.php?action=manageposts&query=add"><i class="fa fa-qrcode "></i>Manage posts</a>
             </li>
 
-          
+
 
 
         </ul>

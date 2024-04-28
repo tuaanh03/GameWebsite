@@ -11,7 +11,7 @@
         {
             $id_sanpham = $value['id'];
             $soluong = $value['quantity'];
-            $insert_order_details = "INSERT INTO order_details(product_id,code_orders,quantity) VALUE('".$id_sanpham."','".$code_order."','".$soluong."')";
+            $insert_order_details = "INSERT INTO order_details(product_id,code_orders,quantity_order) VALUE('".$id_sanpham."','".$code_order."','".$soluong."')";
             mysqli_query($mysqli,$insert_order_details);
         }
     }

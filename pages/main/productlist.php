@@ -9,8 +9,9 @@ if (isset($_GET['page'])) {
 }
 if ($page == '' || $page == 1) {
     $begin = 0;
-} else {
-    $begin = ($page * 8) / $page;
+} 
+else {
+    $begin = ($page - 1) * 8;  // 8 là số sản phẩm trong 1 trang
 }
 
 
@@ -64,19 +65,34 @@ $row_title = mysqli_fetch_array($query_cate);
     $trang = ceil($row_count / 8);
     ?>
 
-    <div class="pagination">
+<div class="pagination">
+    
+    <?php
+    if ($page == 1) {
+        echo '';
+    } else {
+    ?>
+        <a style="margin-right: 10px;" href="index.php?manage=product&page=<?php echo 1 ?>&id=<?php echo $row_title['category_id'] ?>" class="page-number"><i class="fa fa-angle-double-left"></i></a>
+        <a href="index.php?manage=product&page=<?php echo $page - 1 ?>&id=<?php echo $row_title['category_id'] ?>" class="page-number"><i class="fa fa-angle-left"></i></a>
+    <?php } ?>
 
-        <a href="#" class="page-number"><i class="fa fa-angle-left"></i></a>
-        <?php
-        echo $page;
-        for ($i = 1; $i <= $trang; $i++) {
-            $isActive = ($i == $page) ? 'background-color: rgb(80,188,133);' : '';
-        ?>
-            <a href="index.php?manage=product&page=<?php echo $i ?>&id=<?php echo $row_title['category_id'] ?>" class="page-number" style="color:black; margin-left: 10px;  <?php echo $isActive; ?>"><?php echo $i ?></a>
-        <?php } ?>
-        <a href="#" class="page-number" style="margin-left: 10px;"><i class="fa fa-angle-right"></i></a>
+    <?php
 
-    </div> <!-- .pagination -->
+    for ($i = 1; $i <= $trang; $i++) {
+        $isActive = ($i == $page) ? 'background-color: rgb(80,188,133);' : '';
+    ?>
+        <a href="index.php?manage=product&page=<?php echo $i ?>&id=<?php echo $row_title['category_id'] ?>" class="page-number" style="color:black; margin-left: 10px;  <?php echo $isActive; ?>"><?php echo $i ?></a>
+    <?php } ?>
+    <?php
+    if ($page == $trang) {
+        echo '';
+    } else {
+    ?>
+        <a href="index.php?manage=product&page=<?php echo $page + 1 ?>&id=<?php echo $row_title['category_id'] ?>" class="page-number" style="margin-left: 10px;"><i class="fa fa-angle-right"></i></a>
+        <a style="margin-left: 10px;" href="index.php?manage=product&page=<?php echo $trang ?>&id=<?php echo $row_title['category_id'] ?>" class="page-number" ><i class="fa fa-angle-double-right"></i></a>
+    <?php } ?>
+    
+</div> <!-- .pagination -->
 </div> <!-- .filter-bar -->
 
 <div class="product-list">
@@ -101,17 +117,32 @@ $row_title = mysqli_fetch_array($query_cate);
 
 <div class="pagination-bar">
     <div class="pagination">
-
-        <a href="#" class="page-number"><i class="fa fa-angle-left"></i></a>
+    
         <?php
-        echo $page;
+        if ($page == 1) {
+            echo '';
+        } else {
+        ?>
+            <a style="margin-right: 10px;" href="index.php?manage=product&page=<?php echo 1 ?>&id=<?php echo $row_title['category_id'] ?>" class="page-number"><i class="fa fa-angle-double-left"></i></a>
+            <a href="index.php?manage=product&page=<?php echo $page - 1 ?>&id=<?php echo $row_title['category_id'] ?>" class="page-number"><i class="fa fa-angle-left"></i></a>
+        <?php } ?>
+
+        <?php
+
         for ($i = 1; $i <= $trang; $i++) {
             $isActive = ($i == $page) ? 'background-color: rgb(80,188,133);' : '';
         ?>
             <a href="index.php?manage=product&page=<?php echo $i ?>&id=<?php echo $row_title['category_id'] ?>" class="page-number" style="color:black; margin-left: 10px;  <?php echo $isActive; ?>"><?php echo $i ?></a>
         <?php } ?>
-        <a href="#" class="page-number" style="margin-left: 10px;"><i class="fa fa-angle-right"></i></a>
-
+        <?php
+        if ($page == $trang) {
+            echo '';
+        } else {
+        ?>
+            <a href="index.php?manage=product&page=<?php echo $page + 1 ?>&id=<?php echo $row_title['category_id'] ?>" class="page-number" style="margin-left: 10px;"><i class="fa fa-angle-right"></i></a>
+            <a style="margin-left: 10px;" href="index.php?manage=product&page=<?php echo $trang ?>&id=<?php echo $row_title['category_id'] ?>" class="page-number" ><i class="fa fa-angle-double-right"></i></a>
+        <?php } ?>
+        
     </div> <!-- .pagination -->
     <p style=" color:black;">Current page: <?php echo $page ?>/<?php echo $trang ?></p>
 </div>

@@ -21,6 +21,7 @@ if (isset($_GET['logout']) && $_GET['logout'] == 1) {
             if (isset($_SESSION['dangky'])) {
             ?>
                 <a href="#"><?php if (isset($_SESSION['dangky'])) echo $_SESSION['dangky'] ?></a>
+                <a href="index.php?manage=historypurchase">History purchase</a>
                 <a href="index.php?logout=1" class="login-button">Log out</a>
             <?php
             } else {

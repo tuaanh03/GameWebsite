@@ -1,9 +1,8 @@
-<?php 
-    session_start();
-    if(!isset($_SESSION['dangnhap']))
-    {
-        header('Location:login.php');
-    }
+<?php
+session_start();
+if (!isset($_SESSION['dangnhap'])) {
+    header('Location:login.php');
+}
 ?>
 
 <!DOCTYPE html>
@@ -21,6 +20,8 @@
     <link href="assets/css/custom.css" rel="stylesheet" />
     <!-- GOOGLE FONTS-->
     <link href='http://fonts.googleapis.com/css?family=Open+Sans' rel='stylesheet' type='text/css' />
+    <!-- CSS MORRIS -->
+    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/morris.js/0.5.1/morris.css">
 </head>
 
 <body>
@@ -36,7 +37,7 @@
     </div>
     <?php
     include("modules/footer.php");
-    
+
     ?>
 
 
@@ -48,6 +49,41 @@
     <script src="assets/js/bootstrap.min.js"></script>
     <!-- CUSTOM SCRIPTS -->
     <script src="assets/js/custom.js"></script>
+    <!-- JS MORRIS -->
+    <script src="//cdnjs.cloudflare.com/ajax/libs/raphael/2.1.0/raphael-min.js"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/morris.js/0.5.1/morris.min.js"></script>
+    <script>
+        $(document).ready(function() {
+            thongke();
+            var char = new Morris.Area({
+
+                element: 'myfirstchart',
+
+                xkey: 'date',
+
+                ykeys: ['date','order', 'sales', 'quantity'],
+
+                labels: ['Orders', 'Profit', 'Quantity']
+            });
+            function thongke()
+            {
+                var text = '365 ngày qua';
+                $('#text-date').text(text);             
+                $.ajax({
+                    url:"modules/thongke.php",
+                    method:"POST",
+                    dataType:"JSON",
+
+                    success:function(data)
+                    {
+                        char.setData(data);
+                        $('#text-date').text(text);
+                    }
+                })
+            }
+        });
+    </script>
+
 
 
 </body>
