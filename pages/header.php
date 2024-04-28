@@ -25,14 +25,13 @@ if (isset($_GET['logout']) && $_GET['logout'] == 1) {
                     <a style="padding: 3px;" class="nav-link" href="" id="navbarDropdown" role="button" aria-expanded="false"><?php if (isset($_SESSION['dangky'])) echo $_SESSION['dangky'] ?></a>
                     <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
                         <li>
-                            <a class="dropdown-item"  href="index.php?manage=historypurchase"><span style="color: black;">History purchase</span></a>
-                            <a class="dropdown-item"  href="index.php?logout=1" class="login-button"><span style="color: black;">Log out</span></a>
+                            <a class="dropdown-item" href="index.php?manage=historypurchase"><span style="color: black;">History purchase</span></a>
+                            <a class="dropdown-item" href="index.php?logout=1" class="login-button"><span style="color: black;">Log out</span></a>
                         </li>
                         <style>
-                            .dropdown-item:hover
-                            {
+                            .dropdown-item:hover {
                                 font-weight: 600;
-                                background:none;
+                                background: none;
                                 font-size: 20px;
                             }
                         </style>
@@ -55,7 +54,10 @@ if (isset($_GET['logout']) && $_GET['logout'] == 1) {
 
 
             <div class="search-form">
-                <form action="index.php?manage=search" method="POST">
+                <form action="index.php" method="GET">
+                    <!-- Khi sử dụng method GET thì không thể nào truyền url với ?manage=search nên đây là cách để dùng  -->
+                    <input type="hidden" name="manage" value="search"> 
+                     <!--  -->
                     <input name="tukhoa" type="text" placeholder="Search...">
                     <button name="timkiem" type="submit" value=""><label><img src="images/icon-search.png"></label></button>
                 </form>
