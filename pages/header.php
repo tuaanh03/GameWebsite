@@ -20,9 +20,26 @@ if (isset($_GET['logout']) && $_GET['logout'] == 1) {
             <?php
             if (isset($_SESSION['dangky'])) {
             ?>
-                <a href="#"><?php if (isset($_SESSION['dangky'])) echo $_SESSION['dangky'] ?></a>
-                <a href="index.php?manage=historypurchase">History purchase</a>
-                <a href="index.php?logout=1" class="login-button">Log out</a>
+                <li class="menu-item drop-down" style="float: right; list-style-type: none;">
+
+                    <a style="padding: 3px;" class="nav-link" href="" id="navbarDropdown" role="button" aria-expanded="false"><?php if (isset($_SESSION['dangky'])) echo $_SESSION['dangky'] ?></a>
+                    <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                        <li>
+                            <a class="dropdown-item"  href="index.php?manage=historypurchase"><span style="color: black;">History purchase</span></a>
+                            <a class="dropdown-item"  href="index.php?logout=1" class="login-button"><span style="color: black;">Log out</span></a>
+                        </li>
+                        <style>
+                            .dropdown-item:hover
+                            {
+                                font-weight: 600;
+                                background:none;
+                                font-size: 20px;
+                            }
+                        </style>
+                    </ul>
+                </li>
+
+
             <?php
             } else {
             ?>

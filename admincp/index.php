@@ -61,21 +61,20 @@ if (!isset($_SESSION['dangnhap'])) {
 
                 xkey: 'date',
 
-                ykeys: ['date','order', 'sales', 'quantity'],
+                ykeys: ['date', 'order', 'sales', 'quantity'],
 
                 labels: ['Orders', 'Profit', 'Quantity']
             });
-            function thongke()
-            {
-                var text = '365 ngày qua';
-                $('#text-date').text(text);             
-                $.ajax({
-                    url:"modules/thongke.php",
-                    method:"POST",
-                    dataType:"JSON",
 
-                    success:function(data)
-                    {
+            function thongke() {
+                var text = '365 ngày qua';
+                $('#text-date').text(text);
+                $.ajax({
+                    url: "modules/thongke.php",
+                    method: "POST",
+                    dataType: "JSON",
+
+                    success: function(data) {
                         char.setData(data);
                         $('#text-date').text(text);
                     }
@@ -84,6 +83,20 @@ if (!isset($_SESSION['dangnhap'])) {
         });
     </script>
 
+    <script>
+        function imagePreview(fileInput) {
+            if (fileInput.files && fileInput.files[0]) {
+                var fileReader = new FileReader();
+                fileReader.onload = function(event) {
+                    $('#preview').html('<img src="' + event.target.result + '" width="150px" height="auto"/>');
+                };
+                fileReader.readAsDataURL(fileInput.files[0]);
+            }
+        }
+        $("#image").change(function() {
+            imagePreview(this);
+        });
+    </script>
 
 
 </body>

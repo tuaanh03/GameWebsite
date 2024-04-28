@@ -20,9 +20,7 @@
         if ($query_them_vanchuyen) {
             echo '<script>alert("Add shipping successfully !")</script>';
         }
-    }
-    elseif(isset($_POST['capnhatvanchuyen']))
-    {
+    } elseif (isset($_POST['capnhatvanchuyen'])) {
         $name = $_POST['name'];
         $phone = $_POST['phone'];
         $address = $_POST['address'];
@@ -46,9 +44,7 @@
             $phone = $row_get_vanchuyen['phone'];
             $address = $row_get_vanchuyen['address'];
             $note = $row_get_vanchuyen['note'];
-        }
-        else
-        {
+        } else {
             $name = '';
             $phone = '';
             $address = '';
@@ -79,10 +75,10 @@
                     <input value="<?php echo $note ?>" type="text" name="note" class="form-control" placeholder="...">
                 </div>
                 <?php
-                    if($name =='' && $phone == ''){                 
+                if ($name == '' && $phone == '') {
                 ?>
-                <button style="margin-top: 25px;" name="themvanchuyen" type="submit" class="btn btn-primary">Add shipping</button>
-                <?php }elseif($name !='' && $phone != ''){ ?>
+                    <button style="margin-top: 25px;" name="themvanchuyen" type="submit" class="btn btn-primary">Add shipping</button>
+                <?php } elseif ($name != '' && $phone != '') { ?>
                     <button style="margin-top: 25px;" name="capnhatvanchuyen" type="submit" class="btn btn-success">Update shipping</button>
                 <?php } ?>
             </form>
@@ -137,6 +133,8 @@
                 </tr>
             <?php } ?>
         </table> <!-- .cart -->
+
+        <a href="index.php?manage=payment" class="button" style="text-align: center;">Payment</a>
 
     </div>
 </div>

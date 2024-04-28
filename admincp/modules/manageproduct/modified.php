@@ -71,8 +71,10 @@ $query_sua_sp = mysqli_query($mysqli, $sql_sua_sp);
                 <tr>
                     <th scope="row">Thumnail</th>
                     <td>
-                        <input type="file" name="hinhanh">
+                        <input type="file" name="hinhanh" id="image">
                         <img src="modules/manageproduct/uploads/<?php echo $row['thumbnail'] ?>" alt="" style="width: 150px; ">
+                        <h3>New image</h3>
+                        <div style="margin: 20px;" id="preview"></div>
                     </td>
 
                 </tr>

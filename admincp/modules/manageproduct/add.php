@@ -55,8 +55,10 @@
             </tr>
             <tr>
                 <th scope="row">Thumnail</th>
-                <td><input type="file" name="hinhanh"></td>
+                <td><input type="file" id="image" name="hinhanh"><div style="margin: 20px;" id="preview"></div></td>
+                
             </tr>
+            
             <tr>
                 <th scope="row">Release Date</th>
                 <td><input type="text" name="ngayramat"></td>
