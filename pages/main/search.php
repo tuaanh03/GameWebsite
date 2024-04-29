@@ -205,7 +205,7 @@ if (isset($_GET['manage']) && $_GET['manage'] == 'search') {
                 } else {
                 ?>
                     <a style="margin-right: 10px;" href="index.php?manage=search&timkiem&page=<?php echo 1 ?>&tukhoa=<?php echo $tukhoa ?>" class="page-number"><i class="fa fa-angle-double-left"></i></a>
-                    <a href="index.php?manage=search&timkiem&page=<?php echo $page - 1 ?>" class="page-number"><i class="fa fa-angle-left"></i></a>
+                    <a href="index.php?manage=search&timkiem&page=<?php echo $page - 1 ?>&tukhoa=<?php echo $tukhoa ?>" class="page-number"><i class="fa fa-angle-left"></i></a>
                 <?php } ?>
 
                 <?php
