@@ -178,8 +178,8 @@ if (isset($_GET['manage']) && $_GET['manage'] == 'search') {
                 } else {
                     if ($trang != 0) {
                 ?>
-                        <a href="index.php?manage=search&timkiem&page=<?php echo $page + 1 ?>&tukhoa=<?php echo $tukhoa ?>" class="page-number" style="margin-left: 10px;"><i class="fa fa-angle-right"></i></a>
-                        <a style="margin-left: 10px;" href="index.php?manage=search&timkiem&page=<?php echo $trang ?>&tukhoa=<?php echo $tukhoa ?>" class="page-number"><i class="fa fa-angle-double-right"></i></a>
+                        <a href="index.php?manage=search&timkiemnangcao&page=<?php echo $page + 1 ?>&tukhoa=<?php echo $tukhoa ?>&danhmuc=<?php echo $danhmuc ?>&theloai=<?php echo $theloai ?>" class="page-number" style="margin-left: 10px;"><i class="fa fa-angle-right"></i></a>
+                        <a style="margin-left: 10px;" href="index.php?manage=search&timkiem&page=<?php echo $trang ?>&tukhoa=<?php echo $tukhoa ?>&danhmuc=<?php echo $danhmuc ?>&theloai=<?php echo $theloai ?>" class="page-number"><i class="fa fa-angle-double-right"></i></a>
                     <?php  } else {
                     ?>
 

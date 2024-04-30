@@ -8,18 +8,29 @@ if (isset($_POST['dangnhap'])) {
     $count = mysqli_num_rows($row);
     if ($count > 0) {
         $row_data = mysqli_fetch_array($row);
-        $_SESSION['dangky'] = $row_data['username'];
-        $_SESSION['id_khachhang'] = $row_data['customer_id'];
+        if ($row_data['status_user'] == 1) {
+            echo '<p>Your account is blocked.</p>';
+        } 
+        else {
+            $_SESSION['dangky'] = $row_data['username'];
+            $_SESSION['id_khachhang'] = $row_data['customer_id'];
+            $_SESSION['diachi'] = $row_data['customer_address'];
 ?>
-        <script>
-            window.location.href = 'index.php?manage=carts'; // không cần dùng đến header:'Location:../../index.php?manage=carts' vì có thể bị lỗi
-        </script>
+
+            <script>
+                window.location.href = 'index.php?manage=carts'; // không cần dùng đến header:'Location:../../index.php?manage=carts' vì có thể bị lỗi
+            </script>
+        <?php
+        }
+        ?>
+
 <?php
 
     } else {
         echo '<p>Sai</p>';
     }
 }
+
 ?>
 
 

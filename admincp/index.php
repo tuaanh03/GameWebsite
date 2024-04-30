@@ -16,6 +16,7 @@ if (!isset($_SESSION['dangnhap'])) {
     <link href="assets/css/bootstrap.css" rel="stylesheet" />
     <!-- FONTAWESOME STYLES-->
     <link href="assets/css/font-awesome.css" rel="stylesheet" />
+    <link href="../fonts/font-awesome.min.css" rel="stylesheet" type="text/css">
     <!-- CUSTOM STYLES-->
     <link href="assets/css/custom.css" rel="stylesheet" />
     <!-- GOOGLE FONTS-->

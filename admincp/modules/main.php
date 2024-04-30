@@ -60,6 +60,10 @@
             {
                 include("manageorder/vieworder.php");
             }
+            elseif($tam == 'manageusers'  && $query == 'list')
+            {
+                include("manageuser/list.php");
+            }
 			else
 			{
 				include("dashboard.php");

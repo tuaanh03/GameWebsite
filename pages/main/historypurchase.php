@@ -8,13 +8,10 @@ $query_lietke_dh = mysqli_query($mysqli, $sql_lietke_dh);
     <tbody>
         <tr>
             <th scope="row">ID</th>
-            <th scope="row">ID of order</th>
-            <th scope="row">Customer name</th>
-            <th scope="row">Email</th>
-            <th scope="row">Address</th>
-            <th scope="row">Phone number</th>
-            <th scope="row">Status</th>
             <th scope="row">Date order</th>
+            <th scope="row">ID of order</th>     
+            <th scope="row">Status</th>
+            
             <th scope="row">Payment Method</th>
             <th scope="row">Manage</th>
         </tr>
@@ -27,11 +24,8 @@ $query_lietke_dh = mysqli_query($mysqli, $sql_lietke_dh);
 
             <tr>
                 <td><?php echo $i ?></td>
+                <td><?php echo $row['order_date'] ?></td>
                 <td><?php echo $row['code_orders'] ?></td>
-                <td><?php echo $row['username'] ?></td>
-                <td><?php echo $row['email'] ?></td>
-                <td><?php echo $row['customer_address'] ?></td>
-                <td><?php echo $row['phonenumber'] ?></td>
                 <td>
                     <h4 <?php if ($row['status_order'] == 1) {  ?> style="color: rgb(254,192,94);" <?php } else { ?> style="color: rgb(66,148,216)" <?php } ?>>
                         <?php
@@ -46,7 +40,7 @@ $query_lietke_dh = mysqli_query($mysqli, $sql_lietke_dh);
 
 
                 </td>
-                <td><?php echo $row['order_date'] ?></td>
+                
                 <td>
                     <?php
                     if ($row['cart_payment'] == 'vnpay') {

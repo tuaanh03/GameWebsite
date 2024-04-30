@@ -12,6 +12,7 @@ if (isset($_POST['dangky'])) {
         echo '<p style="color:green">Register Successfully !</p>';    
         $_SESSION['dangky'] = $tenkhachhang;
         $_SESSION['id_khachhang'] = mysqli_insert_id($mysqli);
+        $_SESSION['diachi'] = $diachi;
 ?>
         <script>
             window.location.href='index.php?manage=carts';    // không cần dùng đến header:'Location:../../index.php?manage=carts' vì có thể bị lỗi

@@ -50,6 +50,10 @@
             $address = '';
             $note = '';
         }
+        if($address == '')
+        {
+            $address = $_SESSION['diachi'];
+        }
         ?>
         <div class="col-md-4">
             <form action="" autocomplete="off" method="POST">
@@ -67,7 +71,7 @@
 
                 <div class="form-group" style="margin-top: 25px;">
                     <label for="exampleInputPassword1">Address</label>
-                    <input value="<?php echo $address ?>" type="text" name="address" class="form-control" placeholder="...">
+                    <input value="<?php echo $address; ?>" type="text" name="address" class="form-control" placeholder="...">
                 </div>
 
                 <div class="form-group" style="margin-top: 25px;">
