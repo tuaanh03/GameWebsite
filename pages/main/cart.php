@@ -79,7 +79,7 @@ if ($total_money == 0) {
 
     <div class="cart-total" style="float: left; width: 160px;">
         <tr>
-            <p><a href="pages/main/addtocart.php?deleteall=1">Delete all products</a></p>
+            <p><a href="javascript:;" onclick="confirmDelete(1)">Delete all products</a></p>
         </tr>
     </div>
 
@@ -106,3 +106,12 @@ if ($total_money == 0) {
 ?>
 
 <!-- Use class="button muted" to muted button -->
+
+<script>
+function confirmDelete(productId) {
+    var result = confirm("Are you sure you want to delete all product?");
+    if (result) {
+        window.location = "pages/main/addtocart.php?deleteall=" + productId;
+    }
+}
+</script>

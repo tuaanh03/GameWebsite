@@ -3,7 +3,7 @@
     include('config/config.php');
     if(isset($_POST['dangnhap']))
     {
-        $taikhoan = $_POST['username'];
+        $taikhoan = mysqli_real_escape_string($mysqli,$_POST['username']);
         $matkhau = md5($_POST['password']);
         $sql = "SELECT * FROM tbl_admin WHERE username = '".$taikhoan."' AND password = '".$matkhau."' LIMIT 1 ";
         $row = mysqli_query($mysqli,$sql);

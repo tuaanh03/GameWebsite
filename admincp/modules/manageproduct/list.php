@@ -12,7 +12,7 @@ $query_lietke_sp = mysqli_query($mysqli, $sql_lietke_sp);
             <th scope="row">Product Name</th>
             <th scope="row">Product ID</th>
             <th scope="row">Price</th>
-            <th scope="row">Quantity</th>           
+            <th scope="row">Quantity</th>
             <th scope="row">Category</th>
             <th scope="row">Genre</th>
             <th scope="row">Thumnail</th>
@@ -37,48 +37,34 @@ $query_lietke_sp = mysqli_query($mysqli, $sql_lietke_sp);
                 <td><?php echo $row['idproduct'] ?></td>
                 <td><?php echo $row['price'] ?></td>
                 <td><?php echo $row['quantity'] ?></td>
-                <td><?php echo $row['category_name'] ?></td>               
-                <td><?php echo $row['genre_name'] ?></td>                 
+                <td><?php echo $row['category_name'] ?></td>
+                <td><?php echo $row['genre_name'] ?></td>
                 <td><img src="modules/manageproduct/uploads/<?php echo $row['thumbnail'] ?>" alt="" style="width: 150px; "></td>
                 <td><?php echo $row['console_type'] ?></td>
                 <td><?php echo $row['languages'] ?></td>
                 <td><?php echo $row['player'] ?></td>
                 <td><?php echo $row['publisher_name'] ?></td>
-                <td><?php if($row['statuspr'] == 1)
-                {
-                    echo 'Activate';
-                }
-                else
-                {
-                    echo 'Hide';
-                } ?></td>
-                <td><?php if($row['esrb'] == 1)
-                {
-                    echo 'EARLYCHILDHOOD';
-                }
-                elseif($row['esrb'] == 2)
-                {
-                    echo 'EVERYONE';
-                }  
-                elseif($row['esrb'] == 3)
-                {
-                    echo 'EVERYONE 10+';
-                }
-                elseif($row['esrb'] == 4)
-                {
-                    echo 'TEEN';
-                }
-                elseif($row['esrb'] == 5)
-                {
-                    echo 'MATURE 17+';
-                }
-                else
-                {
-                    echo 'ADULTS ONLY 18+';
-                } ?></td>  
+                <td><?php if ($row['statuspr'] == 1) {
+                        echo 'Activate';
+                    } else {
+                        echo 'Hide';
+                    } ?></td>
+                <td><?php if ($row['esrb'] == 1) {
+                        echo 'EARLYCHILDHOOD';
+                    } elseif ($row['esrb'] == 2) {
+                        echo 'EVERYONE';
+                    } elseif ($row['esrb'] == 3) {
+                        echo 'EVERYONE 10+';
+                    } elseif ($row['esrb'] == 4) {
+                        echo 'TEEN';
+                    } elseif ($row['esrb'] == 5) {
+                        echo 'MATURE 17+';
+                    } else {
+                        echo 'ADULTS ONLY 18+';
+                    } ?></td>
 
                 <td>
-                    <a href="modules/manageproduct/xuly.php?idsanpham=<?php echo $row['product_id'] ?>">Delete</a> | <a href="?action=manageproducts&query=modified&idsanpham=<?php echo $row['product_id'] ?>">Modified</a>
+                    <a href="javascript:;" onclick="confirmDelete(<?php echo $row['product_id'] ?>)">Delete</a> | <a href="?action=manageproducts&query=modified&idsanpham=<?php echo $row['product_id'] ?>">Modified</a>
                 </td>
             </tr>
         <?php
@@ -86,3 +72,12 @@ $query_lietke_sp = mysqli_query($mysqli, $sql_lietke_sp);
 
     </tbody>
 </table>
+
+<script>
+    function confirmDelete(productId) {
+        var result = confirm("Are you sure you want to delete this product?");
+        if (result) {
+            window.location = "modules/manageproduct/xuly.php?idsanpham=" + productId;
+        }
+    }
+</script>

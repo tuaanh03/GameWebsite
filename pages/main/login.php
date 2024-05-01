@@ -1,7 +1,7 @@
 <?php
 
 if (isset($_POST['dangnhap'])) {
-    $email = $_POST['email'];
+    $email = mysqli_real_escape_string($mysqli, $_POST['email']);
     $matkhau = md5($_POST['password']);
     $sql = "SELECT * FROM tbl_customer WHERE email = '" . $email . "' AND customer_password = '" . $matkhau . "' LIMIT 1 ";
     $row = mysqli_query($mysqli, $sql);
