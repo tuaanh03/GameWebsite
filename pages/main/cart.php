@@ -88,7 +88,7 @@ if ($total_money == 0) {
         <p><strong>Shipment:</strong> $15.00</p> -->
         <p class="total"><strong>Total</strong><span class="num"><?php echo number_format($total_money) . 'đ'; ?></span></p>
         <p>
-            <a href="#" class="button">Continue Shopping</a>
+            <a href="index.php" class="button">Continue Shopping</a>
            
             <?php 
                 if(isset($_SESSION['dangky'])){

@@ -8,7 +8,7 @@
             </li>
 
 
-            <li class="active-link">
+            <li>
                 <a href="index.php?action=managecategory&query=add"><i class="fa fa-desktop "></i>Manage category </a>
             </li>
 
@@ -44,3 +44,4 @@
 
 </nav>
 <!-- /. NAV SIDE  -->
+

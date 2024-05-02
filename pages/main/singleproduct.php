@@ -78,60 +78,38 @@ while ($row_chitiet = mysqli_fetch_array($query_chitiet)) {
         <header>
             <h2 class="section-title">Similiar Product</h2>
         </header>
+        <?php
+        $sql_similar = "SELECT * FROM product WHERE genre_id = ? AND product_id != ? LIMIT 4";
+        $query_similar = mysqli_query($mysqli, $sql_chitiet);
+
+        ?>
+
         <div class="product-list">
-            <div class="product">
-                <div class="inner-product">
-                    <div class="figure-image">
-                        <img src="dummy/game-1.jpg" alt="Game 1">
+            <?php 
+            if ($stmt_similar = mysqli_prepare($mysqli, $sql_similar)) {
+                mysqli_stmt_bind_param($stmt_similar, "ii", $row_chitiet['genre_id'], $_GET['id']);
+                mysqli_stmt_execute($stmt_similar);
+                $result_similar = mysqli_stmt_get_result($stmt_similar);
+    
+                while ($row_similar = mysqli_fetch_array($result_similar)) { ?>
+                <div class="product">
+                    <div class="inner-product">
+                        <div class="figure-image">
+                            <img src="admincp/modules/manageproduct/uploads/<?php echo $row_similar['thumbnail'] ?>" alt=" Game 1">
+                        </div>
+                        <h3 class="product-title"><a href="#"><?php echo $row_similar['name_product'] ?></a></h3>
+                        <small class="price"><?php echo number_format($row_similar['price']) . '₫' ?></small>
+                        <p><?php echo $row_similar['descriptions'] ?></p>
+                        <a href="#" class="button">Add to cart</a>
+                        <a href="#" class="button muted">Read Details</a>
                     </div>
-                    <h3 class="product-title"><a href="#">Alpha Protocol</a></h3>
-                    <small class="price">$20.00</small>
-                    <p>Lorem ipsum dolor sit consectetur adipiscing elit do eiusmod tempor...</p>
-                    <a href="#" class="button">Add to cart</a>
-                    <a href="#" class="button muted">Read Details</a>
-                </div>
-            </div> <!-- .product -->
+                </div> <!-- .product -->
 
-            <div class="product">
-                <div class="inner-product">
-                    <div class="figure-image">
-                        <img src="dummy/game-2.jpg" alt="Game 2">
-                    </div>
-                    <h3 class="product-title"><a href="#">Grand Theft Auto V</a></h3>
-                    <small class="price">$20.00</small>
-                    <p>Lorem ipsum dolor sit consectetur adipiscing elit do eiusmod tempor...</p>
-                    <a href="#" class="button">Add to cart</a>
-                    <a href="#" class="button muted">Read Details</a>
-                </div>
-            </div> <!-- .product -->
-
-            <div class="product">
-                <div class="inner-product">
-                    <div class="figure-image">
-                        <img src="dummy/game-3.jpg" alt="Game 3">
-                    </div>
-                    <h3 class="product-title"><a href="#">Need for Speed rivals</a></h3>
-                    <small class="price">$20.00</small>
-                    <p>Lorem ipsum dolor sit consectetur adipiscing elit do eiusmod tempor...</p>
-                    <a href="#" class="button">Add to cart</a>
-                    <a href="#" class="button muted">Read Details</a>
-                </div>
-            </div> <!-- .product -->
-
-            <div class="product">
-                <div class="inner-product">
-                    <div class="figure-image">
-                        <img src="dummy/game-4.jpg" alt="Game 4">
-                    </div>
-                    <h3 class="product-title"><a href="#">Big game hunter</a></h3>
-                    <small class="price">$20.00</small>
-                    <p>Lorem ipsum dolor sit consectetur adipiscing elit do eiusmod tempor...</p>
-                    <a href="#" class="button">Add to cart</a>
-                    <a href="#" class="button muted">Read Details</a>
-                </div>
-            </div> <!-- .product -->
+            <?php }
+            } ?>
 
         </div> <!-- .product-list -->
+
     </section>
 
 <?php } ?>

@@ -1,3 +1,4 @@
+<p style="font-size: 50px; text-align:center;">Login</p>
 <?php
 
 if (isset($_POST['dangnhap'])) {
@@ -6,28 +7,26 @@ if (isset($_POST['dangnhap'])) {
     $sql = "SELECT * FROM tbl_customer WHERE email = '" . $email . "' AND customer_password = '" . $matkhau . "' LIMIT 1 ";
     $row = mysqli_query($mysqli, $sql);
     $count = mysqli_num_rows($row);
-    if ($count > 0) {
-        $row_data = mysqli_fetch_array($row);
-        if ($row_data['status_user'] == 1) {
-            echo '<p>Your account is blocked.</p>';
-        } 
-        else {
-            $_SESSION['dangky'] = $row_data['username'];
-            $_SESSION['id_khachhang'] = $row_data['customer_id'];
-            $_SESSION['diachi'] = $row_data['customer_address'];
-?>
-
-            <script>
-                window.location.href = 'index.php?manage=carts'; // không cần dùng đến header:'Location:../../index.php?manage=carts' vì có thể bị lỗi
-            </script>
-        <?php
-        }
-        ?>
-
-<?php
-
+    if (empty($email) || empty($matkhau)) {
+        echo '<p style="color:red;font-weight:600;">Please enter both email and password.</p>';
     } else {
-        echo '<p>Sai</p>';
+        if ($count > 0) {
+            $row_data = mysqli_fetch_array($row);
+            if ($row_data['status_user'] == 1) {
+                echo '<p style="color:red;font-weight:600;">Your account has been blocked.</p>';
+            } else {
+                $_SESSION['dangky'] = $row_data['username'];
+                $_SESSION['id_khachhang'] = $row_data['customer_id'];
+                $_SESSION['diachi'] = $row_data['customer_address'];
+?>
+                <script>
+                    window.location.href = 'index.php?manage=carts'; // không cần dùng đến header:'Location:../../index.php?manage=carts' vì có thể bị lỗi
+                </script>
+<?php
+            }
+        } else {
+            echo '<p style="color:red;font-weight:600;">Wrong email or password !</p>';
+        }
     }
 }
 
@@ -35,7 +34,7 @@ if (isset($_POST['dangnhap'])) {
 
 
 
-<p style="font-size: 50px; text-align:center;">Login</p>
+
 <form action="" method="POST">
 
     <div class="form-group" style="margin-top: 25px;">

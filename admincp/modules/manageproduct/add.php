@@ -1,3 +1,13 @@
+<?php
+// Kiểm tra xem có thông điệp không thành công hay thành công
+if(isset($_GET['status']) && $_GET['status'] == 'failed') {
+    echo '<p style="color:red;">Failed to add product. Please try again.</p>';
+}
+elseif(isset($_GET['status']) && $_GET['status'] == 'successfully')
+{
+    echo '<p style="color:green;">Successfully to add product.</p>';
+}
+?>
 <p>Add product</p>
 <table class="table">
     <form action="modules/manageproduct/xuly.php" method="POST" enctype="multipart/form-data">

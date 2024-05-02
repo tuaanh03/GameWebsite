@@ -77,12 +77,17 @@
                 <td><?php echo $row['address'] ?></td>
                 <td><?php echo $row['phone'] ?></td>
                 <td>
-                    <a href="modules/manageorder/xuly.php?cart_status=0&coder=<?php echo $row['code_orders'] ?>" <?php if ($row['status_order'] == 1) {  ?> style="color: rgb(254,192,94);" <?php } ?>>
+                    <a href="modules/manageorder/xuly.php?cart_status=<?php echo $row['status_order'] ?>&coder=<?php echo $row['code_orders'] ?>" <?php if ($row['status_order'] == 1) {  ?> style="color: rgb(254,192,94);" <?php } elseif($row['status_order'] == 2) { ?>style="color: rgb(114,185,104);"<?php } elseif($row['status_order'] == -1) {?>style="color: rgb(217,83,79);"<?php } ?>>
                         <?php
                         if ($row['status_order'] == 1) {
                             echo 'Pending';
-                        } else {
+                        } elseif($row['status_order'] == 0) {
                             echo 'Approve';
+                        }elseif($row['status_order'] == 2) {
+                            echo 'Completed';
+                        }
+                        elseif($row['status_order'] == -1) {
+                            echo 'Cancelled';
                         }
                         ?>
                     </a>

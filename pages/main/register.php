@@ -18,6 +18,7 @@ if (isset($_POST['dangky'])) {
     $email = mysqli_real_escape_string($mysqli, $_POST['email']);
     $dienthoai = mysqli_real_escape_string($mysqli, $_POST['dienthoai']);
     $matkhau = md5($_POST['matkhau']);
+    $xacnhanmatkhau = md5($_POST['xacnhanmatkhau']);
     $diachi = mysqli_real_escape_string($mysqli, $_POST['diachi']);
 
     // Kiểm tra và hiển thị thông báo nếu các trường nhập liệu bị thiếu
@@ -28,7 +29,7 @@ if (isset($_POST['dangky'])) {
         $sql_check_email = "SELECT * FROM tbl_customer WHERE email='" . $email . "'";
         $query_check_email = mysqli_query($mysqli, $sql_check_email);
         if (mysqli_num_rows($query_check_email) > 0) {
-            echo '<p style="color:red">Email has already been taken!</p>';
+            echo '<p style="color:red">Email has already been registered!</p>';
         } else {
             // Kiểm tra username đã tồn tại trong database chưa
             $sql_check_username = "SELECT * FROM tbl_customer WHERE username='" . $tenkhachhang . "'";
@@ -39,18 +40,24 @@ if (isset($_POST['dangky'])) {
                 if (!preg_match("/^\d{10,11}$/", $dienthoai)) {
                     echo '<p style="color:red">Please enter a valid phone number!</p>';
                 } else {
-                    // Thực hiện thêm thông tin vào database
-                    $sql_dangky = "INSERT INTO tbl_customer(username,email,customer_address,customer_password,phonenumber) VALUE('" . $tenkhachhang . "','" . $email . "','" . $diachi . "','" . $matkhau . "','" . $dienthoai . "')";
-                    $query_dangky = mysqli_query($mysqli, $sql_dangky);
-                    if ($query_dangky) {
-                        echo '<p style="color:green">Register Successfully !</p>';
-                        $_SESSION['dangky'] = $tenkhachhang;
-                        $_SESSION['id_khachhang'] = mysqli_insert_id($mysqli);
-                        $_SESSION['diachi'] = $diachi;
-                        // Chuyển hướng sau khi đăng ký thành công
-                        echo '<script>window.location.href="index.php?manage=carts";</script>';
-                    } else {
-                        echo '<p style="color:red">Registration failed!</p>';
+                    if ($matkhau === $xacnhanmatkhau) {
+                        // Thực hiện thêm thông tin vào database
+                        $sql_dangky = "INSERT INTO tbl_customer(username,email,customer_address,customer_password,phonenumber) VALUE('" . $tenkhachhang . "','" . $email . "','" . $diachi . "','" . $matkhau . "','" . $dienthoai . "')";
+                        $query_dangky = mysqli_query($mysqli, $sql_dangky);
+                        if ($query_dangky) {
+                            echo '<p style="color:green">Register Successfully !</p>';
+                            $_SESSION['dangky'] = $tenkhachhang;
+                            $_SESSION['id_khachhang'] = mysqli_insert_id($mysqli);
+                            $_SESSION['diachi'] = $diachi;
+                            // Chuyển hướng sau khi đăng ký thành công
+                            echo '<script>window.location.href="index.php?manage=carts";</script>';
+                        } else {
+                            echo '<p style="color:red">Registration failed!</p>';
+                        }
+                    }
+                    else
+                    {
+                        echo '<p style="color:red">Please enter a valid confirm password!</p>';
                     }
                 }
             }
@@ -100,6 +107,14 @@ if (isset($_POST['dangky'])) {
         <input type="password" name="matkhau" class="form-control" id="exampleInputPassword1" placeholder="Password">
         <?php if ($form_submitted && empty($_POST['matkhau'])) {
             echo '<p style="color:red">Please enter your password!</p>';
+        } ?>
+    </div>
+
+    <div class="form-group" style="margin-top: 25px;">
+        <label for="exampleInputPassword1">Confirm Password</label>
+        <input type="password" name="xacnhanmatkhau" class="form-control" id="exampleInputPassword1" placeholder="Confirm Password">
+        <?php if ($form_submitted && empty($_POST['xacnhanmatkhau'])) {
+            echo '<p style="color:red">Please enter your confirm password!</p>';
         } ?>
     </div>
 

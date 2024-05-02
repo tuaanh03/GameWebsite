@@ -24,7 +24,7 @@ foreach ($_SESSION['cart'] as $key => $value) {
     $total_money += $thanhtien;
 }
 
-if ($cart_payment == 'tienmat' || $cart_payment == 'chuyenkhoan') {
+if ($cart_payment == 'cash' || $cart_payment == 'transfer') {
     //insert đơn hàng
     $insert_cart = "INSERT INTO orders(users_id,code_orders,order_date,status_order,cart_payment,cart_shipping) VALUE('" . $id_khachhang . "','" . $code_order . "','" . $now . "',1,'" . $cart_payment . "', '" . $id_shipping . "')";
     $cart_query = mysqli_query($mysqli, $insert_cart);

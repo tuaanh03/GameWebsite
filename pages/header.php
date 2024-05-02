@@ -1,4 +1,5 @@
 <?php
+
 if (isset($_GET['logout']) && $_GET['logout'] == 1) {
     unset($_SESSION['dangky']);
 }
@@ -10,13 +11,13 @@ if (isset($_GET['logout']) && $_GET['logout'] == 1) {
         <a href="index.php" id="branding">
             <img src="images/logo.png" alt="" class="logo">
             <div class="logo-text">
-                <h1 class="site-title">Company name</h1>
+                <h1 class="site-title">AloneWolf</h1>
                 <small class="site-description">Tagline goes here</small>
             </div>
         </a> <!-- #branding -->
 
         <div class="right-section pull-right">
-            <a href="index.php?manage=carts" class="cart"><i class="icon-cart"></i> 0 items in cart</a>
+            <a href="index.php?manage=carts" class="cart"><i class="icon-cart"></i> <?php if(isset($_SESSION['cart'])) {echo count($_SESSION['cart']);} else{echo '0';}?> item(s) in cart</a>
             <?php
             if (isset($_SESSION['dangky'])) {
             ?>

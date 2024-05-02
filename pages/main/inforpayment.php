@@ -90,9 +90,9 @@
         </div>
         <div class="col-md-4" style="float: right;">
             <h4>Payment Methods</h4>
-            <input type="radio" name="payment" value="tienmat">
+            <input type="radio" name="payment" value="cash">
             <label for="html">Cash</label><br>
-            <input type="radio" name="payment" value="chuyenkhoan">
+            <input type="radio" name="payment" value="transfer">
             <label for="html">Transfer</label><br>
             <input type="radio" name="payment" value="momo">
             <label for="css">MOMO</label><br>
