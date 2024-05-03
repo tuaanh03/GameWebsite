@@ -19,10 +19,10 @@ if (isset($_POST['dangky'])) {
     $dienthoai = mysqli_real_escape_string($mysqli, $_POST['dienthoai']);
     $matkhau = md5($_POST['matkhau']);
     $xacnhanmatkhau = md5($_POST['xacnhanmatkhau']);
-    $diachi = mysqli_real_escape_string($mysqli, $_POST['diachi']);
+    
 
     // Kiểm tra và hiển thị thông báo nếu các trường nhập liệu bị thiếu
-    if (empty($tenkhachhang) || empty($email) || empty($dienthoai) || empty($diachi) || empty($_POST['matkhau'])) {
+    if (empty($tenkhachhang) || empty($email) || empty($dienthoai) || empty($_POST['matkhau'])) {
         echo '<p style="color:red">Please fill in all fields!</p>';
     } else {
         // Kiểm tra email đã tồn tại trong database chưa
@@ -42,7 +42,7 @@ if (isset($_POST['dangky'])) {
                 } else {
                     if ($matkhau === $xacnhanmatkhau) {
                         // Thực hiện thêm thông tin vào database
-                        $sql_dangky = "INSERT INTO tbl_customer(username,email,customer_address,customer_password,phonenumber) VALUE('" . $tenkhachhang . "','" . $email . "','" . $diachi . "','" . $matkhau . "','" . $dienthoai . "')";
+                        $sql_dangky = "INSERT INTO tbl_customer(username,email,customer_password,phonenumber) VALUE('" . $tenkhachhang . "','" . $email . "','" . $matkhau . "','" . $dienthoai . "')";
                         $query_dangky = mysqli_query($mysqli, $sql_dangky);
                         if ($query_dangky) {
                             echo '<p style="color:green">Register Successfully !</p>';
@@ -94,14 +94,7 @@ if (isset($_POST['dangky'])) {
         } ?>
     </div>
 
-    <div class="form-group" style="margin-top: 25px;">
-        <label for="exampleInputPassword1">Address</label>
-        <input type="text" name="diachi" class="form-control" id="exampleInputPassword1" placeholder="Address" value="<?php echo htmlspecialchars($diachi); ?>">
-        <?php if ($form_submitted && empty($diachi)) {
-            echo '<p style="color:red">Please enter your address!</p>';
-        } ?>
-    </div>
-
+   
     <div class="form-group" style="margin-top: 25px;">
         <label for="exampleInputPassword1">Password</label>
         <input type="password" name="matkhau" class="form-control" id="exampleInputPassword1" placeholder="Password">

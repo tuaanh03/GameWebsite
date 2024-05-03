@@ -38,6 +38,7 @@ if ($cart_payment == 'cash' || $cart_payment == 'transfer') {
     }
     header("Location:../../index.php?manage=thankyou");
 } elseif ($cart_payment == 'vnpay') {
+    
     //thanh toán bằng vnpay
     $vnp_TxnRef = $code_order; //Mã đơn hàng. Trong thực tế Merchant cần insert đơn hàng vào DB và gửi mã này sang VNPAY
     $vnp_OrderInfo = 'Thanh toán đơn hàng đặt tại web';
@@ -56,7 +57,7 @@ if ($cart_payment == 'cash' || $cart_payment == 'transfer') {
     $inputData = array(
         "vnp_Version" => "2.1.0",
         "vnp_TmnCode" => $vnp_TmnCode,
-        "vnp_Amount" => $vnp_Amount,
+        "vnp_Amount" => $vnp_Amount * 100,
         "vnp_Command" => "pay",
         "vnp_CreateDate" => date('YmdHis'),
         "vnp_CurrCode" => "VND",
@@ -113,6 +114,7 @@ if ($cart_payment == 'cash' || $cart_payment == 'transfer') {
             }
         }
         header('Location: ' . $vnp_Url);
+        unset($_SESSION['cart']);
         die();
     } else {
         echo json_encode($returnData);

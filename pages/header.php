@@ -26,7 +26,8 @@ if (isset($_GET['logout']) && $_GET['logout'] == 1) {
                     <a style="padding: 3px;" class="nav-link" href="" id="navbarDropdown" role="button" aria-expanded="false"><?php if (isset($_SESSION['dangky'])) echo $_SESSION['dangky'] ?></a>
                     <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
                         <li>
-                            <a class="dropdown-item" href="index.php?manage=historypurchase"><span style="color: black;">History purchase</span></a>
+                        <a class="dropdown-item" href="index.php?manage=profile&control=viewprofile"><span style="color: black;">Information</span></a>
+                            <a class="dropdown-item" href="index.php?manage=profile&control=viewhistoryorder"><span style="color: black;">History purchase</span></a>
                             <a class="dropdown-item" href="index.php?logout=1" class="login-button"><span style="color: black;">Log out</span></a>
                         </li>
                         <style>

@@ -1,12 +1,7 @@
 <?php
-if(isset($_GET['manage']))
-{
-	$tam = $_GET['manage'];
-}
-else{
-	$tam = '';
-}
-if($tam == '')
+$tam = isset($_GET['manage']) ? $_GET['manage'] : '';
+$control = isset($_GET['control']) ? $_GET['control'] : '';
+if($tam == '' && $control == '')
 {
 	include("pages/slider.php");
 }
@@ -85,6 +80,17 @@ if($tam == '')
 			{
 				include("main/viewbill.php");
 			}
+
+			elseif($tam == 'profile' && $control == 'viewprofile')
+			{
+				include("main/profile.php");
+			}
+
+			elseif($tam == 'profile' && $control == 'viewhistoryorder')
+			{
+				include("main/profile.php");
+			}
+
 
 			else
 			{

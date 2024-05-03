@@ -1,3 +1,6 @@
+
+
+
 <?php
 $sql_pro = "SELECT * FROM product,category WHERE product.category_id = category.category_id ORDER BY product.product_id DESC LIMIT 25";
 $query_pro = mysqli_query($mysqli, $sql_pro);
