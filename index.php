@@ -51,10 +51,10 @@ session_start();
 
 	<script src="js/jquery-1.11.1.min.js"></script>
 	<script src="https://code.jquery.com/jquery-3.6.4.js"></script>
-	<script src="js/plugins.js"></script>
+	
 	<script src="js/app.js"></script>
 	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
-	<script src='https://kit.fontawesome.com/a076d05399.js' crossorigin='anonymous'></script>
+	
 	<script>
 		$(document).ready(function() {
 

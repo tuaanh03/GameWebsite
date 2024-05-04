@@ -12,16 +12,16 @@ if ($page == '' || $page == 1) {
 }
 
 if (isset($_GET['manage']) && $_GET['manage'] == 'search') {
-    if (isset($_GET['timkiem'])) {
+    if (isset($_GET['timkiem'])) { 
         $tukhoa = $_GET['tukhoa'];
-        $sql_pro = "SELECT * FROM product,category WHERE product.category_id = category.category_id AND product.name_product LIKE '%" . $tukhoa . "%' ORDER BY product.product_id DESC ";
+        $sql_pro = "SELECT * FROM product,category WHERE product.category_id = category.category_id AND product.name_product LIKE '%" . $tukhoa . "%' AND product.statuspr = 1 ORDER BY product.product_id DESC ";
         $sql_pro .= " LIMIT $begin, 8";
-        $query_pro = mysqli_query($mysqli, $sql_pro);
+        $query_pro = mysqli_query($mysqli, $sql_pro);   
     } elseif (isset($_GET['timkiemnangcao'])) {
         $tukhoa = $_GET['tukhoa'];
         $danhmuc = $_GET['danhmuc']; // Lấy danh mục từ form nếu được chọn
         $theloai = $_GET['theloai']; // Lấy thể loại từ form nếu được chọn
-        $sql_pro = "SELECT * FROM product, category,genres WHERE product.category_id = category.category_id AND product.genre_id = genres.genre_id  ";
+        $sql_pro = "SELECT * FROM product, category,genres WHERE product.category_id = category.category_id AND product.genre_id = genres.genre_id AND product.statuspr = 1 ";
 
         // Thêm điều kiện tìm kiếm từ khóa nếu có
         if (!empty($tukhoa)) {
@@ -139,7 +139,7 @@ if (isset($_GET['manage']) && $_GET['manage'] == 'search') {
     if (isset($tukhoa) && isset($_GET['timkiemnangcao'])) {
         $danhmuc_phantrang = $_GET['danhmuc'];
         $theloai_phantrang = $_GET['theloai'];
-        $sql_trang = "SELECT * FROM product WHERE name_product LIKE '%" . $tukhoa . "%'";
+        $sql_trang = "SELECT * FROM product WHERE name_product LIKE '%" . $tukhoa . "%' AND statuspr = 1";
         if (!empty($danhmuc_phantrang) && $danhmuc_phantrang != '0') {
             $sql_trang .= " AND product.category_id = " . $danhmuc_phantrang;
         }
@@ -179,7 +179,7 @@ if (isset($_GET['manage']) && $_GET['manage'] == 'search') {
                     if ($trang != 0) {
                 ?>
                         <a href="index.php?manage=search&timkiemnangcao&page=<?php echo $page + 1 ?>&tukhoa=<?php echo $tukhoa ?>&danhmuc=<?php echo $danhmuc ?>&theloai=<?php echo $theloai ?>" class="page-number" style="margin-left: 10px;"><i class="fa fa-angle-right"></i></a>
-                        <a style="margin-left: 10px;" href="index.php?manage=search&timkiem&page=<?php echo $trang ?>&tukhoa=<?php echo $tukhoa ?>&danhmuc=<?php echo $danhmuc ?>&theloai=<?php echo $theloai ?>" class="page-number"><i class="fa fa-angle-double-right"></i></a>
+                        <a style="margin-left: 10px;" href="index.php?manage=search&timkiemnangcao&page=<?php echo $trang ?>&tukhoa=<?php echo $tukhoa ?>&danhmuc=<?php echo $danhmuc ?>&theloai=<?php echo $theloai ?>" class="page-number"><i class="fa fa-angle-double-right"></i></a>
                     <?php  } else {
                     ?>
 
@@ -190,7 +190,7 @@ if (isset($_GET['manage']) && $_GET['manage'] == 'search') {
         </div>
     <?php } elseif (isset($tukhoa) && isset($_GET['timkiem'])) {
 
-        $sql_trang = "SELECT * FROM product WHERE name_product LIKE '%" . $tukhoa . "%'";
+        $sql_trang = "SELECT * FROM product WHERE name_product LIKE '%" . $tukhoa . "%' AND statuspr = 1";
         $query_trang = mysqli_query($mysqli, $sql_trang);
         $row_count = mysqli_num_rows($query_trang);
         $trang = ceil($row_count / 8);

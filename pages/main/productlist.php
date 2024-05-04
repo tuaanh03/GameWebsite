@@ -12,7 +12,7 @@ if ($page == '' || $page == 1) {
 }
 
 
-$sql_pro = "SELECT * FROM product WHERE product.category_id = '$_GET[id]' ORDER BY product.product_id DESC LIMIT $begin,8";
+$sql_pro = "SELECT * FROM product WHERE product.category_id = '$_GET[id]' AND product.statuspr = 1 ORDER BY product.product_id DESC LIMIT $begin,8";
 $query_pro = mysqli_query($mysqli, $sql_pro);
 // danhmuc
 $sql_cate = "SELECT * FROM category WHERE category_id = '$_GET[id]' LIMIT 1";
@@ -56,7 +56,7 @@ $row_title = mysqli_fetch_array($query_cate);
 
     <?php
     $category_id = $row_title['category_id'];
-    $sql_trang = "SELECT * FROM product WHERE product.category_id = $category_id ";
+    $sql_trang = "SELECT * FROM product WHERE product.category_id = $category_id AND product.statuspr = 1 ";
     $query_trang = mysqli_query($mysqli, $sql_trang);
     $row_count = mysqli_num_rows($query_trang);
     $trang = ceil($row_count / 8);

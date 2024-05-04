@@ -11,6 +11,9 @@ $query_lietke_user = mysqli_query($mysqli, $sql_lietke_user);
             <th scope="row">ID</th>
             <th scope="row">Customer name</th>
             <th scope="row">Email</th>
+            <th scope="row">Province</th>
+            <th scope="row">District</th>
+            <th scope="row">Ward</th>
             <th scope="row">Address</th>
             <th scope="row">Phone number</th>
             <th scope="row">Status</th>
@@ -27,6 +30,9 @@ $query_lietke_user = mysqli_query($mysqli, $sql_lietke_user);
                 <td><?php echo $i ?></td>
                 <td><?php echo $row['username'] ?></td>
                 <td><?php echo $row['email'] ?></td>
+                <td><?php echo $row['customer_province'] ?></td>
+                <td><?php echo $row['customer_district'] ?></td>
+                <td><?php echo $row['customer_ward'] ?></td>
                 <td><?php echo $row['customer_address'] ?></td>
                 <td><?php echo $row['phonenumber'] ?></td>
                 <td>
