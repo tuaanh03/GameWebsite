@@ -14,13 +14,14 @@ if (isset($_SESSION['form_data'])) {
     $form_data = $_SESSION['form_data'];
     // Lấy dữ liệu từ session
     $name = isset($form_data['name']) ? $form_data['name'] : '';
+    $fullname = isset($form_data['fullname']) ? $form_data['fullname'] : '';
     $email = isset($form_data['email']) ? $form_data['email'] : '';
     $phone = isset($form_data['phonenumber']) ? $form_data['phonenumber'] : '';
     $province = isset($form_data['province']) ? $form_data['province'] : '';
     $district = isset($form_data['district']) ? $form_data['district'] : '';
     $ward = isset($form_data['ward']) ? $form_data['ward'] : '';
     $streetaddress = isset($form_data['streetaddress']) ? $form_data['streetaddress'] : '';
-    $sql_update = "UPDATE tbl_customer SET customer_province = '" . $province . "',customer_district='" . $district . "',customer_ward='" . $ward . "',customer_address='" . $streetaddress . "',phonenumber='" . $phone . "' WHERE customer_id = '" . $id_dangky . "'";
+    $sql_update = "UPDATE tbl_customer SET fullname = '" . $fullname . "', customer_province = '" . $province . "',customer_district='" . $district . "',customer_ward='" . $ward . "',customer_address='" . $streetaddress . "',phonenumber='" . $phone . "' WHERE customer_id = '" . $id_dangky . "'";
     mysqli_query($mysqli, $sql_update);
     unset($_SESSION['form_data']); // Xóa dữ liệu trong session sau khi đã sử dụng
 }
@@ -33,6 +34,7 @@ else {
     if ($count > 0) {
         $row_get_vanchuyen = mysqli_fetch_array($sql_get_vanchuyen);
         $name = $row_get_vanchuyen['username'];
+        $fullname = $row_get_vanchuyen['fullname'];
         $phone = $row_get_vanchuyen['phonenumber'];
         $email = $row_get_vanchuyen['email'];
         $province = $row_get_vanchuyen['customer_province'];
@@ -41,6 +43,7 @@ else {
         $streetaddress = $row_get_vanchuyen['customer_address'];
     } else {
         $name = '';
+        $fullname = '';
         $phone = '';
         $email = '';
         $province = '';
@@ -94,7 +97,7 @@ if (isset($_POST['updateprofile'])) {
             <div class="form-group row">
                 <label for="name" class="col-4 col-form-label">Full Name</label>
                 <div class="col-8">
-                    <input id="lastname" name="fullname" placeholder="Last Name" class="form-control here" type="text">
+                    <input value="<?php echo $fullname?>" id="lastname" name="fullname" placeholder="Full Name" class="form-control here" type="text">
                 </div>
             </div>
 

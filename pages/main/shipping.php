@@ -11,113 +11,199 @@
     <?php
 
 
-// xử lý thêm
+    // xử lý thêm địa chỉ
+
     if (isset($_POST['themvanchuyen'])) {
-        $name = $_POST['name'];
-        $phone = $_POST['phone'];
-        $address = $_POST['address'];
-        $note = $_POST['note'];
         $id_dangky = $_SESSION['id_khachhang'];
-        $sql_them_vanchuyen = "INSERT INTO tbl_shipping(customer_id,name,phone,address,note) VALUES('$id_dangky','$name','$phone','$address','$note')";
+        $name = isset($_POST['name']) ? $_POST['name'] : '';
+        $phone = isset($_POST['phone']) ? $_POST['phone'] : '';
+        $province = isset($_POST['province']) ? $_POST['province'] : '';
+        $district = isset($_POST['district']) ? $_POST['district'] : '';
+        $ward = isset($_POST['ward']) ? $_POST['ward'] : '';
+        $streetaddress = isset($_POST['streetaddress']) ? $_POST['streetaddress'] : '';
+        $note = isset($_POST['note']) ? $_POST['note'] : '';
+        $sql_them_vanchuyen = "INSERT INTO tbl_shipping(customer_id,name,phone,address,province,district,ward,note) VALUES('$id_dangky','$name','$phone',' $streetaddress','$province','$district','$ward','$note')";
         $query_them_vanchuyen = mysqli_query($mysqli, $sql_them_vanchuyen);
         if ($query_them_vanchuyen) {
             echo '<script>alert("Add shipping successfully !")</script>';
         }
-
-  
-        
- // xử lý cập nhật       
-    } elseif (isset($_POST['capnhatvanchuyen'])) {
-        $name = $_POST['name'];
-        $phone = $_POST['phone'];
-        $address = $_POST['address'];
-        $note = $_POST['note'];
-        $id_dangky = $_SESSION['id_khachhang'];
-        $sql_update_vanchuyen = "UPDATE tbl_shipping SET customer_id='$id_dangky',name='$name',phone='$phone',address='$address',note='$note' WHERE customer_id = '$id_dangky' ";
-        $query_update_vanchuyen = mysqli_query($mysqli, $sql_update_vanchuyen);
-        if ($query_update_vanchuyen) {
-            echo '<script>alert("Update shipping successfully !")</script>';
-        }
+    } else {
+        $name = '';
+        $phone = '';
+        $province = '';
+        $district = '';
+        $ward = '';
+        $streetaddress = '';
     }
+
+
+
+    // phần sử dụng địa chỉ có sẵn
+    $id_dangky = $_SESSION['id_khachhang'];
+    $sql_get_vanchuyen = mysqli_query($mysqli, "SELECT * FROM tbl_customer WHERE customer_id = '$id_dangky' LIMIT 1");
+    $count = mysqli_num_rows($sql_get_vanchuyen);
+    if ($count > 0) {
+        $row_get_vanchuyen = mysqli_fetch_array($sql_get_vanchuyen);
+        $name = $row_get_vanchuyen['fullname'];
+        $phone = $row_get_vanchuyen['phonenumber'];
+        $email = $row_get_vanchuyen['email'];
+        $province = $row_get_vanchuyen['customer_province'];
+        $district = $row_get_vanchuyen['customer_district'];
+        $ward = $row_get_vanchuyen['customer_ward'];
+        $streetaddress = $row_get_vanchuyen['customer_address'];
+    } else {
+        $name = '';
+        $phone = '';
+        $email = '';
+        $province = '';
+        $district = '';
+        $ward = '';
+        $streetaddress = '';
+    }
+
+
+
+
+    // xử lý cập nhật     
+    // elseif (isset($_POST['capnhatvanchuyen'])) {
+    //     $name = $_POST['name'];
+    //     $phone = $_POST['phone'];
+    //     $address = $_POST['address'];
+    //     $note = $_POST['note'];
+    //     $id_dangky = $_SESSION['id_khachhang'];
+    //     $sql_update_vanchuyen = "UPDATE tbl_shipping SET customer_id='$id_dangky',name='$name',phone='$phone',address='$address',note='$note' WHERE customer_id = '$id_dangky' ";
+    //     $query_update_vanchuyen = mysqli_query($mysqli, $sql_update_vanchuyen);
+    //     if ($query_update_vanchuyen) {
+    //         echo '<script>alert("Update shipping successfully !")</script>';
+    //     }
+    // }
+    // 
     ?>
     <div class="row">
-        <?php
-        $id_dangky = $_SESSION['id_khachhang'];
-        $sql_get_vanchuyen = mysqli_query($mysqli, "SELECT * FROM tbl_shipping WHERE customer_id = '$id_dangky' LIMIT 1");
-        $count = mysqli_num_rows($sql_get_vanchuyen);
-        if ($count > 0) {
-            $row_get_vanchuyen = mysqli_fetch_array($sql_get_vanchuyen);
-            $name = $row_get_vanchuyen['name'];
-            $phone = $row_get_vanchuyen['phone'];
-            $address = $row_get_vanchuyen['address'];
-            $note = $row_get_vanchuyen['note'];
-        } else {
-            $name = '';
-            $phone = '';
-            $address = '';
-            $note = '';
-        }
-        if ($address == '') {
-            $address = $_SESSION['diachi'];
-        }
-        ?>
-        <div class="col-md-4">
-            <form action="" autocomplete="off" method="POST">
 
-                <div class="form-group" style="margin-top: 25px;">
-                    <label for="exampleInputEmail1">Họ và tên</label>
-                    <input value="<?php echo $name ?>" type="text" name="name" class="form-control" placeholder="...">
-                    <!-- <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small> -->
-                </div>
-
-                <div class="form-group" style="margin-top: 25px;">
-                    <label for="exampleInputPassword1">Phone</label>
-                    <input value="<?php echo $phone ?>" type="text" name="phone" class="form-control" placeholder="...">
-                </div>
-
-                <div class="form-group" style="margin-top: 25px;">
-                    <label for="exampleInputPassword1">Province</label>
-                    <select name="province" id="province" class="form-control">
-                        <option value="" disabled selected>Select Province / City</option>
-                        <!-- Added options for cities -->
-                        <option value="TP Hồ Chí Minh">TP Hồ Chí Minh</option>
-                        <option value="Hà Nội">Hà Nội</option>
-                        <!-- Add other cities here if needed -->
-                    </select>
-                </div>
-
-                <div class="form-group" style="margin-top: 25px;">
-                    <label for="exampleInputPassword1">District</label>
-                    <select name="district" id="district" class="form-control">
-                        <option value="" disabled selected>Select district</option>
-                    </select>
-                </div>
-
-                <div class="form-group" style="margin-top: 25px;">
-                    <label for="exampleInputPassword1">Ward</label>
-                    <select name="ward" id="ward" class="form-control">
-                        <option value="" disabled selected>Select ward</option>
-                    </select>
-                </div>
-
-                <div class="form-group" style="margin-top: 25px;">
-                    <label for="exampleInputPassword1">Address</label>
-                    <input value="<?php echo $address; ?>" type="text" name="address" class="form-control" placeholder="...">
-                </div>
-
-                <div class="form-group" style="margin-top: 25px;">
-                    <label for="exampleInputPassword1">Note</label>
-                    <input value="<?php echo $note ?>" type="text" name="note" class="form-control" placeholder="...">
-                </div>
-                <?php
-                if ($name == '' && $phone == '') {
-                ?>
-                    <button style="margin-top: 25px;" name="themvanchuyen" type="submit" class="btn btn-primary">Add shipping</button>
-                <?php } elseif ($name != '' && $phone != '') { ?>
-                    <button style="margin-top: 25px;" name="capnhatvanchuyen" type="submit" class="btn btn-success">Update shipping</button>
+        <p class="d-inline-flex gap-1">
+            <?php if ($row_get_vanchuyen['fullname']) { ?>
+                <a class="btn btn-primary" data-bs-toggle="collapse" href="#collapseExample1" role="button" aria-expanded="false" aria-controls="collapseExample">
+                    Use default address
                 <?php } ?>
-            </form>
+                </a>
+                <a class="btn btn-primary" data-bs-toggle="collapse" href="#collapseExample2" role="button" aria-expanded="false" aria-controls="collapseExample">
+                    Create new address
+                </a>
+
+        </p>
+        <div class="collapse" id="collapseExample1">
+            <div class="card card-body">
+                <div class="col-md-5">
+                    <form action="" autocomplete="off" method="POST">
+
+                        <div class="form-group" style="margin-top: 25px;">
+                            <label for="exampleInputEmail1">Họ và tên</label>
+                            <input value="<?php echo $name ?>" type="text" name="name" class="form-control" placeholder="...">
+                            <!-- <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small> -->
+                        </div>
+
+                        <div class="form-group" style="margin-top: 25px;">
+                            <label for="exampleInputPassword1">Phone</label>
+                            <input value="<?php echo $phone ?>" type="text" name="phone" class="form-control" placeholder="...">
+                        </div>
+
+                        <div class="form-group" style="margin-top: 25px;">
+                            <label for="exampleInputPassword1">Province</label>
+                            <select name="province" id="province" class="form-control">
+                                <option value="" disabled selected>Select Province / City</option>
+                                <!-- Added options for cities -->
+                                <option value="TP Hồ Chí Minh">TP Hồ Chí Minh</option>
+                                <option value="Hà Nội">Hà Nội</option>
+                                <!-- Add other cities here if needed -->
+                            </select>
+                        </div>
+
+                        <div class="form-group" style="margin-top: 25px;">
+                            <label for="exampleInputPassword1">District</label>
+                            <select name="district" id="district" class="form-control">
+                                <option value="" disabled selected>Select district</option>
+                            </select>
+                        </div>
+
+                        <div class="form-group" style="margin-top: 25px;">
+                            <label for="exampleInputPassword1">Ward</label>
+                            <select name="ward" id="ward" class="form-control">
+                                <option value="" disabled selected>Select ward</option>
+                            </select>
+                        </div>
+
+                        <div class="form-group" style="margin-top: 25px;">
+                            <label for="exampleInputPassword1">Street Address</label>
+                            <input value="<?php echo $streetaddress; ?>" type="text" name="streetaddress" class="form-control" placeholder="...">
+                        </div>
+
+
+
+                        <button style="margin-top: 25px;" name="currentaddress" type="submit" class="btn btn-primary">Confirm</button>
+
+                    </form>
+                </div>
+            </div>
         </div>
+        <div class="collapse" id="collapseExample2">
+            <div class="card card-body">
+                <div class="col-md-5">
+                    <form action="" autocomplete="off" method="POST">
+
+                        <div class="form-group" style="margin-top: 25px;">
+                            <label for="exampleInputEmail1">Họ và tên</label>
+                            <input type="text" name="name" class="form-control" placeholder="...">
+                            <!-- <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small> -->
+                        </div>
+
+                        <div class="form-group" style="margin-top: 25px;">
+                            <label for="exampleInputPassword1">Phone</label>
+                            <input type="text" name="phone" class="form-control" placeholder="...">
+                        </div>
+
+                        <div class="form-group" style="margin-top: 25px;">
+                            <label for="exampleInputPassword1">Province</label>
+                            <select name="province" id="province" class="form-control">
+                                <option value="" disabled selected>Select Province / City</option>
+                                <!-- Added options for cities -->
+                                <option value="TP Hồ Chí Minh">TP Hồ Chí Minh</option>
+                                <option value="Hà Nội">Hà Nội</option>
+                                <!-- Add other cities here if needed -->
+                            </select>
+                        </div>
+
+                        <div class="form-group" style="margin-top: 25px;">
+                            <label for="exampleInputPassword1">District</label>
+                            <select name="district" id="district" class="form-control">
+                                <option value="" disabled selected>Select district</option>
+                            </select>
+                        </div>
+
+                        <div class="form-group" style="margin-top: 25px;">
+                            <label for="exampleInputPassword1">Ward</label>
+                            <select name="ward" id="ward" class="form-control">
+                                <option value="" disabled selected>Select ward</option>
+                            </select>
+                        </div>
+
+                        <div class="form-group" style="margin-top: 25px;">
+                            <label for="exampleInputPassword1">Street Address</label>
+                            <input type="text" name="streetaddress" class="form-control" placeholder="...">
+                        </div>
+
+
+
+                        <button style="margin-top: 25px;" name="themvanchuyen" type="submit" class="btn btn-primary">Confirm</button>
+
+                    </form>
+                </div>
+            </div>
+        </div>
+
+
+
+
         <!-- -----------Giỏ hàng---------- -->
         <table class="cart">
             <thead>
@@ -250,6 +336,21 @@
         });
     });
 
+    // Đặt giá trị của tỉnh/thành phố
+    document.getElementById("province").value = "<?php echo $province; ?>";
+
+    // Kích hoạt sự kiện change để cập nhật các quận huyện tương ứng
+    var event = new Event('change');
+    document.getElementById("province").dispatchEvent(event);
+
+    // Đặt giá trị của quận/huyện
+    document.getElementById("district").value = "<?php echo $district; ?>";
+
+    // Kích hoạt sự kiện change để cập nhật các phường/xã tương ứng
+    document.getElementById("district").dispatchEvent(event);
+
+    // Đặt giá trị của phường/xã
+    document.getElementById("ward").value = "<?php echo $ward; ?>";
 
 
 
