@@ -11,12 +11,15 @@
         <div class="row">
             <?php
             $id_dangky = $_SESSION['id_khachhang'];
-            $sql_get_vanchuyen = mysqli_query($mysqli, "SELECT * FROM tbl_shipping WHERE customer_id = '$id_dangky' LIMIT 1");
+            $sql_get_vanchuyen = mysqli_query($mysqli, "SELECT * FROM tbl_shipping WHERE customer_id = '$id_dangky' ORDER BY id_shipping DESC LIMIT 1");
             $count = mysqli_num_rows($sql_get_vanchuyen);
             if ($count > 0) {
                 $row_get_vanchuyen = mysqli_fetch_array($sql_get_vanchuyen);
                 $name = $row_get_vanchuyen['name'];
                 $phone = $row_get_vanchuyen['phone'];
+                $province = $row_get_vanchuyen['province'];
+                $district = $row_get_vanchuyen['district'];
+                $ward = $row_get_vanchuyen['ward'];
                 $address = $row_get_vanchuyen['address'];
                 $note = $row_get_vanchuyen['note'];
             } else {
@@ -30,7 +33,7 @@
                 <ul style="line-height:1.8">
                     <li style="color:black;">Fullname: <span style="font-weight: bold; "><?php echo $name ?></span></li>
                     <li style="color:black;">Phone number: <span style="font-weight: bold;"><?php echo $phone ?></span></li>
-                    <li style="color:black;">Address: <span style="font-weight: bold;"><?php echo $address ?></span></li>
+                    <li style="color:black;">Address: <span style="font-weight: bold;"><?php echo $address ?>,<?php echo $ward ?>, <?php echo $district ?>, <?php echo $province ?> </span></li>
                     <li style="color:black;">Note: <span style="font-weight: bold;"><?php echo $note ?></span></li>
                 </ul>
             </div>

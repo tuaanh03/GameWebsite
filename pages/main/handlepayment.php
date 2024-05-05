@@ -14,19 +14,25 @@ $code_order = rand(0, 9999);
 $cart_payment = $_POST['payment'];
 // lấy thông tin vận chuyển
 $id_dangky = $_SESSION['id_khachhang'];
-$sql_get_vanchuyen = mysqli_query($mysqli, "SELECT * FROM tbl_shipping WHERE customer_id = '$id_dangky' LIMIT 1");
-$row_get_vanchuyen = mysqli_fetch_array($sql_get_vanchuyen);
+// $sql_get_vanchuyen = mysqli_query($mysqli, "SELECT * FROM tbl_shipping WHERE customer_id = '$id_dangky' LIMIT 1");
+// $row_get_vanchuyen = mysqli_fetch_array($sql_get_vanchuyen);
 
-$id_shipping = $row_get_vanchuyen['id_shipping'];
+// $id_shipping = $row_get_vanchuyen['id_shipping'];
 $total_money = 0;
 foreach ($_SESSION['cart'] as $key => $value) {
     $thanhtien = $value['quantity'] * $value['price'];
     $total_money += $thanhtien;
 }
 
+//mới thêm 2:42
+$sql_get_thongtin = mysqli_query($mysqli, "SELECT * FROM tbl_shipping WHERE customer_id = '$id_dangky' ORDER BY id_shipping DESC LIMIT 1");
+$row_get_thongtin = mysqli_fetch_array($sql_get_thongtin);
+$id_thongtin = $row_get_thongtin['id_shipping'];
+
+
 if ($cart_payment == 'cash' || $cart_payment == 'transfer') {
     //insert đơn hàng
-    $insert_cart = "INSERT INTO orders(users_id,code_orders,order_date,status_order,cart_payment,cart_shipping) VALUE('" . $id_khachhang . "','" . $code_order . "','" . $now . "',1,'" . $cart_payment . "', '" . $id_shipping . "')";
+    $insert_cart = "INSERT INTO orders(users_id,code_orders,order_date,status_order,cart_payment,cart_shipping) VALUE('" . $id_khachhang . "','" . $code_order . "','" . $now . "',1,'" . $cart_payment . "', '" . $id_thongtin . "')";
     $cart_query = mysqli_query($mysqli, $insert_cart);
     if ($cart_query) {
         foreach ($_SESSION['cart'] as $key => $value) {
@@ -34,6 +40,8 @@ if ($cart_payment == 'cash' || $cart_payment == 'transfer') {
             $soluong = $value['quantity'];
             $insert_order_details = "INSERT INTO order_details(product_id,code_orders,quantity_order) VALUE('" . $id_sanpham . "','" . $code_order . "','" . $soluong . "')";
             mysqli_query($mysqli, $insert_order_details);
+            $insert_shipping = "UPDATE tbl_shipping SET code_orders = '".$code_order."' WHERE id_shipping = '".$id_thongtin."'";
+            mysqli_query($mysqli, $insert_shipping);
         }
     }
     header("Location:../../index.php?manage=thankyou");

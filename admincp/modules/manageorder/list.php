@@ -39,6 +39,9 @@
             <th scope="row">ID of order</th>
             <th scope="row">ID of user</th>
             <th scope="row">Customer name</th>
+            <th scope="row">Province</th>
+            <th scope="row">District</th>
+            <th scope="row">Ward</th>
             <th scope="row">Address</th>
             <th scope="row">Phone number</th>
             <th scope="row">Status</th>
@@ -47,7 +50,7 @@
         </tr>
 
         <?php
-        $sql_lietke_dh = "SELECT * FROM orders,tbl_shipping WHERE orders.users_id = tbl_shipping.customer_id ";
+        $sql_lietke_dh = "SELECT * FROM orders,tbl_shipping WHERE orders.users_id = tbl_shipping.customer_id AND orders.cart_shipping = tbl_shipping.id_shipping";
         if ((isset($_GET['date']) && $_GET['date'] != '')) {
             $date = $_GET['date'];
             $sql_lietke_dh .= " AND orders.order_date LIKE '%" . $date . "%'";
@@ -74,6 +77,9 @@
                 <td><?php echo $row['code_orders'] ?></td>
                 <td><?php echo $row['users_id'] ?></td>
                 <td><?php echo $row['name'] ?></td>
+                <td><?php echo $row['province'] ?></td>
+                <td><?php echo $row['district'] ?></td>
+                <td><?php echo $row['ward'] ?></td>
                 <td><?php echo $row['address'] ?></td>
                 <td><?php echo $row['phone'] ?></td>
                 <td>
