@@ -10,8 +10,7 @@
       <div class="list-group ">
         <a href="index.php?manage=profile&control=viewprofile" class="list-group-item list-group-item-action <?php if($_GET['control'] == 'viewprofile'){?> active <?php } ?>">Information</a>
         <a href="index.php?manage=profile&control=viewhistoryorder" class="list-group-item list-group-item-action <?php if($_GET['control'] == 'viewhistoryorder'){?> active <?php } ?>">History Order</a>
-        <a href="#" class="list-group-item list-group-item-action">Used</a>
-        <a href="#" class="list-group-item list-group-item-action">Enquiry</a>
+        
 
 
       </div>

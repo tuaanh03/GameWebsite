@@ -12,11 +12,11 @@ if ($page == '' || $page == 1) {
 }
 
 if (isset($_GET['manage']) && $_GET['manage'] == 'search') {
-    if (isset($_GET['timkiem'])) { 
+    if (isset($_GET['timkiem'])) {
         $tukhoa = $_GET['tukhoa'];
         $sql_pro = "SELECT * FROM product,category WHERE product.category_id = category.category_id AND product.name_product LIKE '%" . $tukhoa . "%' AND product.statuspr = 1 ORDER BY product.product_id DESC ";
         $sql_pro .= " LIMIT $begin, 8";
-        $query_pro = mysqli_query($mysqli, $sql_pro);   
+        $query_pro = mysqli_query($mysqli, $sql_pro);
     } elseif (isset($_GET['timkiemnangcao'])) {
         $tukhoa = $_GET['tukhoa'];
         $danhmuc = $_GET['danhmuc']; // Lấy danh mục từ form nếu được chọn
@@ -47,10 +47,34 @@ if (isset($_GET['manage']) && $_GET['manage'] == 'search') {
 ?>
 
 <section>
-    <!-- <header>
-        <h2 class="section-title">Search: <?php echo $tukhoa  ?></h2>
+    <header style="margin-bottom: 30px;">
+        <!-- new -->
+        <form action="">
+            
+            <?php
+            if (isset($_GET['timkiemnangcao'])) {
+                $sql_danhmuc = "SELECT * FROM category WHERE category_id = '" . $danhmuc . "'";
+                $query_danhmuc = mysqli_query($mysqli, $sql_danhmuc);
+                $row_danhmuc = mysqli_fetch_assoc($query_danhmuc);
+                $sql_theloai = "SELECT * FROM genres WHERE genre_id = '" . $theloai . "'";
+                $query_theloai = mysqli_query($mysqli, $sql_theloai);
+                $row_theloai = mysqli_fetch_assoc($query_theloai);
+            ?>
+                Search: <input type="text" placeholder="Search..." value="<?php echo $tukhoa ?>" readonly>
+                Category: <input type="text" placeholder="Category..." value="<?php if (!empty($danhmuc)) {
+                                                                        echo $row_danhmuc['category_name'];
+                                                                    }  ?>" readonly>
+                Genre: <input type="text" placeholder="Genre..." value="<?php if (!empty($theloai)) {
+                                                        echo $row_theloai['genre_name'];
+                                                    } ?>" readonly>
+            <?php }else{ ?>
+                Search: <input type="text" placeholder="Search..." value="<?php echo $tukhoa ?>" readonly>
+                <?php } ?>
 
-    </header> -->
+        </form>
+
+
+    </header>
 
     <style>
         .form-inputs {

@@ -1,13 +1,13 @@
 <?php
 $total_money = 0; ?>
 
-<p>Giỏ hàng :</p>
-<?php  
+<p>Cart : <?php  
 if(isset($_SESSION['dangky']))
 {
     echo $_SESSION['dangky'];
 }
-?>
+?></p>
+
 <div class="container">
   <!-- Responsive Arrow Progress Bar -->
   <div class="arrow-steps clearfix">

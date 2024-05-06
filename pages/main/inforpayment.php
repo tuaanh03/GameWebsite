@@ -1,4 +1,4 @@
-<p>Thong tin</p>
+<p>Information of payment</p>
 <div class="container">
     <!-- Responsive Arrow Progress Bar -->
     <div class="arrow-steps clearfix">

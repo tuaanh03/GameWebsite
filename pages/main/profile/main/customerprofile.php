@@ -111,7 +111,7 @@ if (isset($_POST['updateprofile'])) {
             <div class="form-group row">
                 <label for="province" class="col-4 col-form-label">Province / City</label>
                 <div class="col-8">
-                    <select id="province" name="province" class="custom-select">
+                    <select id="province" name="province" class="form-control here">
                         <option value="" disabled selected>Select Province / City</option>
                         <!-- Added options for cities -->
                         <option value="TP Hồ Chí Minh">TP Hồ Chí Minh</option>
@@ -124,7 +124,7 @@ if (isset($_POST['updateprofile'])) {
             <div class="form-group row">
                 <label for="district" class="col-4 col-form-label">District</label>
                 <div class="col-8">
-                    <select id="district" name="district" class="custom-select">
+                    <select id="district" name="district" class="form-control here">
                         <option value="" disabled selected>Select district</option>
                     </select>
                 </div>
@@ -133,7 +133,7 @@ if (isset($_POST['updateprofile'])) {
             <div class="form-group row">
                 <label for="ward" class="col-4 col-form-label">Ward</label>
                 <div class="col-8">
-                    <select id="ward" name="ward" class="custom-select">
+                    <select id="ward" name="ward" class="form-control here">
                         <option value="" disabled selected>Select ward</option>
                     </select>
                 </div>

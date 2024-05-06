@@ -84,10 +84,13 @@ $row_title = mysqli_fetch_array($query_cate);
         if ($page == $trang) {
             echo '';
         } else {
+            if ($trang != 0) {
         ?>
-            <a href="index.php?manage=product&page=<?php echo $page + 1 ?>&id=<?php echo $row_title['category_id'] ?>" class="page-number" style="margin-left: 10px;"><i class="fa fa-angle-right"></i></a>
-            <a style="margin-left: 10px;" href="index.php?manage=product&page=<?php echo $trang ?>&id=<?php echo $row_title['category_id'] ?>" class="page-number"><i class="fa fa-angle-double-right"></i></a>
-        <?php } ?>
+                <a href="index.php?manage=product&page=<?php echo $page + 1 ?>&id=<?php echo $row_title['category_id'] ?>" class="page-number" style="margin-left: 10px;"><i class="fa fa-angle-right"></i></a>
+                <a style="margin-left: 10px;" href="index.php?manage=product&page=<?php echo $trang ?>&id=<?php echo $row_title['category_id'] ?>" class="page-number"><i class="fa fa-angle-double-right"></i></a>
+
+        <?php }else{ ?>
+        <?php } }?>
 
     </div> <!-- .pagination -->
 </div> <!-- .filter-bar -->
@@ -146,14 +149,12 @@ $row_title = mysqli_fetch_array($query_cate);
             }
         } ?>
     </div> <!-- .pagination -->
-    <?php 
-    if($trang != 0)
-    {
-        ?>
+    <?php
+    if ($trang != 0) {
+    ?>
         <p style=" color:black;">Current page: <?php echo $page ?>/<?php echo $trang ?></p>
-        <?php
-    }
-    else{
+    <?php
+    } else {
     ?>
     <?php } ?>
 </div>

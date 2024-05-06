@@ -1,4 +1,4 @@
-<p>Vận chuyển</p>
+<p>Transportation</p>
 <div class="container">
     <!-- Responsive Arrow Progress Bar -->
     <div class="arrow-steps clearfix">
@@ -7,7 +7,7 @@
         <div class="step"> <span><a href="index.php?manage=payment">Payment</a><span> </div>
         <div class="step"> <span><a href="index.php?manage=alreadyorder">History Bill</a><span> </div>
     </div>
-    <h4>Information Shipping</h4>
+    <h4 style="margin-top: 20px;">Information Shipping</h4>
     <?php
 
 
@@ -93,22 +93,21 @@
             if (isset($_POST['status'])) {
                 if ($_POST['status'] == 'successfully') {
             ?>
-                    
-            <?php
-                }
-            }
-            elseif(!isset($_POST['status']))
-            {
-            ?>
-            <a class="btn btn-primary" data-bs-toggle="collapse" href="#collapseExample1" role="button" aria-expanded="false" aria-controls="collapseExample">
 
-                Create new address
-            </a>
+                <?php
+                }
+            } elseif (!isset($_POST['status'])) {
+                ?>
+                <a class="btn btn-primary" data-bs-toggle="collapse" href="#collapseExample1" role="button" aria-expanded="false" aria-controls="collapseExample">
+
+                    Create new address
+                </a>
             <?php } ?>
 
         </p>
         <div class="collapse" id="collapseExample1">
             <div class="card card-body">
+            <h1>New Address</h1>
                 <div class="col-md-5">
                     <form action="" autocomplete="off" method="POST">
 
@@ -162,11 +161,11 @@
         </div>
         <div class="collapse" id="collapseExample2">
             <div class="card card-body">
-
+                <h1>Default Address</h1>
                 <div class="col-md-5">
                     <form action="" autocomplete="off" method="POST">
 
-                    <input type="hidden" name="status" value="successfully">
+                        <input type="hidden" name="status" value="successfully">
 
                         <div class="form-group" style="margin-top: 25px;">
                             <label for="exampleInputEmail1">Họ và tên</label>

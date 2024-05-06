@@ -11,11 +11,11 @@ while ($row_chitiet = mysqli_fetch_array($query_chitiet)) {
                     <figure class="large-image">
                         <a href="admincp/modules/manageproduct/uploads/<?php echo $row_chitiet['thumbnail'] ?>"><img src="admincp/modules/manageproduct/uploads/<?php echo $row_chitiet['thumbnail'] ?>" alt=""></a>
                     </figure>
-                    <div class="thumbnails">
+                    <!-- <div class="thumbnails">
                         <a href="dummy/image-2.jpg"><img src="dummy/small-thumb-1.jpg" alt=""></a>
                         <a href="dummy/image-3.jpg"><img src="dummy/small-thumb-2.jpg" alt=""></a>
                         <a href="dummy/image-4.jpg"><img src="dummy/small-thumb-3.jpg" alt=""></a>
-                    </div>
+                    </div> -->
                 </div>
             </div>
             <div class="col-sm-6 col-md-8">
@@ -61,13 +61,13 @@ while ($row_chitiet = mysqli_fetch_array($query_chitiet)) {
                             <input name="themgiohang" type="submit" value="Add to cart">
                         </form>
 
-                        <div class="social-links square">
+                        <!-- <div class="social-links square">
                             <strong>Share</strong>
                             <a href="#" class="facebook"><i class="fa fa-facebook"></i></a>
                             <a href="#" class="twitter"><i class="fa fa-twitter"></i></a>
                             <a href="#" class="google-plus"><i class="fa fa-google-plus"></i></a>
                             <a href="#" class="pinterest"><i class="fa fa-pinterest"></i></a>
-                        </div>
+                        </div> -->
                     </div>
                 </form>
             </div>

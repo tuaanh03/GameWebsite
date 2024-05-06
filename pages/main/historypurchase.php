@@ -20,6 +20,7 @@ $query_lietke_dh = mysqli_query($mysqli, $sql_lietke_dh);
             <th scope="row">ID</th>
             <th scope="row">Date order</th>
             <th scope="row">ID of order</th>
+            <th scope="row">Total money</th>
             <th scope="row">Status</th>
             <th scope="row">Payment Method</th>
             <th scope="row">Manage</th>
@@ -35,6 +36,7 @@ $query_lietke_dh = mysqli_query($mysqli, $sql_lietke_dh);
                 <td><?php echo $i ?></td>
                 <td><?php echo $row['order_date'] ?></td>
                 <td><?php echo $row['code_orders'] ?></td>
+                <td><?php echo number_format($row['total_money']) . 'đ' ?></td>
                 <td>
                     <h4 <?php if ($row['status_order'] == 1) {  ?> style="color: rgb(254,192,94);" <?php } elseif ($row['status_order'] == 2) { ?>style="color: rgb(114,185,104);" <?php } elseif($row['status_order'] == -1){ ?> style="color: rgb(220,53,69);" <?php } elseif($row['status_order'] == 0){ ?> style="color: rgb(42,152,214);" <?php } ?>>
                         <?php

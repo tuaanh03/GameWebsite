@@ -40,18 +40,20 @@ if ($cart_payment == 'cash' || $cart_payment == 'transfer') {
             $soluong = $value['quantity'];
             $insert_order_details = "INSERT INTO order_details(product_id,code_orders,quantity_order) VALUE('" . $id_sanpham . "','" . $code_order . "','" . $soluong . "')";
             mysqli_query($mysqli, $insert_order_details);
-            $insert_shipping = "UPDATE tbl_shipping SET code_orders = '".$code_order."' WHERE id_shipping = '".$id_thongtin."'";
+            $insert_shipping = "UPDATE tbl_shipping SET code_orders = '" . $code_order . "' WHERE id_shipping = '" . $id_thongtin . "'";
             mysqli_query($mysqli, $insert_shipping);
         }
     }
+    $update_basic_total_price = "UPDATE orders SET total_money = '" . $total_money . "' WHERE code_orders = '" . $code_order . "' ";
+    mysqli_query($mysqli, $update_basic_total_price);
     header("Location:../../index.php?manage=thankyou");
 } elseif ($cart_payment == 'vnpay') {
-    
+
     //thanh toán bằng vnpay
     $vnp_TxnRef = $code_order; //Mã đơn hàng. Trong thực tế Merchant cần insert đơn hàng vào DB và gửi mã này sang VNPAY
     $vnp_OrderInfo = 'Thanh toán đơn hàng đặt tại web';
     $vnp_OrderType = 'billpayment';
-    
+
 
     $vnp_Amount = $total_money;
     $vnp_Locale = 'vn';
@@ -121,6 +123,8 @@ if ($cart_payment == 'cash' || $cart_payment == 'transfer') {
                 mysqli_query($mysqli, $insert_order_details);
             }
         }
+        $update_total_price = "UPDATE orders SET total_money = '" . $total_money . "' WHERE code_orders = '" . $code_order . "' ";
+        mysqli_query($mysqli, $update_total_price);
         header('Location: ' . $vnp_Url);
         unset($_SESSION['cart']);
         die();
@@ -132,10 +136,6 @@ if ($cart_payment == 'cash' || $cart_payment == 'transfer') {
     echo 'Thanh toan bằng momo';
 }
 
-if($cart_query)
-{
+if ($cart_query) {
     unset($_SESSION['cart']);
 }
-
-
-

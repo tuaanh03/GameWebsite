@@ -1,4 +1,4 @@
-<p>Chi tiết</p>
+<p>Details</p>
 <div class="container">
   <!-- Responsive Arrow Progress Bar -->
   <div class="arrow-steps clearfix">
