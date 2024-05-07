@@ -3,36 +3,59 @@
         <p>List the order</p>
     </div>
     <div class="col-md-7">
-        <form action="" method="GET" id="orderForm">
-            <input type="hidden" name="action" value="manageorders">
-            <input type="hidden" name="query" value="list">
-            <div class="row">
-                <div class="col-md-4">
-                    <input type="date" name="date" value="<?= isset($_GET['date']) == true ? $_GET['date'] : '' ?>" class="form-control">
-                </div>
 
-                <div class="col-md-4">
-                    <input placeholder="address..." type="text" name="address" value="<?= isset($_GET['address']) == true ? $_GET['address'] : '' ?>" class="form-control">
-                </div>
-
-                <div class="col-md-4" style="width: 20%;">
-                    <select name="status" class="form-select">
-                        <option value="0" <?= isset($_GET['status']) == true ? ($_GET['status'] == '0' ? 'selected' : '') : '' ?>>Approve</option>
-                        <option value="1" <?= isset($_GET['status']) == true ? ($_GET['status'] == '1' ? 'selected' : '') : '' ?>>Pending</option>
-                    </select>
-                </div>
-
-                <div class="col-md-4" style="padding: 0; margin:20px 0px 20px 0px; float:right;">
-                    <button name="submit" type="submit" class="btn btn-primary">Filter</button>
-                    <a href="#" id="resetButton" class="btn btn-danger">Reset</a>
-                </div>
-            </div>
-        </form>
     </div>
 </div>
 
 
 <table class="table">
+    <form action="" method="GET" id="orderForm">
+        <input type="hidden" name="action" value="manageorders">
+        <input type="hidden" name="query" value="list">
+        <div class="row">
+            <div class="col-md-4">
+                <label for="" style="margin-left: 40px;">Date from</label>
+                <input type="date" name="datefrom" value="<?= isset($_GET['date']) == true ? $_GET['date'] : '' ?>" class="form-control" style="margin-left: 35px;">
+            </div>
+
+            <div class="col-md-4">
+                <label for="" style="margin-left: 40px;">Date to</label>
+                <input type="date" name="dateto" value="<?= isset($_GET['date']) == true ? $_GET['date'] : '' ?>" class="form-control" style="margin-left: 35px;">
+            </div>
+
+            <div class="form-group" style="margin-top: 80px;">
+                <label for="exampleInputPassword1" style="margin-left: 50px;">Province</label>
+                <select name="province" id="province" class="form-control" style="width: 32%; margin-left:50px;">
+                    <option value="" disabled selected>Select Province / City</option>
+
+                </select>
+            </div>
+
+            <div class="form-group" style="margin-top: 25px;">
+                <label for="exampleInputPassword1" style="margin-left: 50px;">District</label>
+                <select name="district" id="district" class="form-control" style="width: 32%; margin-left:50px;">
+                    <option value="" disabled selected>Select district</option>
+                </select>
+            </div>
+
+
+
+            <div class="col-md-4" style="width: 20%;">
+                <select name="status" class="form-select" style="margin-left: 35px;">
+                    <option value="" <?= isset($_GET['status']) == true ? ($_GET['status'] == '' ? 'selected' : '') : '' ?>>None</option>
+                    <option value="0" <?= isset($_GET['status']) == true ? ($_GET['status'] == '0' ? 'selected' : '') : '' ?>>Approve</option>
+                    <option value="1" <?= isset($_GET['status']) == true ? ($_GET['status'] == '1' ? 'selected' : '') : '' ?>>Pending</option>
+                    <option value="2" <?= isset($_GET['status']) == true ? ($_GET['status'] == '2' ? 'selected' : '') : '' ?>>Complete</option>
+                    <option value="-1" <?= isset($_GET['status']) == true ? ($_GET['status'] == '-1' ? 'selected' : '') : '' ?>>Cancelled</option>
+                </select>
+            </div>
+
+            <div class="col-md-4" style="padding: 0; margin:20px 0px 20px 0px; ">
+                <button name="submit" type="submit" class="btn btn-primary">Filter</button>
+                <a href="#" id="resetButton" class="btn btn-danger" onclick="myFunction()">Reset</a>
+            </div>
+        </div>
+    </form>
     <tbody>
         <tr>
             <th scope="row">ID</th>
@@ -51,18 +74,25 @@
 
         <?php
         $sql_lietke_dh = "SELECT * FROM orders,tbl_shipping WHERE orders.users_id = tbl_shipping.customer_id AND orders.cart_shipping = tbl_shipping.id_shipping";
-        if ((isset($_GET['date']) && $_GET['date'] != '')) {
-            $date = $_GET['date'];
-            $sql_lietke_dh .= " AND orders.order_date LIKE '%" . $date . "%'";
+        if ((isset($_GET['datefrom']) && $_GET['datefrom'] != '' && isset($_GET['datefrom']) && $_GET['datefrom'] != '')) {
+            $datefrom = $_GET['datefrom'];
+            $dateto = $_GET['dateto'];
+            $sql_lietke_dh .= " AND orders.order_date >= '" . $datefrom . "' AND orders.order_date <= '" . $dateto . "' ";
         }
         if (isset($_GET['status']) && $_GET['status'] != '') {
             $status = $_GET['status'];
-            $sql_lietke_dh .= "AND orders.status_order = " . $status;
+            $sql_lietke_dh .= " AND orders.status_order = " . $status;
         }
-        if (isset($_GET['address']) && $_GET['address'] != '') {
-            $address = $_GET['address'];
-            $sql_lietke_dh .= " AND tbl_shipping.address LIKE '%" . $address . "%'";
+        if (isset($_GET['province']) && $_GET['province'] != '') {
+            $province = $_GET['province'];
+            $sql_lietke_dh .= " AND tbl_shipping.province LIKE '%" . $province . "%'";
         }
+
+        if (isset($_GET['district']) && $_GET['district'] != '') {
+            $district = $_GET['district'];
+            $sql_lietke_dh .= " AND tbl_shipping.district LIKE '%" . $district . "%'";
+        }
+
 
         $sql_lietke_dh .= " ORDER BY orders.orders_id DESC";
 
@@ -83,16 +113,15 @@
                 <td><?php echo $row['address'] ?></td>
                 <td><?php echo $row['phone'] ?></td>
                 <td>
-                    <a href="modules/manageorder/xuly.php?cart_status=<?php echo $row['status_order'] ?>&coder=<?php echo $row['code_orders'] ?>" <?php if ($row['status_order'] == 1) {  ?> style="color: rgb(254,192,94);" <?php } elseif($row['status_order'] == 2) { ?>style="color: rgb(114,185,104);"<?php } elseif($row['status_order'] == -1) {?>style="color: rgb(217,83,79);"<?php } ?>>
+                    <a href="modules/manageorder/xuly.php?cart_status=<?php echo $row['status_order'] ?>&coder=<?php echo $row['code_orders'] ?>" <?php if ($row['status_order'] == 1) {  ?> style="color: rgb(254,192,94);" <?php } elseif ($row['status_order'] == 2) { ?>style="color: rgb(114,185,104);" <?php } elseif ($row['status_order'] == -1) { ?>style="color: rgb(217,83,79);" <?php } ?>>
                         <?php
                         if ($row['status_order'] == 1) {
                             echo 'Pending';
-                        } elseif($row['status_order'] == 0) {
+                        } elseif ($row['status_order'] == 0) {
                             echo 'Approve';
-                        }elseif($row['status_order'] == 2) {
+                        } elseif ($row['status_order'] == 2) {
                             echo 'Completed';
-                        }
-                        elseif($row['status_order'] == -1) {
+                        } elseif ($row['status_order'] == -1) {
                             echo 'Cancelled';
                         }
                         ?>
@@ -111,22 +140,154 @@
 </table>
 
 <script>
-    document.addEventListener("DOMContentLoaded", function() {
-        const form = document.getElementById("orderForm");
+    document.addEventListener('DOMContentLoaded', function() {
+        const citySelect = document.getElementById('province');
+        const districtSelect = document.getElementById('district');
+        const wardSelect = document.getElementById('ward');
+        const dateFromInput = document.querySelector('input[name="datefrom"]');
+        const dateToInput = document.querySelector('input[name="dateto"]');
 
-        document.getElementById("resetButton").addEventListener("click", function(event) {
-            event.preventDefault();
+        let selectedCity = '';
+        let selectedDistrict = '';
+        let selectedDateFrom = '';
+        let selectedDateTo = '';
+        // Định nghĩa danh sách các thành phố và các quận theo thành phố
+        const cities = {
+            "Ho Chi Minh City": ["District 1", "District 2", "District 3", "District 4", "District 5", "District 6", "District 7", "District 8", "District 9", "District 10", "District 11", "District 12", "Go Vap", "Binh Tan", "Can Gio", "Binh Chanh", "Binh Thanh"],
+            "Da Nang": ['Son Tra', 'Cam Le'],
+            "Ha Noi": ["Ba Dinh", "Hoan Kiem", "Long Bien", "Tay Ho", ]
+        };
 
-            const dateInput = form.querySelector('input[type="date"]');
-            dateInput.value = '';
+        // Định nghĩa danh sách các phường theo quận
+        // const wardsByDistrict = {
+        //     "District 1": ["Tan Dinh Ward", "Da Kao Ward", "Ben Nghe Ward", "Ben Thanh Ward", "Nguyen Thai Binh Ward"],
+        //     "District 2": ["Thao Dien Ward", "An Phu Ward", "Binh An Ward", "Binh Trung Dong Ward", "Binh Trung Tay Ward"],
+        //     "District 3": ["Ward 1", "Ward 2", "Ward 3", "Ward 4", "Ward 5"],
+        //     "District 4": ["Ward 1", "Ward 2", "Ward 3", "Ward 4", "Ward 5"],
+        //     "District 5": ["Ward 1", "Ward 2", "Ward 3", "Ward 4", "Ward 5"],
+        //     "District 6": ["Ward 1", "Ward 2", "Ward 3", "Ward 4", "Ward 5"],
+        //     "District 7": ["Ward 1", "Ward 2", "Ward 3", "Ward 4", "Ward 5"],
+        //     "District 8": ["Ward 1", "Ward 2", "Ward 3", "Ward 4", "Ward 5"],
+        //     "District 9": ["Ward 1", "Ward 2", "Ward 3", "Ward 4", "Ward 5"],
+        //     "District 10": ["Ward 1", "Ward 2", "Ward 3", "Ward 4", "Ward 5"],
+        //     // Thêm thông tin cho các quận còn lại
+        //     "District 11": ["Ward 1", "Ward 2", "Ward 3", "Ward 4", "Ward 5"],
+        //     "District 12": ["Ward 1", "Ward 2", "Ward 3", "Ward 4", "Ward 5"],
+        //     "Binh Tan": ["Phường Bình Trị Đông", "Phường Bình Trị Đông A", "Phường Bình Hưng Hòa", "Phường Bình Hưng Hoà A", "Phường Bình Hưng Hoà B"],
+        //     "Binh Thanh": ["Ward 1", "Ward 2", "Ward 3", "Ward 4", "Ward 5"],
+        //     "Go Vap": ["Ward 1", "Ward 2", "Ward 3", "Ward 4", "Ward 5"],
+        //     "Binh Chanh": ["Commune 1, Binh Chanh", "Commune 2, Binh Chanh", "Commune 3, Binh Chanh", "Commune 4, Binh Chanh", "Commune 5, Binh Chanh"],
+        //     "Can Gio": ["Commune 1, Can Gio", "Commune 2, Can Gio", "Commune 3, Can Gio", "Commune 4, Can Gio", "Commune 5, Can Gio"],
+        //     "Ba Dinh": ["Truc Bach Ward", "Vinh Phuc Ward", "Cong Vi Ward", "Lieu Giai Ward", "Nguyen Trung Truc Ward"],
+        //     "Hoan Kiem": ["Phuc Tan Ward", "Dong Xuan Ward", "Hang Gai Ward", "Hang Bac Ward", "Hang Bo Ward"],
+        //     "Tay Ho": ["Quang An Ward", "Xuan La Ward", "Yen Phu Ward", "Thuy Khue Ward", "Tay Ho Ward"],
+        //     "Long Bien": ["Thuong Thanh Ward", "Ngoc Thuy Ward", "Bo De Ward", "Sai Dong Ward", "Gia Thuy Ward"],
 
-            const statusSelect = form.querySelector('select[name="status"]');
-            statusSelect.value = '0';
+        //     "Son Tra": ["Phuoc My Ward", "Tho Quang Ward"],
+        //     "Cam Le": ["Hoa An Ward", "Hoa Xuan Ward"]
+        // };
 
-            const addressInput = form.querySelector('input[type="text"]');
-            addressInput.value = '';
-
-            form.submit();
+        // Tạo các option cho dropdown thành phố
+        Object.keys(cities).forEach(function(city) {
+            const optionElem = document.createElement('option');
+            optionElem.textContent = city;
+            optionElem.value = city;
+            citySelect.appendChild(optionElem);
         });
+
+        // GIữ các option mặc định cho dropdown quận/huyện và phường/xã
+        districtSelect.innerHTML = '<option value="">Select District</option>';
+        // wardSelect.innerHTML = '<option value="">Chọn phường/xã</option>';
+
+        // Xử lý sự kiện khi chọn thành phố
+        citySelect.addEventListener('change', function() {
+            selectedCity = this.value;
+            const districts = cities[selectedCity];
+            populateDropdown(districtSelect, districts);
+            clearDropdown(wardSelect);
+        });
+
+        // Xử lý sự kiện khi chọn quận
+        districtSelect.addEventListener('change', function() {
+            selectedDistrict = this.value;
+            if (selectedDistrict) {
+                const wards = wardsByDistrict[selectedDistrict];
+                populateDropdown(wardSelect, wards);
+            } else {
+                clearDropdown(wardSelect);
+            }
+        });
+
+        const form = document.getElementById("orderForm");
+        form.addEventListener("submit", function(event) {
+            selectedCity = citySelect.value;
+            selectedDistrict = districtSelect.value;
+            selectedDateFrom = dateFromInput.value;
+            selectedDateTo = dateToInput.value;
+            sessionStorage.setItem('selectedCity', selectedCity); // Lưu giá trị vào sessionStorage
+            sessionStorage.setItem('selectedDistrict', selectedDistrict); // Lưu giá trị vào sessionStorage
+            sessionStorage.setItem('selectedDateFrom', selectedDateFrom);
+            sessionStorage.setItem('selectedDateTo', selectedDateTo);
+        });
+
+        // Thiết lập giá trị cho dropdown "Province" sau khi form được gửi đi
+        const storedCity = sessionStorage.getItem('selectedCity');
+        if (storedCity) {
+            citySelect.value = storedCity;
+            selectedCity = storedCity;
+            const districts = cities[selectedCity];
+            populateDropdown(districtSelect, districts);
+        }
+
+        const storedDistrict = sessionStorage.getItem('selectedDistrict');
+        if (storedDistrict) {
+            districtSelect.value = storedDistrict;
+            selectedDistrict = storedDistrict;
+
+        }
+        const storedDateFrom = sessionStorage.getItem('selectedDateFrom');
+        if (storedDateFrom) {
+            dateFromInput.value = storedDateFrom;
+            selectedDateFrom = storedDateFrom;
+        }
+
+        const storedDateTo = sessionStorage.getItem('selectedDateTo');
+        if (storedDateTo) {
+            dateToInput.value = storedDateTo;
+            selectedDateTo = storedDateTo;
+        }
+
+
+
+        // Hàm để điền các tùy chọn vào dropdown
+        function populateDropdown(select, options) {
+            // Xóa tất cả các tùy chọn hiện có trừ option đầu tiên
+            clearDropdown(select);
+            // Thêm các tùy chọn mới từ mảng options
+            options.forEach(function(option) {
+                const optionElem = document.createElement('option');
+                optionElem.textContent = option;
+                optionElem.value = option;
+                select.appendChild(optionElem);
+            });
+        }
+
+        // Hàm để xóa tất cả các tùy chọn trong dropdown
+        function clearDropdown(select) {
+            // Lưu trữ các tùy chọn mặc định
+            const defaultOption = select.options[0];
+            select.innerHTML = '';
+            // Thêm lại các tùy chọn mặc định
+            select.appendChild(defaultOption);
+        }
+
     });
+</script>
+
+<script>
+    function myFunction() {
+        document.getElementById("orderForm").reset();
+        document.querySelector('input[type="date"]').value = '';
+        document.querySelector('select[name="status"]').value = '';
+    }
 </script>

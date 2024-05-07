@@ -83,21 +83,21 @@ if (isset($_POST['updateprofile'])) {
             <div class="form-group row">
                 <label for="name" class="col-4 col-form-label">Username</label>
                 <div class="col-8">
-                    <input value="<?php echo $name?>" readonly id="name" name="name" placeholder="Username" class="form-control here" type="text">
+                    <input value="<?php echo $name ?>" readonly id="name" name="name" placeholder="Username" class="form-control here" type="text">
                 </div>
             </div>
 
             <div class="form-group row">
-            <label for="name" class="col-4 col-form-label">Email</label>
+                <label for="name" class="col-4 col-form-label">Email</label>
                 <div class="col-8">
-                    <input value="<?php echo $email?>" readonly id="lastname" name="email" placeholder="Email" class="form-control here" type="text">
+                    <input value="<?php echo $email ?>" readonly id="lastname" name="email" placeholder="Email" class="form-control here" type="text">
                 </div>
             </div>
 
             <div class="form-group row">
                 <label for="name" class="col-4 col-form-label">Full Name</label>
                 <div class="col-8">
-                    <input value="<?php echo $fullname?>" id="lastname" name="fullname" placeholder="Full Name" class="form-control here" type="text">
+                    <input value="<?php echo $fullname ?>" id="lastname" name="fullname" placeholder="Full Name" class="form-control here" type="text">
                 </div>
             </div>
 
@@ -114,8 +114,9 @@ if (isset($_POST['updateprofile'])) {
                     <select id="province" name="province" class="form-control here">
                         <option value="" disabled selected>Select Province / City</option>
                         <!-- Added options for cities -->
-                        <option value="TP Hồ Chí Minh">TP Hồ Chí Minh</option>
-                        <option value="Hà Nội">Hà Nội</option>
+                        <option value="Ho Chi Minh City">Ho Chi Minh City</option>
+                        <option value="Ha Noi">Ha Noi</option>
+                        <option value="Da Nang">Da Nang</option>
                         <!-- Add other cities here if needed -->
                     </select>
                 </div>
@@ -164,8 +165,9 @@ if (isset($_POST['updateprofile'])) {
 
 <script>
     var cities = {
-        "TP Hồ Chí Minh": ["Quận 1", "Quận 2", "Quận 3", "Quận 4", "Quận 5", "Quận 6", "Quận 7", "Quận 8", "Quận 9", "Quận 10", "Quận 11", "Quận 12", "Gò Vấp", "Bình Tân", "Cần Giờ", "Bình Chánh"],
-        "Hà Nội": ["Ba Đình", "Hoàn Kiếm", "Long Biên", "Tây Hồ", ]
+        "Ho Chi Minh City": ["District 1", "District 2", "District 3", "District 4", "District 5", "District 6", "District 7", "District 8", "District 9", "District 10", "District 11", "District 12", "Go Vap", "Binh Tan", "Can Gio", "Binh Chanh", "Binh Thanh"],
+        "Da Nang": ['Son Tra', 'Cam Le'],
+        "Ha Noi": ["Ba Dinh", "Hoan Kiem", "Long Bien", "Tay Ho", ]
     };
 
     // Lắng nghe sự kiện khi select box của thành phố thay đổi
@@ -194,28 +196,31 @@ if (isset($_POST['updateprofile'])) {
 
     // Mảng chứa thông tin về các phường, xã của mỗi quận
     var wards = {
-        "Quận 1": ["Phường Tân Định", "Phường Đa Kao", "Phường Bến Nghé", "Phường Bến Thành", "Phường Nguyễn Thái Bình"],
-        "Quận 2": ["Phường Thảo Điền", "Phường An Phú", "Phường Bình An", "Phường Bình Trưng Đông", "Phường Bình Trưng Tây"],
-        "Quận 3": ["Phường 1", "Phường 2", "Phường 3", "Phường 4", "Phường 5"],
-        "Quận 4": ["Phường 1", "Phường 2", "Phường 3", "Phường 4", "Phường 5"],
-        "Quận 5": ["Phường 1", "Phường 2", "Phường 3", "Phường 4", "Phường 5"],
-        "Quận 6": ["Phường 1", "Phường 2", "Phường 3", "Phường 4", "Phường 5"],
-        "Quận 7": ["Phường 1", "Phường 2", "Phường 3", "Phường 4", "Phường 5"],
-        "Quận 8": ["Phường 1", "Phường 2", "Phường 3", "Phường 4", "Phường 5"],
-        "Quận 9": ["Phường 1", "Phường 2", "Phường 3", "Phường 4", "Phường 5"],
-        "Quận 10": ["Phường 1", "Phường 2", "Phường 3", "Phường 4", "Phường 5"],
+        "District 1": ["Tan Dinh Ward", "Da Kao Ward", "Ben Nghe Ward", "Ben Thanh Ward", "Nguyen Thai Binh Ward"],
+        "District 2": ["Thao Dien Ward", "An Phu Ward", "Binh An Ward", "Binh Trung Dong Ward", "Binh Trung Tay Ward"],
+        "District 3": ["Ward 1", "Ward 2", "Ward 3", "Ward 4", "Ward 5"],
+        "District 4": ["Ward 1", "Ward 2", "Ward 3", "Ward 4", "Ward 5"],
+        "District 5": ["Ward 1", "Ward 2", "Ward 3", "Ward 4", "Ward 5"],
+        "District 6": ["Ward 1", "Ward 2", "Ward 3", "Ward 4", "Ward 5"],
+        "District 7": ["Ward 1", "Ward 2", "Ward 3", "Ward 4", "Ward 5"],
+        "District 8": ["Ward 1", "Ward 2", "Ward 3", "Ward 4", "Ward 5"],
+        "District 9": ["Ward 1", "Ward 2", "Ward 3", "Ward 4", "Ward 5"],
+        "District 10": ["Ward 1", "Ward 2", "Ward 3", "Ward 4", "Ward 5"],
         // Thêm thông tin cho các quận còn lại
-        "Quận 11": ["Phường 1", "Phường 2", "Phường 3", "Phường 4", "Phường 5"],
-        "Quận 12": ["Phường 1", "Phường 2", "Phường 3", "Phường 4", "Phường 5"],
-        "Bình Tân": ["Phường Bình Trị Đông", "Phường Bình Trị Đông A", "Phường Bình Hưng Hòa", "Phường Bình Hưng Hoà A", "Phường Bình Hưng Hoà B"],
-        "Bình Thạnh": ["Phường 1", "Phường 2", "Phường 3", "Phường 4", "Phường 5"],
-        "Gò Vấp": ["Phường 1", "Phường 2", "Phường 3", "Phường 4", "Phường 5"],
-        "Bình Chánh": ["Xã Bình Chánh 1", "Xã Bình Chánh 2", "Xã Bình Chánh 3", "Xã Bình Chánh 4", "Xã Bình Chánh 5"],
-        "Cần Giờ": ["Xã Cần Giờ 1", "Xã Cần Giờ 2", "Xã Cần Giờ 3", "Xã Cần Giờ 4", "Xã Cần Giờ 5"],
-        "Ba Đình": ["Phường Trúc Bạch", "Phường Vĩnh Phúc", "Phường Cống Vị", "Phường Liễu Giai", "Phường Nguyễn Trung Trực"],
-        "Hoàn Kiếm": ["Phường Phúc Tân", "Phường Đồng Xuân", "Phường Hàng Gai", "Phường Hàng Bạc", "Phường Hàng Bồ"],
-        "Tây Hồ": ["Phường Quảng An", "Phường Xuân La", "Phường Yên Phụ", "Phường Thụy Khuê", "Phường Tây Hồ"],
-        "Long Biên": ["Phường Thượng Thanh", "Phường Ngọc Thụy", "Phường Bồ Đề", "Phường Sài Đồng", "Phường Gia Thụy"],
+        "District 11": ["Ward 1", "Ward 2", "Ward 3", "Ward 4", "Ward 5"],
+        "District 12": ["Ward 1", "Ward 2", "Ward 3", "Ward 4", "Ward 5"],
+        "Binh Tan": ["Binh Tri Dong Ward", "Binh Tri Dong A Ward", "Binh Hung Hoa Ward", "Binh Hung Hoa A Ward", "Binh Hung Hoa B Ward"],
+        "Binh Thanh": ["Ward 1", "Ward 2", "Ward 3", "Ward 4", "Ward 5"],
+        "Go Vap": ["Ward 1", "Ward 2", "Ward 3", "Ward 4", "Ward 5"],
+        "Binh Chanh": ["Commune 1, Binh Chanh", "Commune 2, Binh Chanh", "Commune 3, Binh Chanh", "Commune 4, Binh Chanh", "Commune 5, Binh Chanh"],
+        "Can Gio": ["Commune 1, Can Gio", "Commune 2, Can Gio", "Commune 3, Can Gio", "Commune 4, Can Gio", "Commune 5, Can Gio"],
+        "Ba Dinh": ["Truc Bach Ward", "Vinh Phuc Ward", "Cong Vi Ward", "Lieu Giai Ward", "Nguyen Trung Truc Ward"],
+        "Hoan Kiem": ["Phuc Tan Ward", "Dong Xuan Ward", "Hang Gai Ward", "Hang Bac Ward", "Hang Bo Ward"],
+        "Tay Ho": ["Quang An Ward", "Xuan La Ward", "Yen Phu Ward", "Thuy Khue Ward", "Tay Ho Ward"],
+        "Long Bien": ["Thuong Thanh Ward", "Ngoc Thuy Ward", "Bo De Ward", "Sai Dong Ward", "Gia Thuy Ward"],
+
+        "Son Tra": ["Phuoc My Ward", "Tho Quang Ward"],
+        "Cam Le": ["Hoa An Ward", "Hoa Xuan Ward"]
     };
 
     // Lắng nghe sự kiện khi select box của quận thay đổi
@@ -257,7 +262,7 @@ if (isset($_POST['updateprofile'])) {
     // Đặt giá trị của phường/xã
     document.getElementById("ward").value = "<?php echo $ward; ?>";
 
-    
+
 
     // Hàm trả về danh sách các phường, xã của một quận cụ thể
     function getWards(district) {

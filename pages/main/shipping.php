@@ -79,6 +79,17 @@
     // }
     // 
     ?>
+    <script>
+        function myFunction() {
+            <?php
+            if (!isset($_POST['themvanchuyen'])) {
+            ?>
+                alert('Please confirm your address first');
+            <?php
+            } 
+            ?>
+        }
+    </script>
     <div class="row">
 
         <p class="d-inline-flex gap-1">
@@ -107,11 +118,12 @@
         </p>
         <div class="collapse" id="collapseExample1">
             <div class="card card-body">
-            <h1>New Address</h1>
+                <h1>New Address</h1>
                 <div class="col-md-5">
                     <form action="" autocomplete="off" method="POST">
 
                         <input type="hidden" name="status" value="successfully">
+
 
                         <div class="form-group" style="margin-top: 25px;">
                             <label for="exampleInputEmail1">Họ và tên</label>
@@ -213,6 +225,7 @@
 
 
 
+
         <!-- -----------Giỏ hàng---------- -->
         <table class="cart">
             <thead>
@@ -264,7 +277,9 @@
             <?php } ?>
         </table> <!-- .cart -->
 
-        <a href="index.php?manage=payment" class="button" style="text-align: center;">Payment</a>
+        <a <?php if(isset($_POST['themvanchuyen'])){?> href="index.php?manage=payment" <?php } ?> class="button" style="text-align: center;" onclick="myFunction()">Payment</a>
+
+
 
     </div>
 </div>
