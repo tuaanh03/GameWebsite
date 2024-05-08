@@ -121,6 +121,8 @@ if ($cart_payment == 'cash' || $cart_payment == 'transfer') {
                 $soluong = $value['quantity'];
                 $insert_order_details = "INSERT INTO order_details(product_id,code_orders,quantity_order) VALUE('" . $id_sanpham . "','" . $code_order . "','" . $soluong . "')";
                 mysqli_query($mysqli, $insert_order_details);
+                $insert_shipping = "UPDATE tbl_shipping SET code_orders = '" . $code_order . "' WHERE id_shipping = '" . $id_thongtin . "'";
+                mysqli_query($mysqli, $insert_shipping);
             }
         }
         $update_total_price = "UPDATE orders SET total_money = '" . $total_money . "' WHERE code_orders = '" . $code_order . "' ";

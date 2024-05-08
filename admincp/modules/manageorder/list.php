@@ -77,7 +77,13 @@
         if ((isset($_GET['datefrom']) && $_GET['datefrom'] != '' && isset($_GET['datefrom']) && $_GET['datefrom'] != '')) {
             $datefrom = $_GET['datefrom'];
             $dateto = $_GET['dateto'];
-            $sql_lietke_dh .= " AND orders.order_date >= '" . $datefrom . "' AND orders.order_date <= '" . $dateto . "' ";
+            if ($_GET['datefrom'] === $_GET['dateto']) {
+                $sql_lietke_dh .= " AND orders.order_date LIKE '%" . $datefrom . "%'   ";
+
+            } else {
+                
+                $sql_lietke_dh .= " AND orders.order_date BETWEEN '" . $datefrom . "' AND '" . $dateto . "' OR orders.order_date LIKE '" . $datefrom . "' ";
+            }
         }
         if (isset($_GET['status']) && $_GET['status'] != '') {
             $status = $_GET['status'];
