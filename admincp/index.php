@@ -65,7 +65,7 @@ if (!isset($_SESSION['dangnhap'])) {
 
                 ykeys: ['date', 'order', 'sales', 'quantity'],
 
-                labels: ['Orders', 'Profit', 'Quantity']
+                labels: ['Orders', 'Quantity', 'Profit']
             });
 
             function thongke() {

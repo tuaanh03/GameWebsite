@@ -29,6 +29,7 @@ $sql_get_thongtin = mysqli_query($mysqli, "SELECT * FROM tbl_shipping WHERE cust
 $row_get_thongtin = mysqli_fetch_array($sql_get_thongtin);
 $id_thongtin = $row_get_thongtin['id_shipping'];
 
+$tongsoluong = 0;
 
 if ($cart_payment == 'cash' || $cart_payment == 'transfer') {
     //insert đơn hàng
@@ -38,6 +39,16 @@ if ($cart_payment == 'cash' || $cart_payment == 'transfer') {
         foreach ($_SESSION['cart'] as $key => $value) {
             $id_sanpham = $value['id'];
             $soluong = $value['quantity'];
+           
+            // thay đổi số lượng của sản phẩm khi khách hàng đã mua
+
+            $take_quantity = "SELECT * FROM product WHERE product_id = '".$id_sanpham."'";
+            $row_take_quantity = mysqli_fetch_assoc(mysqli_query($mysqli,$take_quantity));
+            $tongsoluong = $row_take_quantity['quantity'] - $soluong;
+            $update_quantity = "UPDATE product SET quantity = '".$tongsoluong."' WHERE product_id = '".$id_sanpham."'";
+            mysqli_query($mysqli,$update_quantity);
+            // thay đổi số lượng của sản phẩm khi khách hàng đã mua
+
             $insert_order_details = "INSERT INTO order_details(product_id,code_orders,quantity_order) VALUE('" . $id_sanpham . "','" . $code_order . "','" . $soluong . "')";
             mysqli_query($mysqli, $insert_order_details);
             $insert_shipping = "UPDATE tbl_shipping SET code_orders = '" . $code_order . "' WHERE id_shipping = '" . $id_thongtin . "'";
