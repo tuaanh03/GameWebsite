@@ -54,36 +54,7 @@ if (!isset($_SESSION['dangnhap'])) {
     <!-- JS MORRIS -->
     <script src="//cdnjs.cloudflare.com/ajax/libs/raphael/2.1.0/raphael-min.js"></script>
     <script src="//cdnjs.cloudflare.com/ajax/libs/morris.js/0.5.1/morris.min.js"></script>
-    <script>
-        $(document).ready(function() {
-            thongke();
-            var char = new Morris.Area({
-
-                element: 'myfirstchart',
-
-                xkey: 'date',
-
-                ykeys: ['date', 'order', 'sales', 'quantity'],
-
-                labels: ['Orders', 'Quantity', 'Profit']
-            });
-
-            function thongke() {
-                var text = '365 ngày qua';
-                $('#text-date').text(text);
-                $.ajax({
-                    url: "modules/thongke.php",
-                    method: "POST",
-                    dataType: "JSON",
-
-                    success: function(data) {
-                        char.setData(data);
-                        $('#text-date').text(text);
-                    }
-                })
-            }
-        });
-    </script>
+    
 
     <script>
         function imagePreview(fileInput) {

@@ -33,20 +33,21 @@ $tongsoluong = 0;
 
 if ($cart_payment == 'cash' || $cart_payment == 'transfer') {
     //insert đơn hàng
+    $_SESSION['save_code'] = $code_order;
     $insert_cart = "INSERT INTO orders(users_id,code_orders,order_date,status_order,cart_payment,cart_shipping) VALUE('" . $id_khachhang . "','" . $code_order . "','" . $now . "',1,'" . $cart_payment . "', '" . $id_thongtin . "')";
     $cart_query = mysqli_query($mysqli, $insert_cart);
     if ($cart_query) {
         foreach ($_SESSION['cart'] as $key => $value) {
             $id_sanpham = $value['id'];
             $soluong = $value['quantity'];
-           
+
             // thay đổi số lượng của sản phẩm khi khách hàng đã mua
 
-            $take_quantity = "SELECT * FROM product WHERE product_id = '".$id_sanpham."'";
-            $row_take_quantity = mysqli_fetch_assoc(mysqli_query($mysqli,$take_quantity));
+            $take_quantity = "SELECT * FROM product WHERE product_id = '" . $id_sanpham . "'";
+            $row_take_quantity = mysqli_fetch_assoc(mysqli_query($mysqli, $take_quantity));
             $tongsoluong = $row_take_quantity['quantity'] - $soluong;
-            $update_quantity = "UPDATE product SET quantity = '".$tongsoluong."' WHERE product_id = '".$id_sanpham."'";
-            mysqli_query($mysqli,$update_quantity);
+            $update_quantity = "UPDATE product SET quantity = '" . $tongsoluong . "' WHERE product_id = '" . $id_sanpham . "'";
+            mysqli_query($mysqli, $update_quantity);
             // thay đổi số lượng của sản phẩm khi khách hàng đã mua
 
             $insert_order_details = "INSERT INTO order_details(product_id,code_orders,quantity_order) VALUE('" . $id_sanpham . "','" . $code_order . "','" . $soluong . "')";
@@ -59,7 +60,7 @@ if ($cart_payment == 'cash' || $cart_payment == 'transfer') {
     mysqli_query($mysqli, $update_basic_total_price);
     header("Location:../../index.php?manage=thankyou");
 } elseif ($cart_payment == 'vnpay') {
-
+    $_SESSION['save_code'] = $code_order;
     //thanh toán bằng vnpay
     $vnp_TxnRef = $code_order; //Mã đơn hàng. Trong thực tế Merchant cần insert đơn hàng vào DB và gửi mã này sang VNPAY
     $vnp_OrderInfo = 'Thanh toán đơn hàng đặt tại web';
@@ -130,6 +131,14 @@ if ($cart_payment == 'cash' || $cart_payment == 'transfer') {
             foreach ($_SESSION['cart'] as $key => $value) {
                 $id_sanpham = $value['id'];
                 $soluong = $value['quantity'];
+                // thay đổi số lượng của sản phẩm khi khách hàng đã mua
+
+                $take_quantity = "SELECT * FROM product WHERE product_id = '" . $id_sanpham . "'";
+                $row_take_quantity = mysqli_fetch_assoc(mysqli_query($mysqli, $take_quantity));
+                $tongsoluong = $row_take_quantity['quantity'] - $soluong;
+                $update_quantity = "UPDATE product SET quantity = '" . $tongsoluong . "' WHERE product_id = '" . $id_sanpham . "'";
+                mysqli_query($mysqli, $update_quantity);
+                // thay đổi số lượng của sản phẩm khi khách hàng đã mua
                 $insert_order_details = "INSERT INTO order_details(product_id,code_orders,quantity_order) VALUE('" . $id_sanpham . "','" . $code_order . "','" . $soluong . "')";
                 mysqli_query($mysqli, $insert_order_details);
                 $insert_shipping = "UPDATE tbl_shipping SET code_orders = '" . $code_order . "' WHERE id_shipping = '" . $id_thongtin . "'";
