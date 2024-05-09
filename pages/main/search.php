@@ -21,7 +21,7 @@ if (isset($_GET['manage']) && $_GET['manage'] == 'search') {
         $tukhoa = $_GET['tukhoa'];
         $danhmuc = $_GET['danhmuc']; // Lấy danh mục từ form nếu được chọn
         $theloai = $_GET['theloai']; // Lấy thể loại từ form nếu được chọn
-        $sql_pro = "SELECT * FROM product, category,genres WHERE product.category_id = category.category_id AND product.genre_id = genres.genre_id AND product.statuspr = 1 ";
+        $sql_pro = "SELECT * FROM product, category,genres WHERE product.category_id = category.category_id AND product.genre_id = genres.genre_id AND product.statuspr = 1 AND product.quantity != 0 ";
 
         // Thêm điều kiện tìm kiếm từ khóa nếu có
         if (!empty($tukhoa)) {

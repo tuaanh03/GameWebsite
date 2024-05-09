@@ -5,6 +5,9 @@ include('../../admincp/config/config.php');
 //themsoluongsanpham
 if (isset($_GET['plus'])) {
     $id = $_GET['plus'];
+    $sql_limited = "SELECT * FROM product WHERE product_id = '" . $id . "' LIMIT 1 ";
+    $query_limited = mysqli_query($mysqli, $sql_limited);
+    $row_limited = mysqli_fetch_array($query_limited);
     foreach ($_SESSION['cart'] as $cart_item) {
         if ($cart_item['id'] != $id) {
             $product[] = array(
@@ -14,7 +17,8 @@ if (isset($_GET['plus'])) {
         }
         else{
             $tangsoluong = $cart_item['quantity'] + 1;
-            if($cart_item['quantity']<10)
+           
+            if($cart_item['quantity'] < 10 && $cart_item['quantity'] < $row_limited['quantity'] )
             {
                 $product[] = array(
                     'name_product' => $cart_item['name_product'], 'id' => $cart_item['id'], 'quantity' =>$tangsoluong, 'price' => $cart_item['price'], 'thumbnail' => $cart_item['thumbnail'], 'idproduct' => $cart_item['idproduct']
@@ -27,6 +31,15 @@ if (isset($_GET['plus'])) {
                 );
             }
             $_SESSION['cart'] = $product;
+            // echo $cart_item['quantity'];
+            // echo $row_limited['quantity'];
+            if ($cart_item['quantity'] > $row_limited['quantity']) {
+                ?>
+                <script>
+                    alert('Chỉ còn <?php echo $row_limited['quantity'] ?> sản phẩm trong kho');
+                </script>
+                <?php
+            }
         }
     }
     header('Location:../../index.php?manage=carts');
@@ -86,7 +99,7 @@ if (isset($_GET['deleteall']) && $_GET['deleteall'] == 1) {
 if (isset($_POST['themgiohang'])) {
     // session_destroy();
     $id = $_GET['idsanpham'];
-    $soluong = 1;
+    $soluong = $_POST['quantitycart'];
     $sql = "SELECT * FROM product WHERE product_id = '" . $id . "' LIMIT 1 ";
     $query = mysqli_query($mysqli, $sql);
     $row = mysqli_fetch_array($query);
@@ -98,9 +111,19 @@ if (isset($_POST['themgiohang'])) {
             $found = false;
             foreach ($_SESSION['cart'] as $cart_item) {
                 if ($cart_item['id'] == $id) {
-                    $product[] = array(
-                        'name_product' => $cart_item['name_product'], 'id' => $cart_item['id'], 'quantity' => $cart_item['quantity'] + 1, 'price' => $cart_item['price'], 'thumbnail' => $cart_item['thumbnail'], 'idproduct' => $cart_item['idproduct']
-                    );
+                    if($cart_item['quantity'] < 10 && $cart_item['quantity'] < $row_limited['quantity'] )
+                    {
+                        $product[] = array(
+                            'name_product' => $cart_item['name_product'], 'id' => $cart_item['id'], 'quantity' => $cart_item['quantity'] + $soluong, 'price' => $cart_item['price'], 'thumbnail' => $cart_item['thumbnail'], 'idproduct' => $cart_item['idproduct']
+                        );
+                    }
+                    else
+                    {
+                        $product[] = array(
+                            'name_product' => $cart_item['name_product'], 'id' => $cart_item['id'], 'quantity' => $cart_item['quantity'], 'price' => $cart_item['price'], 'thumbnail' => $cart_item['thumbnail'], 'idproduct' => $cart_item['idproduct']
+                        );
+                    }
+                    
                     $found = true;
                 } else {
                     $product[] = array(
@@ -119,3 +142,4 @@ if (isset($_POST['themgiohang'])) {
     }
     header('Location:../../index.php?manage=carts');
 }
+

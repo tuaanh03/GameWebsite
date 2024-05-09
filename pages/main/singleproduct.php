@@ -3,7 +3,15 @@ $sql_chitiet = "SELECT * FROM product,genres WHERE product.genre_id = genres.gen
 $query_chitiet = mysqli_query($mysqli, $sql_chitiet);
 while ($row_chitiet = mysqli_fetch_array($query_chitiet)) {
 ?>
-
+    <!-- Add CSS within style tags -->
+    <style>
+        /* Remove default spin buttons for input type number */
+        input[type=number]::-webkit-inner-spin-button,
+        input[type=number]::-webkit-outer-spin-button {
+            -webkit-appearance: none;
+            margin: 0;
+        }
+    </style>
     <div class="entry-content">
         <div class="row">
             <div class="col-sm-6 col-md-4">
@@ -59,6 +67,9 @@ while ($row_chitiet = mysqli_fetch_array($query_chitiet)) {
                     <div class="addtocart-bar">
                         <form action="#">
                             <input name="themgiohang" type="submit" value="Add to cart">
+                            <label for="#" style="margin-left:50px">Quantity</label>
+                            <input name="quantitycart" id="yourInputId" type="number" min="0" inputmode="numeric" onchange="validateQuantity(this, <?php echo $row_chitiet['quantity']; ?>)" value="1">
+                            <p style="float: right; margin-top:12px">Quantity is only <?php echo $row_chitiet['quantity'] ?> left</p>
                         </form>
 
                         <!-- <div class="social-links square">
@@ -85,25 +96,25 @@ while ($row_chitiet = mysqli_fetch_array($query_chitiet)) {
         ?>
 
         <div class="product-list">
-            <?php 
+            <?php
             if ($stmt_similar = mysqli_prepare($mysqli, $sql_similar)) {
                 mysqli_stmt_bind_param($stmt_similar, "ii", $row_chitiet['genre_id'], $_GET['id']);
                 mysqli_stmt_execute($stmt_similar);
                 $result_similar = mysqli_stmt_get_result($stmt_similar);
-    
+
                 while ($row_similar = mysqli_fetch_array($result_similar)) { ?>
-                <div class="product">
-                    <div class="inner-product">
-                        <div class="figure-image">
-                            <img src="admincp/modules/manageproduct/uploads/<?php echo $row_similar['thumbnail'] ?>" alt=" Game 1">
+                    <div class="product">
+                        <div class="inner-product">
+                            <div class="figure-image">
+                                <img src="admincp/modules/manageproduct/uploads/<?php echo $row_similar['thumbnail'] ?>" alt=" Game 1">
+                            </div>
+                            <h3 class="product-title"><a href="#"><?php echo $row_similar['name_product'] ?></a></h3>
+                            <small class="price"><?php echo number_format($row_similar['price']) . '₫' ?></small>
+                            <p><?php echo $row_similar['descriptions'] ?></p>
+                            <a href="#" class="button">Add to cart</a>
+                            <a href="#" class="button muted">Read Details</a>
                         </div>
-                        <h3 class="product-title"><a href="#"><?php echo $row_similar['name_product'] ?></a></h3>
-                        <small class="price"><?php echo number_format($row_similar['price']) . '₫' ?></small>
-                        <p><?php echo $row_similar['descriptions'] ?></p>
-                        <a href="#" class="button">Add to cart</a>
-                        <a href="#" class="button muted">Read Details</a>
-                    </div>
-                </div> <!-- .product -->
+                    </div> <!-- .product -->
 
             <?php }
             } ?>
@@ -113,3 +124,17 @@ while ($row_chitiet = mysqli_fetch_array($query_chitiet)) {
     </section>
 
 <?php } ?>
+
+
+
+
+<script>
+    function validateQuantity(input, maxQuantity) {
+        var value = parseInt(input.value);
+        if (isNaN(value) || value < 0) {
+            input.value = 1;
+        } else if (value > maxQuantity) {
+            input.value = maxQuantity;
+        }
+    }
+</script>

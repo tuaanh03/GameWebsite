@@ -12,7 +12,7 @@ if ($page == '' || $page == 1) {
 }
 
 
-$sql_pro = "SELECT * FROM product WHERE product.category_id = '$_GET[id]' AND product.statuspr = 1 ORDER BY product.product_id DESC LIMIT $begin,8";
+$sql_pro = "SELECT * FROM product WHERE product.category_id = '$_GET[id]' AND product.statuspr = 1 AND product.quantity != 0 ORDER BY product.product_id DESC LIMIT $begin,8";
 $query_pro = mysqli_query($mysqli, $sql_pro);
 // danhmuc
 $sql_cate = "SELECT * FROM category WHERE category_id = '$_GET[id]' LIMIT 1";
