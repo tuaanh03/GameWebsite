@@ -3,7 +3,7 @@ $sql_lietke_danhmucsp = "SELECT * FROM category ORDER BY category_ordinalnumber 
 $query_lietke_danhmucsp = mysqli_query($mysqli, $sql_lietke_danhmucsp);
 ?>
 
-<p>List the category</p>
+<p>Manage categories</p>
 <table class="table">
     <tbody>
         <tr>

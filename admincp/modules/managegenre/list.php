@@ -3,7 +3,7 @@ $sql_lietke_theloai = "SELECT * FROM genres ORDER BY genre_ordinalnumber DESC";
 $query_lietke_theloai = mysqli_query($mysqli, $sql_lietke_theloai);
 ?>
 
-<p>List the genres</p>
+<p>Manage genres</p>
 <table class="table">
     <tbody>
         <tr>

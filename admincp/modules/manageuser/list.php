@@ -1,4 +1,4 @@
-<p>List user</p>
+<p>Manage users</p>
 <?php
 $sql_lietke_user = "SELECT * FROM tbl_customer ORDER BY customer_id DESC";
 $query_lietke_user = mysqli_query($mysqli, $sql_lietke_user);

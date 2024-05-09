@@ -87,7 +87,7 @@
                                         $sql_lietke .= " AND ord.order_date LIKE '%" . $datefromlietke . "%'   ";
                                     } else {
 
-                                        $sql_lietke .= " AND ord.order_date BETWEEN '" . $datefromlietke . "' AND '" . $datetolietke . "' OR ord.order_date LIKE '" . $datefromlietke . "' ";
+                                        $sql_lietke .= " AND ord.order_date BETWEEN '" . $datefromlietke . "' AND '" . $datetolietke . "'";
                                     }
                                 }
                                 $sql_lietke .= " ORDER BY ord.total_money DESC";

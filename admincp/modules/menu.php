@@ -28,13 +28,13 @@
                 <a href="index.php?action=manageusers&query=list"><i class="fa fa-qrcode "></i>Manage users</a>
             </li>
 
-            <li>
+            <!-- <li>
                 <a href="index.php?action=managelistposts&query=add"><i class="fa fa-edit "></i>Manage list of posts </a>
             </li>
 
             <li>
                 <a href="index.php?action=manageposts&query=add"><i class="fa fa-qrcode "></i>Manage posts</a>
-            </li>
+            </li> -->
 
 
 

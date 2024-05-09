@@ -1,6 +1,6 @@
 <div class="row">
     <div class="col-md-5">
-        <p>List the order</p>
+        <p>Manage orders</p>
     </div>
     <div class="col-md-7">
 
@@ -82,7 +82,7 @@
 
             } else {
                 
-                $sql_lietke_dh .= " AND orders.order_date BETWEEN '" . $datefrom . "' AND '" . $dateto . "' OR orders.order_date LIKE '" . $datefrom . "' ";
+                $sql_lietke_dh .= " AND orders.order_date BETWEEN '" . $datefrom . "' AND '" . $dateto . "'";
             }
         }
         if (isset($_GET['status']) && $_GET['status'] != '') {

@@ -2,6 +2,7 @@
 
 if (isset($_GET['logout']) && $_GET['logout'] == 1) {
     unset($_SESSION['dangky']);
+    unset($_SESSION['cart']);
 }
 ?>
 

@@ -4,7 +4,7 @@ $query_lietke_sp = mysqli_query($mysqli, $sql_lietke_sp);
 // liet ke the loai
 ?>
 
-<p>List the product</p>
+<p>Manage products</p>
 <table class="table">
     <tbody>
         <tr>
