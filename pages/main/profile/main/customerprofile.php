@@ -150,12 +150,12 @@ if (isset($_POST['updateprofile'])) {
 
             <div class="form-group row">
                 <div class="offset-4 col-8">
-                    <button name="updateprofile" type="submit" class="btn btn-primary">Update My Profile</button>
+                    <button name="updateprofile" type="submit" class="btn btn-primary" onclick="return validateForm();">Update My Profile</button>
                 </div>
             </div>
             <?php
             if (isset($_GET['status']) && $_GET['status'] == 'successfully') {
-                echo '<p style="color:green;">Successfully to add product.</p>';
+                echo '<p style="color:green;">Successfully to updata product.</p>';
             }
             ?>
         </form>
@@ -267,5 +267,22 @@ if (isset($_POST['updateprofile'])) {
     // Hàm trả về danh sách các phường, xã của một quận cụ thể
     function getWards(district) {
         return wards[district] || []; // Trả về mảng các phường, xã của quận hoặc một mảng trống nếu không tìm thấy
+    }
+</script>
+
+
+<script>
+    function validateForm() {
+        // Regular expression for phone number
+        var phoneRegex = /^\d{10,11}$/; // Change the regex according to your requirements  
+        var phone = document.querySelector("input[name='phonenumber']").value;
+        
+
+        // Check if any field is empty or phone number is invalid
+        if (!phoneRegex.test(phone)) {
+            // Show error message
+            alert("Vui lòng kiểm tra lại thông tin.");
+            return false; // Prevent form submission
+        }
     }
 </script>

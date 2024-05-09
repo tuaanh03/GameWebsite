@@ -50,6 +50,6 @@ if (isset($_POST['dangnhap'])) {
 
     <button style="margin-top: 25px;" name="dangnhap" type="submit" class="btn btn-primary">Login</button>
     <div style="margin-top:25px; ">
-        <a href=""> Have you already had the account ?</a>
+        <a href="index.php?manage=register"> Doesn't have an account ?</a>
     </div>
 </form>

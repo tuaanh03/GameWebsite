@@ -86,7 +86,7 @@
             ?>
                 alert('Please confirm your address first');
             <?php
-            } 
+            }
             ?>
         }
     </script>
@@ -99,21 +99,21 @@
                     Use default address
 
                 </a>
-            <?php }  ?>
-            <?php
-            if (isset($_POST['status'])) {
-                if ($_POST['status'] == 'successfully') {
-            ?>
-
-                <?php
-                }
-            } elseif (!isset($_POST['status'])) {
-                ?>
                 <a class="btn btn-primary" data-bs-toggle="collapse" href="#collapseExample1" role="button" aria-expanded="false" aria-controls="collapseExample">
 
                     Create new address
                 </a>
-            <?php } ?>
+            <?php } else {
+
+            ?>
+                <a class="btn btn-primary" data-bs-toggle="collapse" href="#collapseExample1" role="button" aria-expanded="false" aria-controls="collapseExample">
+
+                    Create new address
+                </a>
+            <?php
+
+            }  ?>
+
 
         </p>
         <div class="collapse" id="collapseExample1">
@@ -126,7 +126,7 @@
 
 
                         <div class="form-group" style="margin-top: 25px;">
-                            <label for="exampleInputEmail1">Họ và tên</label>
+                            <label for="exampleInputEmail1">Full name</label>
                             <input type="text" name="name" class="form-control" placeholder="...">
                             <!-- <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small> -->
                         </div>
@@ -165,7 +165,7 @@
 
 
 
-                        <button style="margin-top: 25px;" name="themvanchuyen" type="submit" class="btn btn-primary">Confirm</button>
+                        <button style="margin-top: 25px;" name="themvanchuyen" type="submit" class="btn btn-primary" onclick="return validateForm();">Confirm</button>
 
                     </form>
                 </div>
@@ -180,7 +180,7 @@
                         <input type="hidden" name="status" value="successfully">
 
                         <div class="form-group" style="margin-top: 25px;">
-                            <label for="exampleInputEmail1">Họ và tên</label>
+                            <label for="exampleInputEmail1">Full name</label>
                             <input value="<?php echo $name ?>" type="text" name="name" class="form-control" placeholder="...">
                             <!-- <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small> -->
                         </div>
@@ -191,19 +191,19 @@
                         </div>
 
                         <div class="form-group" style="margin-top: 25px;">
-                            <label for="exampleInputEmail1">Họ và tên</label>
+                            <label for="exampleInputEmail1">Province</label>
                             <input value="<?php echo $province ?>" type="text" name="province" class="form-control" placeholder="...">
                             <!-- <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small> -->
                         </div>
 
                         <div class="form-group" style="margin-top: 25px;">
-                            <label for="exampleInputEmail1">Họ và tên</label>
+                            <label for="exampleInputEmail1">District</label>
                             <input value="<?php echo $district ?>" type="text" name="district" class="form-control" placeholder="...">
                             <!-- <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small> -->
                         </div>
 
                         <div class="form-group" style="margin-top: 25px;">
-                            <label for="exampleInputEmail1">Họ và tên</label>
+                            <label for="exampleInputEmail1">Ward</label>
                             <input value="<?php echo $ward ?>" type="text" name="ward" class="form-control" placeholder="...">
                             <!-- <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small> -->
                         </div>
@@ -277,7 +277,7 @@
             <?php } ?>
         </table> <!-- .cart -->
 
-        <a <?php if(isset($_POST['themvanchuyen'])){?> href="index.php?manage=payment" <?php } ?> class="button" style="text-align: center;" onclick="myFunction()">Payment</a>
+        <a <?php if (isset($_POST['themvanchuyen'])) { ?> href="index.php?manage=payment" <?php } ?> class="button" style="text-align: center;" onclick="myFunction()">Payment</a>
 
 
 
@@ -386,4 +386,28 @@
             select.appendChild(defaultOption);
         }
     });
+</script>
+
+
+
+
+<script>
+    function validateForm() {
+        // Regular expression for phone number
+        var phoneRegex = /^\d{10,11}$/; // Change the regex according to your requirements
+
+        var name = document.querySelector("input[name='name']").value;
+        var phone = document.querySelector("input[name='phone']").value;
+        var province = document.querySelector("select[name='province']").value;
+        var district = document.querySelector("select[name='district']").value;
+        var ward = document.querySelector("select[name='ward']").value;
+        var streetAddress = document.querySelector("input[name='streetaddress']").value;
+
+        // Check if any field is empty or phone number is invalid
+        if (!name || !phone || !province || !district || !ward || !streetAddress || !phoneRegex.test(phone)) {
+            // Show error message
+            alert("Vui lòng nhập đầy đủ thông tin và kiểm tra lại số điện thoại.");
+            return false; // Prevent form submission
+        }
+    }
 </script>

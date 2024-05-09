@@ -37,8 +37,8 @@ if (isset($_POST['dangky'])) {
             if (mysqli_num_rows($query_check_username) > 0) {
                 echo '<p style="color:red">Username has already been taken!</p>';
             } else {
-                if (!preg_match("/^\d{10,11}$/", $dienthoai)) {
-                    echo '<p style="color:red">Please enter a valid phone number!</p>';
+                if (!preg_match("/^\d{10,11}$/", $dienthoai) || !preg_match("/^[a-zA-Z0-9._%+-]+@gmail\.com$/", $email)) {
+                    echo '<p style="color:red">Please enter a valid phone number or email address!</p>';
                 } else {
                     if ($matkhau === $xacnhanmatkhau) {
                         // Thực hiện thêm thông tin vào database
