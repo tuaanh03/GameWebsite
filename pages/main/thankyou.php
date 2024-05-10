@@ -35,6 +35,7 @@ $save_code = $_SESSION['save_code'];
 $sql_shipping_address = "SELECT * FROM tbl_shipping WHERE code_orders = '".$save_code."'";
 $query_shipping_address = mysqli_query($mysqli, $sql_shipping_address);
 $row_shipping_address = mysqli_fetch_assoc($query_shipping_address);
+$customer_name = $row_shipping_address['name'];
 $shipping_province = $row_shipping_address['province'];
 $shipping_district = $row_shipping_address['district'];
 $shipping_ward = $row_shipping_address['ward'];
@@ -48,6 +49,7 @@ $total_money = 0;
 ?>
 <h2>Information of order</h2>
 <h3>Id order: <?php echo $save_code ?> </h3>
+<h3>Customer Name: <?php echo $customer_name ?> </h3>
 <h3>Shipping Address:  <span style="font-weight: bold;"><?php echo $shipping_address; ?>, <?php echo $shipping_ward; ?>, <?php echo $shipping_district; ?>, <?php echo $shipping_province; ?></span></h3>
 <table class="table">
     <tbody>

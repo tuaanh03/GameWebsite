@@ -91,12 +91,12 @@
         }
         if (isset($_GET['province']) && $_GET['province'] != '') {
             $province = $_GET['province'];
-            $sql_lietke_dh .= " AND tbl_shipping.province LIKE '%" . $province . "%'";
+            $sql_lietke_dh .= " AND tbl_shipping.province = '".$province."'";
         }
 
         if (isset($_GET['district']) && $_GET['district'] != '') {
             $district = $_GET['district'];
-            $sql_lietke_dh .= " AND tbl_shipping.district LIKE '%" . $district . "%'";
+            $sql_lietke_dh .= " AND tbl_shipping.district = '".$district."'";
         }
 
 

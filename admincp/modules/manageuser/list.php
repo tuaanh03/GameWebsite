@@ -49,7 +49,7 @@ $query_lietke_user = mysqli_query($mysqli, $sql_lietke_user);
 
                 </td>
                 <td>
-                    <a href="modules/manageuser/xuly.php?user_status=0&id=<?php echo $row['customer_id'] ?>">Enable</a> | <a href="modules/manageuser/xuly.php?user_status=1&id=<?php echo $row['customer_id'] ?>">Block</a>
+                    <a href="?action=manageusers&query=modified&iduser=<?php echo $row['customer_id'] ?>">Modified</a> | <a href="modules/manageuser/xuly.php?user_status=0&id=<?php echo $row['customer_id'] ?>">Enable</a> | <a href="modules/manageuser/xuly.php?user_status=1&id=<?php echo $row['customer_id'] ?>">Block</a>
                 </td>
             </tr>
         <?php

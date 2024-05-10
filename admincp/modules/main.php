@@ -62,7 +62,12 @@
             }
             elseif($tam == 'manageusers'  && $query == 'list')
             {
+                include("manageuser/add.php");
                 include("manageuser/list.php");
+            }
+            elseif($tam == 'manageusers'  && $query == 'modified')
+            {
+                include("manageuser/modified.php");
             }
 			else
 			{
