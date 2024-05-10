@@ -52,7 +52,8 @@ $total_money = 0;
 <table class="table">
     <tbody>
         <tr>
-            <th scope="row">ID</th>       
+            <th scope="row">ID</th>  
+            <th scope="row">Thumnail</th>     
             <th scope="row">Product name</th>
             <th scope="row">Quantity</th>
             <th scope="row">Price</th>
@@ -69,7 +70,7 @@ $total_money = 0;
 
             <tr>
                 <td><?php echo $i ?></td>
-                
+                <td><img style="width: 100px;" src="admincp/modules/manageproduct/uploads/<?php echo $row['thumbnail'] ?>" alt=""></td>
                 <td><?php echo $row['name_product'] ?></td>
                 <td><?php echo $row['quantity_order'] ?></td>
                 <td><?php echo number_format($row['price']) . 'đ'; $total_money += $thanhtien;  ?></td>                

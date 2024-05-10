@@ -71,9 +71,9 @@
                                 <td class="product-price"><?php echo number_format($cart_item['price']) . '₫' ?></td>
                                 <td class="product-qty">
 
-                                    <a class="btn btn-light" href="pages/main/addtocart.php?plus=<?php echo $cart_item['id'] ?>"><i class="fa fa-plus"></i></a>
+                                    
                                     <?php echo $cart_item['quantity'] ?>
-                                    <a class="btn btn-light" href="pages/main/addtocart.php?minus=<?php echo $cart_item['id'] ?>"><i class="fa fa-minus"></i></a>
+                                   
 
                                 </td>
                                 <td class="product-total"><?php echo number_format($thanhtien) . 'đ'; ?></td>

@@ -8,7 +8,7 @@ $query_danhmuc = mysqli_query($mysqli, $sql_danhmuc);
     <li class="menu-item home "><a href="index.php"><i class="icon-home"></i></a></li>
 
     <li class="menu-item drop-down">
-        <a class="nav-link" href="" id="navbarDropdown" role="button" aria-expanded="false">
+        <a class="nav-link" href="index.php?manage=product&id=" id="navbarDropdown" role="button" aria-expanded="false">
             Games
         </a>
 

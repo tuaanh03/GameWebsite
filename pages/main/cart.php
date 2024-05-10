@@ -21,7 +21,7 @@ if(isset($_SESSION['dangky']))
 <table class="cart">
     <thead>
         <tr>
-            <th class="product-name">Product Name</th>
+            <th class="product-name">Product</th>
             <th class="product-price">Price</th>
             <th class="product-qty">Quantity</th>
             <th class="product-total">Total</th>
@@ -31,7 +31,10 @@ if(isset($_SESSION['dangky']))
     <?php
     if (isset($_SESSION['cart'])) {
         $thanhtien = 0;
-
+        if(isset($_GET['quantity']))
+        {
+            $limitquantity = $_GET['quantity'];
+        }
         foreach ($_SESSION['cart'] as $cart_item) {
             $thanhtien = $cart_item['quantity'] * $cart_item['price'];
             $total_money += $thanhtien;
@@ -49,9 +52,10 @@ if(isset($_SESSION['dangky']))
                     <td class="product-price"><?php echo number_format($cart_item['price']) . '₫' ?></td>
                     <td class="product-qty">
 
-                        <a class="btn btn-light" href="pages/main/addtocart.php?plus=<?php echo $cart_item['id'] ?>"><i class="fa fa-plus"></i></a>
+                    <a class="btn btn-light" href="pages/main/addtocart.php?minus=<?php echo $cart_item['id'] ?>"><i class="fa fa-minus"></i></a>
                         <?php echo $cart_item['quantity'] ?>
-                        <a class="btn btn-light" href="pages/main/addtocart.php?minus=<?php echo $cart_item['id'] ?>"><i class="fa fa-minus"></i></a>
+                     
+                        <a class="btn btn-light" href="pages/main/addtocart.php?plus=<?php echo $cart_item['id'] ?>"><i class="fa fa-plus" onclick="return checkQuantityLimit(<?php echo $cart_item['quantity']; ?>, <?php echo $limitquantity; ?>)"></i></a>
 
                     </td>
                     <td class="product-total"><?php echo number_format($thanhtien) . 'đ'; ?></td>
@@ -113,5 +117,13 @@ function confirmDelete(productId) {
     if (result) {
         window.location = "pages/main/addtocart.php?deleteall=" + productId;
     }
+}
+
+function checkQuantityLimit(quantity, limit) {
+    if (quantity >= limit) {
+        alert("You have reached your quantity limit for this product.");
+        return false; // Ngăn không cho thêm sản phẩm nữa
+    }
+    return true;
 }
 </script>

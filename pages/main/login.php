@@ -2,9 +2,10 @@
 <?php
 
 if (isset($_POST['dangnhap'])) {
+    $username = mysqli_real_escape_string($mysqli, $_POST['email']);
     $email = mysqli_real_escape_string($mysqli, $_POST['email']);
     $matkhau = md5($_POST['password']);
-    $sql = "SELECT * FROM tbl_customer WHERE email = '" . $email . "' AND customer_password = '" . $matkhau . "' LIMIT 1 ";
+    $sql = "SELECT * FROM tbl_customer WHERE (username = '".$username."' OR email = '" . $email . "') AND customer_password = '" . $matkhau . "' LIMIT 1 ";
     $row = mysqli_query($mysqli, $sql);
     $count = mysqli_num_rows($row);
     if (empty($email) || empty($matkhau)) {
@@ -38,8 +39,8 @@ if (isset($_POST['dangnhap'])) {
 <form action="" method="POST">
 
     <div class="form-group" style="margin-top: 25px;">
-        <label for="exampleInputEmail1">Email address</label>
-        <input type="email" name="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter email">
+        <label for="exampleInputEmail1">Email address or username</label>
+        <input type="text" name="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter email">
         <!-- <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small> -->
     </div>
 

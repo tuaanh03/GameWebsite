@@ -281,8 +281,13 @@ if (isset($_POST['updateprofile'])) {
         // Check if any field is empty or phone number is invalid
         if (!phoneRegex.test(phone)) {
             // Show error message
-            alert("Vui lòng kiểm tra lại thông tin.");
+            alert("Please check information again !");
             return false; // Prevent form submission
+        }
+        else
+        {
+            alert(" Modified successfully !");
+            return true;
         }
     }
 </script>

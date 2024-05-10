@@ -42,7 +42,7 @@ if (isset($_GET['plus'])) {
             }
         }
     }
-    header('Location:../../index.php?manage=carts');
+    header('Location:../../index.php?manage=carts&quantity=' . $row_limited['quantity']);
 }
 
 //trusoluongsanpham

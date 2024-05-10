@@ -11,17 +11,24 @@ if ($page == '' || $page == 1) {
     $begin = ($page - 1) * 8;  // 8 là số sản phẩm trong 1 trang
 }
 
+$category_found_id = isset($_GET['id']) ? $_GET['id'] : '';
 
-$sql_pro = "SELECT * FROM product WHERE product.category_id = '$_GET[id]' AND product.statuspr = 1 AND product.quantity != 0 ORDER BY product.product_id DESC LIMIT $begin,8";
+if ($category_found_id == '') {
+    $sql_pro = "SELECT * FROM product WHERE product.statuspr = 1 AND product.quantity != 0 ORDER BY product.product_id DESC LIMIT $begin,8";
+} else {
+    $sql_pro = "SELECT * FROM product WHERE product.category_id = '" . $category_found_id . "' AND product.statuspr = 1 AND product.quantity != 0 ORDER BY product.product_id DESC LIMIT $begin,8";
+}
 $query_pro = mysqli_query($mysqli, $sql_pro);
 // danhmuc
-$sql_cate = "SELECT * FROM category WHERE category_id = '$_GET[id]' LIMIT 1";
-$query_cate = mysqli_query($mysqli, $sql_cate);
-$row_title = mysqli_fetch_array($query_cate);
+if ($category_found_id != '') {
+    $sql_cate = "SELECT * FROM category WHERE category_id = '" . $category_found_id . "' LIMIT 1";
+    $query_cate = mysqli_query($mysqli, $sql_cate);
+    $row_title = mysqli_fetch_array($query_cate);
+}
 
 ?>
 
-<h3 style="color: black; font-size:50px"><?php echo $row_title['category_name'] ?></h3>
+<h3 style="color: black; font-size:50px"><?php if($category_found_id != ''){ echo $row_title['category_name'] ;} else{echo 'All products';} ?></h3>
 
 <div class="filter-bar">
     <div class="filter">
@@ -55,11 +62,21 @@ $row_title = mysqli_fetch_array($query_cate);
     </div> <!-- .filter -->
 
     <?php
-    $category_id = $row_title['category_id'];
-    $sql_trang = "SELECT * FROM product WHERE product.category_id = $category_id AND product.statuspr = 1 ";
-    $query_trang = mysqli_query($mysqli, $sql_trang);
-    $row_count = mysqli_num_rows($query_trang);
-    $trang = ceil($row_count / 8);
+    if($category_found_id != '')
+    {
+        $sql_trang = "SELECT * FROM product WHERE product.category_id = '".$category_found_id."' AND product.statuspr = 1 ";
+        $query_trang = mysqli_query($mysqli, $sql_trang);
+        $row_count = mysqli_num_rows($query_trang);
+        $trang = ceil($row_count / 8);
+    }
+    else
+    {
+        $sql_trang = "SELECT * FROM product WHERE product.statuspr = 1 ";
+        $query_trang = mysqli_query($mysqli, $sql_trang);
+        $row_count = mysqli_num_rows($query_trang);
+        $trang = ceil($row_count / 8);
+    }
+   
     ?>
 
     <div class="pagination">
@@ -69,8 +86,8 @@ $row_title = mysqli_fetch_array($query_cate);
             echo '';
         } else {
         ?>
-            <a style="margin-right: 10px;" href="index.php?manage=product&page=<?php echo 1 ?>&id=<?php echo $row_title['category_id'] ?>" class="page-number"><i class="fa fa-angle-double-left"></i></a>
-            <a href="index.php?manage=product&page=<?php echo $page - 1 ?>&id=<?php echo $row_title['category_id'] ?>" class="page-number"><i class="fa fa-angle-left"></i></a>
+            <a style="margin-right: 10px;" href="index.php?manage=product&page=<?php echo 1 ?>&id=<?php echo $category_found_id ?>" class="page-number"><i class="fa fa-angle-double-left"></i></a>
+            <a href="index.php?manage=product&page=<?php echo $page - 1 ?>&id=<?php echo $category_found_id ?>" class="page-number"><i class="fa fa-angle-left"></i></a>
         <?php } ?>
 
         <?php
@@ -78,7 +95,7 @@ $row_title = mysqli_fetch_array($query_cate);
         for ($i = 1; $i <= $trang; $i++) {
             $isActive = ($i == $page) ? 'background-color: rgb(80,188,133);' : '';
         ?>
-            <a href="index.php?manage=product&page=<?php echo $i ?>&id=<?php echo $row_title['category_id'] ?>" class="page-number" style="color:black; margin-left: 10px;  <?php echo $isActive; ?>"><?php echo $i ?></a>
+            <a href="index.php?manage=product&page=<?php echo $i ?>&id=<?php echo $category_found_id ?>" class="page-number" style="color:black; margin-left: 10px;  <?php echo $isActive; ?>"><?php echo $i ?></a>
         <?php } ?>
         <?php
         if ($page == $trang) {
@@ -86,11 +103,12 @@ $row_title = mysqli_fetch_array($query_cate);
         } else {
             if ($trang != 0) {
         ?>
-                <a href="index.php?manage=product&page=<?php echo $page + 1 ?>&id=<?php echo $row_title['category_id'] ?>" class="page-number" style="margin-left: 10px;"><i class="fa fa-angle-right"></i></a>
-                <a style="margin-left: 10px;" href="index.php?manage=product&page=<?php echo $trang ?>&id=<?php echo $row_title['category_id'] ?>" class="page-number"><i class="fa fa-angle-double-right"></i></a>
+                <a href="index.php?manage=product&page=<?php echo $page + 1 ?>&id=<?php echo $category_found_id ?>" class="page-number" style="margin-left: 10px;"><i class="fa fa-angle-right"></i></a>
+                <a style="margin-left: 10px;" href="index.php?manage=product&page=<?php echo $trang ?>&id=<?php echo $category_found_id ?>" class="page-number"><i class="fa fa-angle-double-right"></i></a>
 
-        <?php }else{ ?>
-        <?php } }?>
+            <?php } else { ?>
+        <?php }
+        } ?>
 
     </div> <!-- .pagination -->
 </div> <!-- .filter-bar -->
@@ -123,8 +141,8 @@ $row_title = mysqli_fetch_array($query_cate);
             echo '';
         } else {
         ?>
-            <a style="margin-right: 10px;" href="index.php?manage=product&page=<?php echo 1 ?>&id=<?php echo $row_title['category_id'] ?>" class="page-number"><i class="fa fa-angle-double-left"></i></a>
-            <a href="index.php?manage=product&page=<?php echo $page - 1 ?>&id=<?php echo $row_title['category_id'] ?>" class="page-number"><i class="fa fa-angle-left"></i></a>
+            <a style="margin-right: 10px;" href="index.php?manage=product&page=<?php echo 1 ?>&id=<?php echo $category_found_id ?>" class="page-number"><i class="fa fa-angle-double-left"></i></a>
+            <a href="index.php?manage=product&page=<?php echo $page - 1 ?>&id=<?php echo $category_found_id ?>" class="page-number"><i class="fa fa-angle-left"></i></a>
         <?php } ?>
 
         <?php
@@ -132,7 +150,7 @@ $row_title = mysqli_fetch_array($query_cate);
         for ($i = 1; $i <= $trang; $i++) {
             $isActive = ($i == $page) ? 'background-color: rgb(80,188,133);' : '';
         ?>
-            <a href="index.php?manage=product&page=<?php echo $i ?>&id=<?php echo $row_title['category_id'] ?>" class="page-number" style="color:black; margin-left: 10px;  <?php echo $isActive; ?>"><?php echo $i ?></a>
+            <a href="index.php?manage=product&page=<?php echo $i ?>&id=<?php echo $category_found_id ?>" class="page-number" style="color:black; margin-left: 10px;  <?php echo $isActive; ?>"><?php echo $i ?></a>
         <?php } ?>
         <?php
         if ($page == $trang) {
@@ -140,8 +158,8 @@ $row_title = mysqli_fetch_array($query_cate);
         } else {
             if ($trang != 0) {
         ?>
-                <a href="index.php?manage=product&page=<?php echo $page + 1 ?>&id=<?php echo $row_title['category_id'] ?>" class="page-number" style="margin-left: 10px;"><i class="fa fa-angle-right"></i></a>
-                <a style="margin-left: 10px;" href="index.php?manage=product&page=<?php echo $trang ?>&id=<?php echo $row_title['category_id'] ?>" class="page-number"><i class="fa fa-angle-double-right"></i></a>
+                <a href="index.php?manage=product&page=<?php echo $page + 1 ?>&id=<?php echo $category_found_id ?>" class="page-number" style="margin-left: 10px;"><i class="fa fa-angle-right"></i></a>
+                <a style="margin-left: 10px;" href="index.php?manage=product&page=<?php echo $trang ?>&id=<?php echo $category_found_id ?>" class="page-number"><i class="fa fa-angle-double-right"></i></a>
             <?php  } else {
             ?>
 
