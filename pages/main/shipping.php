@@ -221,6 +221,38 @@
                 </div>
             </div>
         </div>
+        <?php if(isset($_POST['themvanchuyen'])) 
+        {
+            $sql_get_shipping = mysqli_query($mysqli, "SELECT * FROM tbl_shipping WHERE customer_id = '$id_dangky' ORDER BY id_shipping DESC LIMIT 1");
+            $count_shipping = mysqli_num_rows($sql_get_shipping);
+            if ($count_shipping > 0) {
+                $row_get_shipping = mysqli_fetch_array($sql_get_shipping);
+                $name_shipping = $row_get_shipping['name'];
+                $phone_shipping = $row_get_shipping['phone'];
+                $province_shipping = $row_get_shipping['province'];
+                $district_shipping = $row_get_shipping['district'];
+                $ward_shipping = $row_get_shipping['ward'];
+                $address_shipping = $row_get_shipping['address'];
+                $note_shipping = $row_get_shipping['note'];
+            } else {
+                $name_shipping = '';
+                $phone_shipping = '';
+                $address_shipping = '';
+                $note_shipping = '';
+            }
+            ?>
+            <div class="col-md-4" style="width: 100%;">
+            <ul style="line-height:1.8">
+                <h3>Selected address</h3>
+                <li style="color:black;">Fullname: <span style="font-weight: bold; "><?php echo $name_shipping ?></span></li>
+                <li style="color:black;">Phone number: <span style="font-weight: bold;"><?php echo $phone_shipping ?></span></li>
+                <li style="color:black;">Address: <span style="font-weight: bold;"><?php echo $address_shipping ?>,<?php echo $ward_shipping ?>, <?php echo $district_shipping ?>, <?php echo $province_shipping ?> </span></li>
+                <li style="color:black;">Note: <span style="font-weight: bold;"><?php echo $note_shipping ?></span></li>
+            </ul>
+        </div>
+            <?php
+        }
+        ?>
 
 
 
@@ -258,9 +290,9 @@
                             <td class="product-price"><?php echo number_format($cart_item['price']) . '₫' ?></td>
                             <td class="product-qty">
 
-                                
+
                                 <?php echo $cart_item['quantity'] ?>
-                            
+
 
                             </td>
                             <td class="product-total"><?php echo number_format($thanhtien) . 'đ'; ?></td>

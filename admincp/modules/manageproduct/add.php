@@ -69,10 +69,10 @@ elseif(isset($_GET['status']) && $_GET['status'] == 'successfully')
                 
             </tr>
             
-            <tr>
+            <!-- <tr>
                 <th scope="row">Release Date</th>
                 <td><input type="text" name="ngayramat"></td>
-            </tr>
+            </tr> -->
             <tr>
                 <th scope="row">Console Type</th>
                 <td><input type="text" name="hemaysp"></td>

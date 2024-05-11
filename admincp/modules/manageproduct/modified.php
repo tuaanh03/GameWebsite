@@ -78,10 +78,10 @@ $query_sua_sp = mysqli_query($mysqli, $sql_sua_sp);
                     </td>
 
                 </tr>
-                <tr>
+                <!-- <tr>
                     <th scope="row">Release Date</th>
                     <td><input type="text" name="ngayramat"></td>
-                </tr>
+                </tr> -->
                 <tr>
                     <th scope="row">Console Type</th>
                     <td><input type="text" value="<?php echo $row['console_type'] ?>" name="hemaysp"></td>

@@ -1,19 +1,20 @@
 <?php
 include('../../config/config.php');
-$tensanpham = $_POST['tensanpham'];
-$masp = $_POST['masp'];
-$giasp = $_POST['giasp'];
-$soluong = $_POST['soluong'];
-$noidung = $_POST['noidung'];
-$hemaysp = $_POST['hemaysp'];
-$ngonngusp = $_POST['ngonngusp'];
-$songuoichoi = $_POST['songuoichoi'];
-$danhmuc = $_POST['danhmuc'];
-$theloai = $_POST['theloai'];
-$nhaxuatban = $_POST['nhaxuatban'];
-$tinhtrang = $_POST['tinhtrang'];
-$dotuoi = $_POST['dotuoi'];
-
+if (isset($_POST['themsanpham']) || isset($_POST['suasanpham'])) {
+    $tensanpham = $_POST['tensanpham'];
+    $masp = $_POST['masp'];
+    $giasp = $_POST['giasp'];
+    $soluong = $_POST['soluong'];
+    $noidung = $_POST['noidung'];
+    $hemaysp = $_POST['hemaysp'];
+    $ngonngusp = $_POST['ngonngusp'];
+    $songuoichoi = $_POST['songuoichoi'];
+    $danhmuc = $_POST['danhmuc'];
+    $theloai = $_POST['theloai'];
+    $nhaxuatban = $_POST['nhaxuatban'];
+    $tinhtrang = $_POST['tinhtrang'];
+    $dotuoi = $_POST['dotuoi'];
+}
 // xét file ảnh có hợp lệ ko
 function validateImageFile($file)
 {
@@ -33,14 +34,16 @@ function isImageFile($file)
 }
 
 
-// xuly hinh anh
-$hinhanh = $_FILES['hinhanh']['name'];
-$hinhanh_tmp = $_FILES['hinhanh']['tmp_name'];
-$hinhanh = time() . '_' . $hinhanh;
+if (isset($_POST['themsanpham']) || isset($_POST['suasanpham'])) {
+    // xuly hinh anh
+    $hinhanh = $_FILES['hinhanh']['name'];
+    $hinhanh_tmp = $_FILES['hinhanh']['tmp_name'];
+    $hinhanh = time() . '_' . $hinhanh;
+}
 
 if (isset($_POST['themsanpham'])) {
     //them
-    if (!empty($tensanpham) && !empty($masp) && !empty($giasp) && !empty($soluong) && !empty($noidung) && !empty($hemaysp) && !empty($ngonngusp) && !empty($songuoichoi) && !empty($danhmuc) && !empty($theloai) && !empty($nhaxuatban) && !empty($tinhtrang) && !empty($dotuoi) && !empty($hinhanh)){
+    if (!empty($tensanpham) && !empty($masp) && !empty($giasp) && !empty($soluong) && !empty($noidung) && !empty($hemaysp) && !empty($ngonngusp) && !empty($songuoichoi) && !empty($danhmuc) && !empty($theloai) && !empty($nhaxuatban) && !empty($tinhtrang) && !empty($dotuoi) && !empty($hinhanh)) {
         if (validateImageFile($_FILES['hinhanh']) && isImageFile($_FILES['hinhanh'])) {
             $spl_them = "INSERT INTO product(name_product,idproduct,thumbnail,descriptions,console_type,languages,player,category_id,genre_id,price,quantity,publisher_name,statuspr,esrb) VALUE('" . $tensanpham . "','" . $masp . "','" . $hinhanh . "','" . $noidung . "','" . $hemaysp . "','" . $ngonngusp . "','" . $songuoichoi . "','" . $danhmuc . "','" . $theloai . "','" . $giasp . "','" . $soluong . "','" . $nhaxuatban . "','" . $tinhtrang . "','" . $dotuoi . "')";
             mysqli_query($mysqli, $spl_them);
@@ -50,12 +53,9 @@ if (isset($_POST['themsanpham'])) {
             header('Location:../../index.php?action=manageproducts&query=add&status=failed');
             // echo "Invalid file type. Please upload only image files.";
         }
-    }
-    else
-    {
+    } else {
         header('Location:../../index.php?action=manageproducts&query=add&status=failed');
     }
-   
 } elseif (isset($_POST['suasanpham'])) {
     //sua
     if ($hinhanh != '') {
@@ -68,9 +68,7 @@ if (isset($_POST['themsanpham'])) {
             while ($row = mysqli_fetch_array($query)) {
                 unlink('uploads/' . $row['thumbnail']);
             }
-        }
-        else
-        {
+        } else {
             header('Location:../../index.php?action=manageproducts&query=add&status=failed');
             // echo "Invalid file type. Please upload only image files.";
         }

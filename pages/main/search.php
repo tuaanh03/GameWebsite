@@ -21,6 +21,8 @@ if (isset($_GET['manage']) && $_GET['manage'] == 'search') {
         $tukhoa = $_GET['tukhoa'];
         $danhmuc = $_GET['danhmuc']; // Lấy danh mục từ form nếu được chọn
         $theloai = $_GET['theloai']; // Lấy thể loại từ form nếu được chọn
+        $minPrice = $_GET['minPrice'];
+        $maxPrice = $_GET['maxPrice'];
         $sql_pro = "SELECT * FROM product, category,genres WHERE product.category_id = category.category_id AND product.genre_id = genres.genre_id AND product.statuspr = 1 AND product.quantity != 0 ";
 
         // Thêm điều kiện tìm kiếm từ khóa nếu có
@@ -38,6 +40,10 @@ if (isset($_GET['manage']) && $_GET['manage'] == 'search') {
             $sql_pro .= " AND product.genre_id = " . $theloai;
         }
 
+        if (!empty($minPrice) && !empty($maxPrice)) {
+            $sql_pro .= " AND product.price BETWEEN " . $minPrice . " AND " . $maxPrice;
+        }
+
         $sql_pro .= " ORDER BY product.product_id DESC LIMIT $begin, 8";
 
         $query_pro = mysqli_query($mysqli, $sql_pro);
@@ -50,7 +56,7 @@ if (isset($_GET['manage']) && $_GET['manage'] == 'search') {
     <header style="margin-bottom: 30px;">
         <!-- new -->
         <form action="">
-            
+
             <?php
             if (isset($_GET['timkiemnangcao'])) {
                 $sql_danhmuc = "SELECT * FROM category WHERE category_id = '" . $danhmuc . "'";
@@ -62,14 +68,14 @@ if (isset($_GET['manage']) && $_GET['manage'] == 'search') {
             ?>
                 Search: <input type="text" placeholder="Search..." value="<?php echo $tukhoa ?>" readonly>
                 Category: <input type="text" placeholder="Category..." value="<?php if (!empty($danhmuc)) {
-                                                                        echo $row_danhmuc['category_name'];
-                                                                    }  ?>" readonly>
+                                                                                    echo $row_danhmuc['category_name'];
+                                                                                }  ?>" readonly>
                 Genre: <input type="text" placeholder="Genre..." value="<?php if (!empty($theloai)) {
-                                                        echo $row_theloai['genre_name'];
-                                                    } ?>" readonly>
-            <?php }else{ ?>
+                                                                            echo $row_theloai['genre_name'];
+                                                                        } ?>" readonly>
+            <?php } else { ?>
                 Search: <input type="text" placeholder="Search..." value="<?php echo $tukhoa ?>" readonly>
-                <?php } ?>
+            <?php } ?>
 
         </form>
 
@@ -129,6 +135,11 @@ if (isset($_GET['manage']) && $_GET['manage'] == 'search') {
                 <?php } ?>
 
             </select>
+            <label for="" style="margin-top:10px;margin-left:30px; width:20%">Price range: </label>
+            <input name="minPrice" id="min-price" type="number" style="width:30%;height: 40px" onchange="handlePriceRangeChange()"  placeholder="Min price...">
+            <label for="" style="padding:20px;font-size:40px;margin-top:-25px">-</label>
+            <input name="maxPrice" id="max-price" type="number" style="width:30%;height: 40px" onchange="handlePriceRangeChange()"  placeholder="Max price...">
+
         </div>
         <button style="width: 100%; margin-bottom:20px;" name="timkiemnangcao" type="submit" value=""><label><img src="images/icon-search.png"></label></button>
     </form>
@@ -163,15 +174,22 @@ if (isset($_GET['manage']) && $_GET['manage'] == 'search') {
     if (isset($tukhoa) && isset($_GET['timkiemnangcao'])) {
         $danhmuc_phantrang = $_GET['danhmuc'];
         $theloai_phantrang = $_GET['theloai'];
-        $sql_trang = "SELECT * FROM product WHERE name_product LIKE '%" . $tukhoa . "%' AND statuspr = 1";
+        $minPrice_phantrang = $_GET['minPrice'];
+        $maxPrice_phantrang = $_GET['maxPrice'];
+        $sql_trang = "SELECT * FROM product WHERE name_product LIKE '%" . $tukhoa . "%' AND statuspr = 1 AND quantity != 0";
         if (!empty($danhmuc_phantrang) && $danhmuc_phantrang != '0') {
             $sql_trang .= " AND product.category_id = " . $danhmuc_phantrang;
         }
 
-        // Thêm điều kiện thể loại nếu được chọn
+        // Thêm điều kiện thể loại nếu được chọn 
         if (!empty($theloai_phantrang) && $theloai_phantrang != '0') {
             $sql_trang .= " AND product.genre_id = " . $theloai_phantrang;
         }
+
+        if (!empty($minPrice_phantrang) && !empty($maxPrice_phantrang)) {
+            $sql_trang .= " AND product.price BETWEEN " . $minPrice_phantrang . " AND " . $maxPrice_phantrang;
+        }
+
         $query_trang = mysqli_query($mysqli, $sql_trang);
         $row_count = mysqli_num_rows($query_trang);
         $trang = ceil($row_count / 8);
@@ -185,8 +203,8 @@ if (isset($_GET['manage']) && $_GET['manage'] == 'search') {
                     echo '';
                 } else {
                 ?>
-                    <a style="margin-right: 10px;" href="index.php?manage=search&timkiemnangcao&page=<?php echo 1 ?>&tukhoa=<?php echo $tukhoa ?>&danhmuc=<?php echo $danhmuc ?>&theloai=<?php echo $theloai ?>" class="page-number"><i class="fa fa-angle-double-left"></i></a>
-                    <a href="index.php?manage=search&timkiemnangcao&page=<?php echo $page - 1 ?>&tukhoa=<?php echo $tukhoa ?>&danhmuc=<?php echo $danhmuc ?>&theloai=<?php echo $theloai ?>" class="page-number"><i class="fa fa-angle-left"></i></a>
+                    <a style="margin-right: 10px;" href="index.php?manage=search&timkiemnangcao&page=<?php echo 1 ?>&tukhoa=<?php echo $tukhoa ?>&danhmuc=<?php echo $danhmuc ?>&theloai=<?php echo $theloai ?>&minPrice=<?php echo $minPrice ?>&maxPrice=<?php echo $maxPrice ?>" class="page-number"><i class="fa fa-angle-double-left"></i></a>
+                    <a href="index.php?manage=search&timkiemnangcao&page=<?php echo $page - 1 ?>&tukhoa=<?php echo $tukhoa ?>&danhmuc=<?php echo $danhmuc ?>&theloai=<?php echo $theloai ?>&minPrice=<?php echo $minPrice ?>&maxPrice=<?php echo $maxPrice ?>" class="page-number"><i class="fa fa-angle-left"></i></a>
                 <?php } ?>
 
                 <?php
@@ -194,7 +212,7 @@ if (isset($_GET['manage']) && $_GET['manage'] == 'search') {
                 for ($i = 1; $i <= $trang; $i++) {
                     $isActive = ($i == $page) ? 'background-color: rgb(80,188,133);' : '';
                 ?>
-                    <a href="index.php?manage=search&timkiemnangcao&page=<?php echo $i ?>&tukhoa=<?php echo $tukhoa ?>&danhmuc=<?php echo $danhmuc ?>&theloai=<?php echo $theloai ?>" class="page-number" style="color:black; margin-left: 10px;  <?php echo $isActive; ?>"><?php echo $i ?></a>
+                    <a href="index.php?manage=search&timkiemnangcao&page=<?php echo $i ?>&tukhoa=<?php echo $tukhoa ?>&danhmuc=<?php echo $danhmuc ?>&theloai=<?php echo $theloai ?>&minPrice=<?php echo $minPrice ?>&maxPrice=<?php echo $maxPrice ?>" class="page-number" style="color:black; margin-left: 10px;  <?php echo $isActive; ?>"><?php echo $i ?></a>
                 <?php } ?>
                 <?php
                 if ($page == $trang) {
@@ -202,8 +220,8 @@ if (isset($_GET['manage']) && $_GET['manage'] == 'search') {
                 } else {
                     if ($trang != 0) {
                 ?>
-                        <a href="index.php?manage=search&timkiemnangcao&page=<?php echo $page + 1 ?>&tukhoa=<?php echo $tukhoa ?>&danhmuc=<?php echo $danhmuc ?>&theloai=<?php echo $theloai ?>" class="page-number" style="margin-left: 10px;"><i class="fa fa-angle-right"></i></a>
-                        <a style="margin-left: 10px;" href="index.php?manage=search&timkiemnangcao&page=<?php echo $trang ?>&tukhoa=<?php echo $tukhoa ?>&danhmuc=<?php echo $danhmuc ?>&theloai=<?php echo $theloai ?>" class="page-number"><i class="fa fa-angle-double-right"></i></a>
+                        <a href="index.php?manage=search&timkiemnangcao&page=<?php echo $page + 1 ?>&tukhoa=<?php echo $tukhoa ?>&danhmuc=<?php echo $danhmuc ?>&theloai=<?php echo $theloai ?>&minPrice=<?php echo $minPrice ?>&maxPrice=<?php echo $maxPrice ?>" class="page-number" style="margin-left: 10px;"><i class="fa fa-angle-right"></i></a>
+                        <a style="margin-left: 10px;" href="index.php?manage=search&timkiemnangcao&page=<?php echo $trang ?>&tukhoa=<?php echo $tukhoa ?>&danhmuc=<?php echo $danhmuc ?>&theloai=<?php echo $theloai ?>&minPrice=<?php echo $minPrice ?>&maxPrice=<?php echo $maxPrice ?>" class="page-number"><i class="fa fa-angle-double-right"></i></a>
                     <?php  } else {
                     ?>
 
@@ -260,3 +278,27 @@ if (isset($_GET['manage']) && $_GET['manage'] == 'search') {
 
 
 </section>
+
+
+<script>
+    function handlePriceRangeChange() {
+        var minPrice = parseFloat(document.getElementById('min-price').value);
+        var maxPrice = parseFloat(document.getElementById('max-price').value);
+
+        // Kiểm tra xem minPrice có bé hơn 0 không, nếu có, đặt lại thành 0
+        if (minPrice < 0) {
+            minPrice = 0;
+            document.getElementById('min-price').value = minPrice;
+        }
+
+        // Kiểm tra xem minPrice có lớn hơn maxPrice không, nếu có, đặt lại thành maxPrice
+        if (minPrice > maxPrice) {
+            minPrice = maxPrice;
+            document.getElementById('min-price').value = minPrice;
+        }
+    }
+</script>
+
+
+
+
