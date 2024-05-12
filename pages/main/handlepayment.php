@@ -155,9 +155,7 @@ if ($cart_payment == 'cash' || $cart_payment == 'transfer') {
         echo json_encode($returnData);
     }
     // vui lòng tham khảo thêm tại code demo
-} elseif ($cart_payment == 'momo') {
-    echo 'Thanh toan bằng momo';
-}
+} 
 
 if ($cart_query) {
     unset($_SESSION['cart']);

@@ -23,7 +23,8 @@
         $streetaddress = isset($_POST['streetaddress']) ? $_POST['streetaddress'] : '';
         $note = isset($_POST['note']) ? $_POST['note'] : '';
         $sql_them_vanchuyen = "INSERT INTO tbl_shipping(customer_id,name,phone,address,province,district,ward,note) VALUES('$id_dangky','$name','$phone',' $streetaddress','$province','$district','$ward','$note')";
-        $query_them_vanchuyen = mysqli_query($mysqli, $sql_them_vanchuyen);
+        // $query_them_vanchuyen = mysqli_query($mysqli, $sql_them_vanchuyen); lỗi phần này
+        mysqli_query($mysqli, $sql_them_vanchuyen);
         if ($_POST['status'] == 'successfully') {
             echo '<script>alert("Add shipping successfully !")</script>';
         }
@@ -94,12 +95,12 @@
 
         <p class="d-inline-flex gap-1">
             <?php if ($row_get_vanchuyen['fullname']) { ?>
-                <a class="btn btn-primary" data-bs-toggle="collapse" href="#collapseExample2" role="button" aria-expanded="false" aria-controls="collapseExample">
+                <a id="useDefaultAddressBtn" class="btn btn-primary" data-bs-toggle="collapse" href="#collapseExample2" role="button" aria-expanded="false" aria-controls="collapseExample" onclick="useDefaultAddress()" style="display: inline-block;">
 
                     Use default address
 
                 </a>
-                <a class="btn btn-primary" data-bs-toggle="collapse" href="#collapseExample1" role="button" aria-expanded="false" aria-controls="collapseExample">
+                <a id="createNewAddressBtn" class="btn btn-primary" data-bs-toggle="collapse" href="#collapseExample1" role="button" aria-expanded="false" aria-controls="collapseExample" onclick="createNewAddress()" style="display: inline-block;">
 
                     Create new address
                 </a>
@@ -438,8 +439,23 @@
         // Check if any field is empty or phone number is invalid
         if (!name || !phone || !province || !district || !ward || !streetAddress || !phoneRegex.test(phone)) {
             // Show error message
-            alert("Vui lòng nhập đầy đủ thông tin và kiểm tra lại số điện thoại.");
+            alert("Please fill enough information !");
             return false; // Prevent form submission
         }
     }
+</script>
+
+
+<script>
+    // JavaScript
+    function useDefaultAddress() {
+      
+        document.getElementById('collapseExample1').style.display = 'none';
+        document.getElementById('collapseExample2').style.display = 'block';
+    }
+
+    function createNewAddress() {
+        document.getElementById('collapseExample1').style.display = 'block';    
+        document.getElementById('collapseExample2').style.display = 'none';
+    }   
 </script>

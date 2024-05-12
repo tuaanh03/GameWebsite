@@ -97,8 +97,6 @@
             <label for="html">Cash</label><br>
             <input type="radio" name="payment" value="transfer">
             <label for="html">Transfer</label><br>
-            <input type="radio" name="payment" value="momo">
-            <label for="css">MOMO</label><br>
             <input type="radio" name="payment" value="vnpay">
             <label for="javascript">VNPAY</label>
             <p>Total money: <?php echo number_format($total_money) . 'đ';  ?></p>
