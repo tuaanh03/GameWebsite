@@ -28,10 +28,14 @@ if ($category_found_id != '') {
 
 ?>
 
-<h3 style="color: black; font-size:50px"><?php if($category_found_id != ''){ echo $row_title['category_name'] ;} else{echo 'All products';} ?></h3>
+<h3 style="color: black; font-size:50px"><?php if ($category_found_id != '') {
+                                                echo $row_title['category_name'];
+                                            } else {
+                                                echo 'All products';
+                                            } ?></h3>
 
 <div class="filter-bar">
-    <div class="filter">
+    <!-- <div class="filter">
         <span>
             <label>Sort by:</label>
             <select name="#">
@@ -59,27 +63,24 @@ if ($category_found_id != '') {
                 <option value="#">24</option>
             </select>
         </span>
-    </div> <!-- .filter -->
+    </div> .filter -->
 
     <?php
-    if($category_found_id != '')
-    {
-        $sql_trang = "SELECT * FROM product WHERE product.category_id = '".$category_found_id."' AND product.statuspr = 1 ";
+    if ($category_found_id != '') {
+        $sql_trang = "SELECT * FROM product WHERE product.category_id = '" . $category_found_id . "' AND product.statuspr = 1 AND product.quantity != 0 ";
+        $query_trang = mysqli_query($mysqli, $sql_trang);
+        $row_count = mysqli_num_rows($query_trang);
+        $trang = ceil($row_count / 8);
+    } else {
+        $sql_trang = "SELECT * FROM product WHERE product.statuspr = 1 AND product.quantity != 0 ";
         $query_trang = mysqli_query($mysqli, $sql_trang);
         $row_count = mysqli_num_rows($query_trang);
         $trang = ceil($row_count / 8);
     }
-    else
-    {
-        $sql_trang = "SELECT * FROM product WHERE product.statuspr = 1 ";
-        $query_trang = mysqli_query($mysqli, $sql_trang);
-        $row_count = mysqli_num_rows($query_trang);
-        $trang = ceil($row_count / 8);
-    }
-   
+
     ?>
 
-    <div class="pagination">
+    <div class="pagination" style="margin-right: 40%;">
 
         <?php
         if ($page == 1) {
@@ -102,6 +103,7 @@ if ($category_found_id != '') {
             echo '';
         } else {
             if ($trang != 0) {
+              
         ?>
                 <a href="index.php?manage=product&page=<?php echo $page + 1 ?>&id=<?php echo $category_found_id ?>" class="page-number" style="margin-left: 10px;"><i class="fa fa-angle-right"></i></a>
                 <a style="margin-left: 10px;" href="index.php?manage=product&page=<?php echo $trang ?>&id=<?php echo $category_found_id ?>" class="page-number"><i class="fa fa-angle-double-right"></i></a>
@@ -134,7 +136,8 @@ if ($category_found_id != '') {
 </div> <!-- .product-list -->
 
 <div class="pagination-bar">
-    <div class="pagination">
+    <div class="pagination" style="    margin-right: 40%;
+">
 
         <?php
         if ($page == 1) {

@@ -1,3 +1,5 @@
+<h1>Search products:</h1>
+
 <?php
 
 if (isset($_GET['page'])) {
@@ -232,7 +234,7 @@ if (isset($_GET['manage']) && $_GET['manage'] == 'search') {
         </div>
     <?php } elseif (isset($tukhoa) && isset($_GET['timkiem'])) {
 
-        $sql_trang = "SELECT * FROM product WHERE name_product LIKE '%" . $tukhoa . "%' AND statuspr = 1";
+        $sql_trang = "SELECT * FROM product WHERE name_product LIKE '%" . $tukhoa . "%' AND statuspr = 1 AND quantity != 0";
         $query_trang = mysqli_query($mysqli, $sql_trang);
         $row_count = mysqli_num_rows($query_trang);
         $trang = ceil($row_count / 8);
