@@ -9,7 +9,7 @@
     </div>
     <h4 style="margin-top: 20px;">Information Shipping</h4>
     <?php
-
+   
 
     // xử lý thêm địa chỉ
 
@@ -24,9 +24,11 @@
         $note = isset($_POST['note']) ? $_POST['note'] : '';
         $sql_them_vanchuyen = "INSERT INTO tbl_shipping(customer_id,name,phone,address,province,district,ward,note) VALUES('$id_dangky','$name','$phone',' $streetaddress','$province','$district','$ward','$note')";
         // $query_them_vanchuyen = mysqli_query($mysqli, $sql_them_vanchuyen); lỗi phần này
-        mysqli_query($mysqli, $sql_them_vanchuyen);
-        if ($_POST['status'] == 'successfully') {
+        $query_them_vanchuyen = mysqli_query($mysqli, $sql_them_vanchuyen);
+        if ($query_them_vanchuyen) {
             echo '<script>alert("Add shipping successfully !")</script>';
+        } else {
+            echo '<script>alert("Failed to add shipping!")</script>';
         }
     } else {
         $name = '';
@@ -123,7 +125,7 @@
                 <div class="col-md-5">
                     <form action="" autocomplete="off" method="POST">
 
-                        <input type="hidden" name="status" value="successfully">
+                        
 
 
                         <div class="form-group" style="margin-top: 25px;">
@@ -178,7 +180,7 @@
                 <div class="col-md-5">
                     <form action="" autocomplete="off" method="POST">
 
-                        <input type="hidden" name="status" value="successfully">
+                        
 
                         <div class="form-group" style="margin-top: 25px;">
                             <label for="exampleInputEmail1">Full name</label>
@@ -352,7 +354,7 @@
             // Thêm thông tin cho các quận còn lại
             "District 11": ["Ward 1", "Ward 2", "Ward 3", "Ward 4", "Ward 5"],
             "District 12": ["Ward 1", "Ward 2", "Ward 3", "Ward 4", "Ward 5"],
-            "Binh Tan": ["Phường Bình Trị Đông", "Phường Bình Trị Đông A", "Phường Bình Hưng Hòa", "Phường Bình Hưng Hoà A", "Phường Bình Hưng Hoà B"],
+            "Binh Tan": ["Binh Tri Dong Ward", "Binh Tri Dong A Ward", "Binh Hung Hoa Ward", "Binh Hung Hoa A Ward", "Binh Hung Hoa B Ward"],
             "Binh Thanh": ["Ward 1", "Ward 2", "Ward 3", "Ward 4", "Ward 5"],
             "Go Vap": ["Ward 1", "Ward 2", "Ward 3", "Ward 4", "Ward 5"],
             "Binh Chanh": ["Commune 1, Binh Chanh", "Commune 2, Binh Chanh", "Commune 3, Binh Chanh", "Commune 4, Binh Chanh", "Commune 5, Binh Chanh"],
@@ -375,8 +377,8 @@
         });
 
         // GIữ các option mặc định cho dropdown quận/huyện và phường/xã
-        districtSelect.innerHTML = '<option value="">Chọn quận/huyện</option>';
-        wardSelect.innerHTML = '<option value="">Chọn phường/xã</option>';
+        districtSelect.innerHTML = '<option value="">Select district</option>';
+        wardSelect.innerHTML = '<option value="">Select ward</option>';
 
         // Xử lý sự kiện khi chọn thành phố
         citySelect.addEventListener('change', function() {

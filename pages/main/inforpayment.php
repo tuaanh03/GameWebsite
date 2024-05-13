@@ -71,9 +71,9 @@
                                 <td class="product-price"><?php echo number_format($cart_item['price']) . '₫' ?></td>
                                 <td class="product-qty">
 
-                                    
+
                                     <?php echo $cart_item['quantity'] ?>
-                                   
+
 
                                 </td>
                                 <td class="product-total"><?php echo number_format($thanhtien) . 'đ'; ?></td>
@@ -93,14 +93,56 @@
         </div>
         <div class="col-md-4" style="float: right;">
             <h4>Payment Methods</h4>
-            <input type="radio" name="payment" value="cash">
-            <label for="html">Cash</label><br>
-            <input type="radio" name="payment" value="transfer">
-            <label for="html">Transfer</label><br>
-            <input type="radio" name="payment" value="vnpay">
-            <label for="javascript">VNPAY</label>
+            <div class="form-check">
+                <input type="radio" name="payment" value="cash">
+                <img src="images/money.png" height="50" width="50" alt="">
+                <label for="html">Cash</label><br>
+            </div>
+            <div class="form-check">
+                <input type="radio" name="payment" value="transfer">
+                <img src="images/transfer.png" height="50" width="50" alt="">
+                <label for="html">Transfer</label><br>
+                <div id="transfer-info" style="display: none; background-color:aliceblue; text-align:center;">
+                    <!-- Thông tin chuyển khoản -->
+                    <h2>Transfer Information</h2>
+                    <h4>Bank No: 0123456789</h4>
+                    <h4>Name: Ngo Tuan Anh</h4>
+                    <h4>Bank Name: Vietcombank </h4>
+
+                </div>
+            </div>
+
+            <div class="form-check">
+                <input type="radio" name="payment" value="vnpay">
+                <img src="images/vnpay.png" height="50" width="50" alt="">
+                <label for="javascript">VNPAY</label>
+            </div>
+
+
             <p>Total money: <?php echo number_format($total_money) . 'đ';  ?></p>
             <button name="redirect" type="submit" class="btn btn-danger">Pay now</button>
         </div>
     </form>
 </div>
+
+
+
+
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        // Lắng nghe sự kiện khi người dùng thay đổi phương thức thanh toán
+        var paymentRadios = document.querySelectorAll('input[name="payment"]');
+        paymentRadios.forEach(function(radio) {
+            radio.addEventListener('change', function() {
+                // Kiểm tra xem radio được chọn có giá trị là "transfer" không
+                if (this.value === 'transfer') {
+                    // Nếu là "transfer", hiển thị phần tử chứa thông tin chuyển khoản
+                    document.getElementById('transfer-info').style.display = 'block';
+                } else {
+                    // Nếu không phải "transfer", ẩn phần tử chứa thông tin chuyển khoản
+                    document.getElementById('transfer-info').style.display = 'none';
+                }
+            });
+        });
+    });
+</script>
