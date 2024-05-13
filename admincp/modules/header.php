@@ -15,13 +15,14 @@
                 <span class="icon-bar"></span>
             </button>
             <a class="navbar-brand" href="#">
-                
+                <img src="../images/logo.png" alt="" style="margin-left: 20px;">
+                <p style="font-size:20px">AloneWolf</p>
             </a>
 
         </div>
 
         <span class="logout-spn">
-            <a href="index.php?logout=1" style="color:#fff;">LOGOUT</a>
+            <a href="index.php?logout=1" style="color:#fff">LOGOUT</a>
         </span>
     </div>
 </div>
