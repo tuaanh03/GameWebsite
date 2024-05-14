@@ -62,11 +62,9 @@
             <th scope="row">ID of order</th>
             <th scope="row">ID of user</th>
             <th scope="row">Customer name</th>
-            <th scope="row">Province</th>
-            <th scope="row">District</th>
-            <th scope="row">Ward</th>
             <th scope="row">Address</th>
             <th scope="row">Phone number</th>
+            <th scope="row">Cart Payment</th>
             <th scope="row">Status</th>
             <th scope="row">Date order</th>
             <th scope="row">Manage</th>
@@ -113,11 +111,9 @@
                 <td><?php echo $row['code_orders'] ?></td>
                 <td><?php echo $row['users_id'] ?></td>
                 <td><?php echo $row['name'] ?></td>
-                <td><?php echo $row['province'] ?></td>
-                <td><?php echo $row['district'] ?></td>
-                <td><?php echo $row['ward'] ?></td>
-                <td><?php echo $row['address'] ?></td>
+                <td><?php echo $row['address'] ?>, <?php echo $row['ward'] ?>, <?php echo $row['district'] ?>, <?php echo $row['province'] ?></td>
                 <td><?php echo $row['phone'] ?></td>
+                <td><?php echo $row['cart_payment'] ?></td>
                 <td>
                     <a href="modules/manageorder/xuly.php?cart_status=<?php echo $row['status_order'] ?>&coder=<?php echo $row['code_orders'] ?>" <?php if ($row['status_order'] == 1) {  ?> style="color: rgb(254,192,94);" <?php } elseif ($row['status_order'] == 2) { ?>style="color: rgb(114,185,104);" <?php } elseif ($row['status_order'] == -1) { ?>style="color: rgb(217,83,79);" <?php } ?>>
                         <?php

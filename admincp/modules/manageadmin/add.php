@@ -4,51 +4,38 @@
 
 $form_submitted = false;
 
-$tenkhachhang = '';
-$email = '';
-$dienthoai = '';
-$diachi = '';
+$tenadmin = '';
+
 
 // Kiểm tra khi form được submit
 if (isset($_POST['dangky'])) {
     $form_submitted = true; // Đánh dấu rằng form đã được gửi đi
 
     // Lấy dữ liệu từ form
-    $tenkhachhang = mysqli_real_escape_string($mysqli, $_POST['hovaten']);
-    $email = mysqli_real_escape_string($mysqli, $_POST['email']);
-    $dienthoai = mysqli_real_escape_string($mysqli, $_POST['dienthoai']);
+    $tenadmin = mysqli_real_escape_string($mysqli, $_POST['hovaten']);
     $matkhau = md5($_POST['matkhau']);
     $xacnhanmatkhau = md5($_POST['xacnhanmatkhau']);
     
 
     // Kiểm tra và hiển thị thông báo nếu các trường nhập liệu bị thiếu
-    if (empty($tenkhachhang) || empty($email) || empty($dienthoai) || empty($_POST['matkhau'])) {
+    if (empty($tenadmin) || empty($_POST['matkhau'])) {
         echo '<p style="color:red">Please fill in all fields!</p>';
     } else {
-        // Kiểm tra email đã tồn tại trong database chưa
-        $sql_check_email = "SELECT * FROM tbl_customer WHERE email='" . $email . "'";
-        $query_check_email = mysqli_query($mysqli, $sql_check_email);
-        if (mysqli_num_rows($query_check_email) > 0) {
-            echo '<p style="color:red">Email has already been registered!</p>';
-        } else {
             // Kiểm tra username đã tồn tại trong database chưa
-            $sql_check_username = "SELECT * FROM tbl_customer WHERE username='" . $tenkhachhang . "'";
+            $sql_check_username = "SELECT * FROM tbl_customer WHERE username='" . $tenadmin . "'";
             $query_check_username = mysqli_query($mysqli, $sql_check_username);
             if (mysqli_num_rows($query_check_username) > 0) {
                 echo '<p style="color:red">Username has already been taken!</p>';
             } else {
-                if (!preg_match("/^\d{10,11}$/", $dienthoai) || !preg_match("/^[a-zA-Z0-9._%+-]+@gmail\.com$/", $email)) {
-                    echo '<p style="color:red">Please enter a valid phone number or email address!</p>';
-                } else {
                     if ($matkhau === $xacnhanmatkhau) {
                         // Thực hiện thêm thông tin vào database
-                        $sql_dangky = "INSERT INTO tbl_customer(username,email,customer_password,phonenumber,status_user) VALUE('" . $tenkhachhang . "','" . $email . "','" . $matkhau . "','" . $dienthoai . "',0)";
+                        $sql_dangky = "INSERT INTO tbl_admin(username,password,admin_status) VALUE('" . $tenadmin . "','" . $matkhau . "', 0)";
                         $query_dangky = mysqli_query($mysqli, $sql_dangky);
                         if ($query_dangky) {
                             echo '<p style="color:green">Register Successfully !</p>';
-                           
+                            
                             // Chuyển hướng sau khi đăng ký thành công
-                            echo '<script>window.location.href="index.php?action=manageusers&query=list";</script>';
+                            echo '<script>window.location.href="index.php?action=manageadmin&query=list";</script>';
                         } else {
                             echo '<p style="color:red">Registration failed!</p>';
                         }
@@ -57,9 +44,9 @@ if (isset($_POST['dangky'])) {
                     {
                         echo '<p style="color:red">Please enter a valid confirm password!</p>';
                     }
-                }
+                
             }
-        }
+        
     }
 }
 ?>
@@ -70,27 +57,13 @@ if (isset($_POST['dangky'])) {
 
     <div class="form-group">
         <label for="exampleInputPassword1">Username</label>
-        <input type="text" name="hovaten" class="form-control" id="exampleInputPassword1" placeholder="Username" value="<?php echo htmlspecialchars($tenkhachhang); ?>">
-        <?php if ($form_submitted && empty($tenkhachhang)) {
+        <input type="text" name="hovaten" class="form-control" id="exampleInputPassword1" placeholder="Username" value="<?php echo htmlspecialchars($tenadmin); ?>">
+        <?php if ($form_submitted && empty($tenadmin)) {
             echo '<p style="color:red">Please enter your username!</p>';
         } ?>
     </div>
 
-    <div class="form-group" style="margin-top: 25px;">
-        <label for="exampleInputEmail1">Email address</label>
-        <input type="email" name="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter email" value="<?php echo htmlspecialchars($email); ?>">
-        <?php if ($form_submitted && empty($email)) {
-            echo '<p style="color:red">Please enter your email!</p>';
-        } ?>
-    </div>
-
-    <div class="form-group" style="margin-top: 25px;">
-        <label for="exampleInputPassword1">Phone number</label>
-        <input type="text" name="dienthoai" class="form-control" id="exampleInputPassword1" placeholder="Phone number" value="<?php echo htmlspecialchars($dienthoai); ?>">
-        <?php if ($form_submitted && empty($dienthoai)) {
-            echo '<p style="color:red">Please enter your phone number!</p>';
-        } ?>
-    </div>
+    
 
    
     <div class="form-group" style="margin-top: 25px;">

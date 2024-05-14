@@ -113,9 +113,16 @@
             </div>
 
             <div class="form-check">
-                <input type="radio" name="payment" value="vnpay">
-                <img src="images/vnpay.png" height="50" width="50" alt="">
+                <input type="radio" name="payment" value="momo">
+                <img src="images/momo.png" height="50" width="50" alt="">
                 <label for="javascript">VNPAY</label>
+                <div id="momo-info" style="display: none; background-color:aliceblue; text-align:center;">
+                    <!-- Thông tin chuyển khoản -->
+                    <h2>Transfer Information</h2>
+                    <h4>Momo No: 0123456789</h4>
+                    <h4>Name: Ngo Tuan Anh</h4>
+                    
+                </div>
             </div>
 
 
@@ -141,6 +148,25 @@
                 } else {
                     // Nếu không phải "transfer", ẩn phần tử chứa thông tin chuyển khoản
                     document.getElementById('transfer-info').style.display = 'none';
+                }
+            });
+        });
+    });
+</script>
+
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        // Lắng nghe sự kiện khi người dùng thay đổi phương thức thanh toán
+        var paymentRadios = document.querySelectorAll('input[name="payment"]');
+        paymentRadios.forEach(function(radio) {
+            radio.addEventListener('change', function() {
+                // Kiểm tra xem radio được chọn có giá trị là "transfer" không
+                if (this.value === 'momo') {
+                    // Nếu là "transfer", hiển thị phần tử chứa thông tin chuyển khoản
+                    document.getElementById('momo-info').style.display = 'block';
+                } else {
+                    // Nếu không phải "transfer", ẩn phần tử chứa thông tin chuyển khoản
+                    document.getElementById('momo-info').style.display = 'none';
                 }
             });
         });

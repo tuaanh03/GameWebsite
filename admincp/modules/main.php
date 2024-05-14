@@ -69,6 +69,11 @@
             {
                 include("manageuser/modified.php");
             }
+            elseif($tam == 'manageadmin'  && $query == 'list')
+            {
+                include("manageadmin/add.php");
+                include("manageadmin/list.php");
+            }
 			else
 			{
 				include("dashboard.php");

@@ -59,13 +59,7 @@ $query_lietke_dh = mysqli_query($mysqli, $sql_lietke_dh);
                 </td>
 
                 <td>
-                    <?php
-                    if ($row['cart_payment'] == 'vnpay') {
-                    ?>
-                        <a href="index.php?manage=profile&control=viewhistoryorder&paymentgateway=<?php echo $row['cart_payment'] ?>&coder=<?php echo $row['code_orders'] ?>"><?php echo $row['cart_payment'] ?></a>
-                    <?php } else { ?>
-                        <?php echo $row['cart_payment'] ?>
-                    <?php } ?>
+                <?php echo $row['cart_payment'] ?>
                 </td>
                 <td>
                     <a href="index.php?manage=viewbill&coder=<?php echo $row['code_orders'] ?>" class="btn btn-primary" style="font-size: 10px;">View order details</a>
@@ -82,45 +76,3 @@ $query_lietke_dh = mysqli_query($mysqli, $sql_lietke_dh);
     </tbody>
 </table>
 
-<?php
-if (isset($_GET['paymentgateway'])) {
-    $paymentgateway = $_GET['paymentgateway'];
-    $code_cart = $_GET['coder'];
-    echo '<h4>Cổng thanh toán:  ' . $paymentgateway . ' </h4>';
-    if ($paymentgateway == 'vnpay') {
-        $sql_vnpay = mysqli_query($mysqli, "SELECT * FROM tbl_vnpay WHERE code_orders = '$code_cart' LIMIT 1 ");
-        $row_vnpay = mysqli_fetch_array($sql_vnpay);
-?>
-        <table class="table">
-            <tbody>
-                <tr>
-                    <th scope="row">vnp_amount</th>
-                    <th scope="row">vnp_bankcode</th>
-                    <th scope="row">vnp_banktranno</th>
-                    <th scope="row">vnp_orderinfo</th>
-                    <th scope="row">vnp_paydate</th>
-                    <th scope="row">vnp_tmncode</th>
-                    <th scope="row">vnp_transactionno</th>
-
-
-                </tr>
-
-
-
-                <tr>
-                    <td><?php echo number_format($row_vnpay['vnp_amount'] /100) . 'đ'; ?></td>
-                    <td><?php echo $row_vnpay['vnp_bankcode'] ?></td>
-                    <td><?php echo $row_vnpay['vnp_banktranno'] ?></td>
-                    <td><?php echo $row_vnpay['vnp_orderinfo'] ?></td>
-                    <td><?php echo $row_vnpay['vnp_paydate'] ?></td>
-                    <td><?php echo $row_vnpay['vnp_tmncode'] ?></td>
-                    <td><?php echo $row_vnpay['vnp_transactionno'] ?></td>
-                </tr>
-
-
-            </tbody>
-        </table>
-<?php
-    }
-}
-?>

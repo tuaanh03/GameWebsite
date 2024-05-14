@@ -25,7 +25,11 @@
             </li>
 
             <li>
-                <a href="index.php?action=manageusers&query=list"><i class="fa fa-qrcode "></i>Manage users</a>
+                <a href="index.php?action=manageusers&query=list"><i class="fa fa-qrcode "></i>Manage customers</a>
+            </li>
+
+            <li>
+                <a href="index.php?action=manageadmin&query=list"><i class="fa fa-qrcode "></i>Manage admin</a>
             </li>
 
             <!-- <li>

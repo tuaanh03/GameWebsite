@@ -61,8 +61,8 @@ $query_danhmuc = mysqli_query($mysqli, $sql_danhmuc);
         </ul>
     </li> -->
     
-    <li class="menu-item"><a class="nav-link" href="index.php?manage=news" id="navbarDropdown" role="button" aria-expanded="false">
+    <!-- <li class="menu-item"><a class="nav-link" href="index.php?manage=news" id="navbarDropdown" role="button" aria-expanded="false">
             News
-        </a></li>
+        </a></li> -->
 
 </ul> <!-- .menu -->
